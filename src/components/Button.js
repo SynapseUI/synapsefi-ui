@@ -19,7 +19,7 @@ const commonBtnStyle = `
   border: none;
   cursor: pointer;
   border-radius: 3px;
-  font-weight: 100;
+  font-weight: 300;
   transition: all .2s;
 `;
 

@@ -35,7 +35,7 @@ const largeHeight = 48;
 // -----------------------------------------------------------------------------------------
 const small = `
   height: ${smallHeight}px;
-  font-size: 18px;
+  font-size: 16px;
   padding: 0 32px;
 `;
 

@@ -2,8 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  devtool: 'cheap-eval-source-map',
-  entry: './test/entry.js',
+  entry: './sandbox/entry.js',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -28,6 +27,6 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: 'test/',
+    contentBase: 'sandbox/',
   },
 };

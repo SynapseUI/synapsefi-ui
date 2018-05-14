@@ -34,6 +34,10 @@ export const BABY_PEACH = 'BABY_PEACH';
 export const LILAC = 'LILAC';
 export const LIGHT_IVORY = 'LIGHT_IVORY';
 
+// Title and Body Colors
+export const TITLE = 'TITLE';
+export const BODY = 'BODY';
+
 export default {
   // Primary
   [TEAL]: '#049cb0',
@@ -66,4 +70,7 @@ export default {
   [BABY_PEACH]: '#efdfd9',
   [LILAC]: '#ede2ef',
   [LIGHT_IVORY]: '#fdf8f3',
+  // Title And Body Color
+  [TITLE]: '#1a1a1a',
+  [BODY]: '#404040',
 };

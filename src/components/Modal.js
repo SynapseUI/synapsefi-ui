@@ -55,25 +55,28 @@ const HeaderText = styled.div`
 const BtnWrapper = styled.div`
   flex: 1;
 
-  display: grid;
-  grid-gap: 16px;
-  justify-content: end;
-  align-content: end;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  & > button {
+    &:not(:last-child) {
+      margin-right: 16px;
+    }
+  }
 
   ${props =>
-    props.oneBtn && css`grid-template-columns: ${props => (props.fullWidthBtn ? '1fr' : 'auto')};`};
-
-  ${props =>
-    props.twoBtns &&
+    props.fullWidthBtn &&
     css`
-      grid-template-columns: ${props => (props.fullWidthBtn ? '1fr 1fr' : 'auto auto')};
+      & > button {
+        flex: 1;
+      }
     `};
 `;
 
-const ADD_ME_UNDER_PROVIDER = 'add-me-under-Provider';
 const uniqId = 'uniq-modal-id';
 
-class SandboxModal extends Component {
+class Modal extends Component {
   constructor(props) {
     super(props);
     this.appendElement = this.appendElement.bind(this);
@@ -84,9 +87,6 @@ class SandboxModal extends Component {
   componentDidMount() {
     // first time modal is opened
     this.appendElement();
-    if (this.props.isOpen) {
-      this.openModal(this.props.children);
-    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -108,37 +108,29 @@ class SandboxModal extends Component {
   appendElement() {
     this.modal = document.createElement('div');
     this.modal.id = uniqId;
-
-    const divUnderProvider = document.getElementById(ADD_ME_UNDER_PROVIDER);
-
-    divUnderProvider === null
-      ? document.body.appendChild(this.modal)
-      : divUnderProvider.appendChild(this.modal);
+    document.body.appendChild(this.modal);
   }
 
-  renderBtns({ leftBtnObj, rightBtnObj }, fullWidthBtn) {
-    let buttonObjs = [];
-
-    if (leftBtnObj) buttonObjs.push(leftBtnObj);
-    if (rightBtnObj) buttonObjs.push(rightBtnObj);
-
+  renderBtns(btnObjs, fullWidthBtn) {
     return (
-      <BtnWrapper
-        oneBtn={buttonObjs.length === 1}
-        twoBtns={buttonObjs.length === 2}
-        fullWidthBtn={fullWidthBtn}
-      >
-        {buttonObjs.map(({ key, text, cb }, idx) => {
+      <BtnWrapper fullWidthBtn={fullWidthBtn}>
+        {btnObjs.map(({ btnProps, text, cb }, idx) => {
+          const { style, size } = btnProps;
           return (
             <Button
               key={idx}
               onClick={cb && (() => cb())}
-              primary={key === 'primary'}
-              secondary={key === 'secondary'}
-              tertiary={key === 'tertiary'}
-              remove={key === 'remove'}
-              isDisabled={key === 'isDisabled'}
-              isLoading={key === 'isLoading'}
+              //
+              primary={style === 'primary'}
+              secondary={style === 'secondary'}
+              tertiary={style === 'tertiary'}
+              remove={style === 'remove'}
+              isDisabled={style === 'isDisabled'}
+              isLoading={style === 'isLoading'}
+              //
+              small={size === 'small'}
+              medium={size === 'medium'}
+              large={size === 'large'}
             >
               {text}
             </Button>
@@ -158,12 +150,11 @@ class SandboxModal extends Component {
       width,
       fullWidthBtn,
       headerText,
-      leftBtnObj,
-      rightBtnObj,
+      btnObjs,
       closeModal,
     } = this.props;
 
-    ReactDOM.render(
+    return ReactDOM.createPortal(
       <OuterBox outsideBgColor={outsideBgColor} onClick={e => closeModal()}>
         <InnerBox
           insideBgColor={insideBgColor}
@@ -178,8 +169,7 @@ class SandboxModal extends Component {
           </CloseBtnPositioning>
           {headerText && <HeaderText>{headerText}</HeaderText>}
           {children}
-          {(leftBtnObj || rightBtnObj) &&
-            this.renderBtns({ leftBtnObj, rightBtnObj }, fullWidthBtn)}
+          {btnObjs && btnObjs.length !== 0 && this.renderBtns(btnObjs, fullWidthBtn)}
         </InnerBox>
       </OuterBox>,
       this.modal
@@ -188,17 +178,15 @@ class SandboxModal extends Component {
 
   closeModal() {
     ReactDOM.unmountComponentAtNode(this.modal);
-
-    const divUnderProvider = document.getElementById(ADD_ME_UNDER_PROVIDER);
-
-    divUnderProvider === null
-      ? document.body.removeChild(this.modal)
-      : divUnderProvider.removeChild(this.modal);
+    document.body.removeChild(this.modal);
   }
 
   render() {
+    if (this.props.isOpen) {
+      return this.openModal(this.props.children);
+    }
     return null;
   }
 }
 
-export default SandboxModal;
+export default Modal;

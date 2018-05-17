@@ -153,7 +153,6 @@ class SandboxModal extends Component {
       btnObjs,
       closeModal,
     } = this.props;
-    console.log('this.props: ', this.props);
 
     return ReactDOM.createPortal(
       <OuterBox outsideBgColor={outsideBgColor} onClick={e => closeModal()}>
@@ -170,7 +169,7 @@ class SandboxModal extends Component {
           </CloseBtnPositioning>
           {headerText && <HeaderText>{headerText}</HeaderText>}
           {children}
-          {btnObjs.length !== 0 && this.renderBtns(btnObjs, fullWidthBtn)}
+          {btnObjs && btnObjs.length !== 0 && this.renderBtns(btnObjs, fullWidthBtn)}
         </InnerBox>
       </OuterBox>,
       this.modal

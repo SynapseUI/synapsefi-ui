@@ -64,6 +64,7 @@ const BtnWrapper = styled.div`
     `};
 `;
 
+const ADD_MD_UNDER_PROVIDER = 'add-me-under-Provider';
 const uniqId = 'uniq-modal-id';
 
 class SandboxModal extends Component {
@@ -102,7 +103,7 @@ class SandboxModal extends Component {
     this.modal = document.createElement('div');
     this.modal.id = uniqId;
 
-    const divUnderProvider = document.getElementById('add-me-under-Provider');
+    const divUnderProvider = document.getElementById(ADD_MD_UNDER_PROVIDER);
 
     divUnderProvider === null
       ? document.body.appendChild(this.modal)
@@ -157,8 +158,15 @@ class SandboxModal extends Component {
     } = this.props;
 
     ReactDOM.render(
-      <OuterBox outsideBgColor={outsideBgColor}>
-        <InnerBox insideBgColor={insideBgColor} top={top} left={left} height={height} width={width}>
+      <OuterBox outsideBgColor={outsideBgColor} onClick={e => closeModal()}>
+        <InnerBox
+          insideBgColor={insideBgColor}
+          top={top}
+          left={left}
+          height={height}
+          width={width}
+          onClick={e => e.stopPropagation()}
+        >
           <CloseBtnPositioning>
             <CloseBtn onClick={() => closeModal()} size="16px" />
           </CloseBtnPositioning>
@@ -175,7 +183,7 @@ class SandboxModal extends Component {
   closeModal() {
     ReactDOM.unmountComponentAtNode(this.modal);
 
-    const divUnderProvider = document.getElementById('add-me-under-Provider');
+    const divUnderProvider = document.getElementById(ADD_MD_UNDER_PROVIDER);
 
     divUnderProvider === null
       ? document.body.removeChild(this.modal)

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import styled, { css } from 'styled-components';
 import colors from '../colors';
 import CloseBtn from './CloseBtn';
+import Button from './Button';
 
 const OuterBox = styled.div`
   background-color: ${props =>
@@ -30,22 +31,37 @@ const InnerBox = styled.div`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   border: solid 1px ${colors.WARM_LIGHT};
   border-radius: 4px;
-
-  & > div:nth-child(2) > *:first-child {
-    font-size: 28px;
-    font-weight: bold;
-    color: ${colors.DARK_NIGHT};
-    border-bottom: solid 1px ${colors.WARM_LIGHT};
-    line-height: 1;
-    padding-bottom: 24px;
-    margin-bottom: 32px;
-  }
 `;
 
 const CloseBtnPositioning = styled.div`
   position: absolute;
   top: 32px;
   right: 32px;
+`;
+
+const HeaderText = styled.div`
+  font-size: 28px;
+  font-weight: bold;
+  color: ${colors.DARK_NIGHT};
+  border-bottom: solid 1px ${colors.WARM_LIGHT};
+  line-height: 1;
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+`;
+
+const BtnWrapper = styled.div`
+  display: grid;
+  grid-gap: 16px;
+  justify-content: end;
+
+  ${props =>
+    props.oneBtn && css`grid-template-columns: ${props => (props.fullWidthBtn ? '1fr' : 'auto')};`};
+
+  ${props =>
+    props.twoBtns &&
+    css`
+      grid-template-columns: ${props => (props.fullWidthBtn ? '1fr 1fr' : 'auto auto')};
+    `};
 `;
 
 const uniqId = 'uniq-modal-id';
@@ -85,23 +101,71 @@ class SandboxModal extends Component {
   appendElement() {
     this.modal = document.createElement('div');
     this.modal.id = uniqId;
-    document.body.appendChild(this.modal);
+
+    const divUnderProvider = document.getElementById('add-me-under-Provider');
+
+    divUnderProvider === null
+      ? document.body.appendChild(this.modal)
+      : divUnderProvider.appendChild(this.modal);
+  }
+
+  renderBtns({ leftBtnObj, rightBtnObj }, fullWidthBtn) {
+    let buttonObjs = [];
+
+    if (leftBtnObj) buttonObjs.push(leftBtnObj);
+    if (rightBtnObj) buttonObjs.push(rightBtnObj);
+
+    return (
+      <BtnWrapper
+        oneBtn={buttonObjs.length === 1}
+        twoBtns={buttonObjs.length === 2}
+        fullWidthBtn={fullWidthBtn}
+      >
+        {buttonObjs.map(({ key, text, cb }, idx) => {
+          return (
+            <Button
+              key={idx}
+              onClick={cb && (() => cb())}
+              primary={key === 'primary'}
+              secondary={key === 'secondary'}
+              tertiary={key === 'tertiary'}
+              remove={key === 'remove'}
+              isDisabled={key === 'isDisabled'}
+              isLoading={key === 'isLoading'}
+            >
+              {text}
+            </Button>
+          );
+        })}
+      </BtnWrapper>
+    );
   }
 
   openModal(children) {
+    const {
+      outsideBgColor,
+      insideBgColor,
+      top,
+      left,
+      height,
+      width,
+      fullWidthBtn,
+      headerText,
+      leftBtnObj,
+      rightBtnObj,
+      closeModal,
+    } = this.props;
+
     ReactDOM.render(
-      <OuterBox onClick={() => this.props.closeModal()} outsideBgColor={this.props.outsideBgColor}>
-        <InnerBox
-          insideBgColor={this.props.insideBgColor}
-          top={this.props.top}
-          left={this.props.left}
-          width={this.props.width}
-          height={this.props.height}
-        >
+      <OuterBox outsideBgColor={outsideBgColor}>
+        <InnerBox insideBgColor={insideBgColor} top={top} left={left} height={height} width={width}>
           <CloseBtnPositioning>
-            <CloseBtn onClick={() => this.props.closeModal()} size="16px" />
+            <CloseBtn onClick={() => closeModal()} size="16px" />
           </CloseBtnPositioning>
+          {headerText && <HeaderText>{headerText}</HeaderText>}
           {children}
+          {(leftBtnObj || rightBtnObj) &&
+            this.renderBtns({ leftBtnObj, rightBtnObj }, fullWidthBtn)}
         </InnerBox>
       </OuterBox>,
       this.modal
@@ -110,7 +174,12 @@ class SandboxModal extends Component {
 
   closeModal() {
     ReactDOM.unmountComponentAtNode(this.modal);
-    document.body.removeChild(this.modal);
+
+    const divUnderProvider = document.getElementById('add-me-under-Provider');
+
+    divUnderProvider === null
+      ? document.body.removeChild(this.modal)
+      : divUnderProvider.removeChild(this.modal);
   }
 
   render() {

@@ -8,12 +8,17 @@ import Button from './Button';
 const OuterBox = styled.div`
   background-color: ${props =>
     props.outsideBgColor ? `${props.outsideBgColor}` : 'rgba(255,255,255,.7)'};
+
   width: 100vw;
   height: 100vh;
 
-  position: fixed;
-  top: 0;
-  left: 0;
+  width: ${props => (props.outerWidth ? `${props.outerWidth}` : '100vw')};
+  height: ${props => (props.outerHeight ? `${props.outerHeight}` : '100vh')};
+
+  position: absolute;
+
+  top: ${props => (props.outerTop ? `${props.outerTop}` : '0')};
+  left: ${props => (props.outerLeft ? `${props.outerLeft}` : '0')};
 `;
 
 const InnerBox = styled.div`
@@ -142,6 +147,11 @@ class Modal extends Component {
 
   openModal(children) {
     const {
+      outerWidth,
+      outerHeight,
+      outerTop,
+      outerLeft,
+      //
       outsideBgColor,
       insideBgColor,
       top,
@@ -153,9 +163,19 @@ class Modal extends Component {
       btnObjs,
       closeModal,
     } = this.props;
+    
+    ;
 
     return ReactDOM.createPortal(
-      <OuterBox outsideBgColor={outsideBgColor} onClick={e => closeModal()}>
+      <OuterBox
+        outsideBgColor={outsideBgColor}
+        onClick={e => closeModal()}
+        //
+        outerWidth={outerWidth}
+        outerHeight={outerHeight}
+        outerTop={outerTop}
+        outerLeft={outerLeft}
+      >
         <InnerBox
           insideBgColor={insideBgColor}
           top={top}
@@ -177,7 +197,7 @@ class Modal extends Component {
   }
 
   closeModal() {
-    ReactDOM.unmountComponentAtNode(this.modal);
+    // ReactDOM.unmountComponentAtNode(this.modal);
     document.body.removeChild(this.modal);
   }
 

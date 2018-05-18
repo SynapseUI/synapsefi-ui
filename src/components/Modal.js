@@ -7,7 +7,7 @@ import Button from './Button';
 
 const OuterBox = styled.div`
   background-color: ${props =>
-    props.outsideBgColor ? `${props.outsideBgColor}` : 'rgba(255,255,255,.7)'};
+    props.outerBgColor ? `${props.outerBgColor}` : 'rgba(255,255,255,.7)'};
 
   width: 100vw;
   height: 100vh;
@@ -15,10 +15,19 @@ const OuterBox = styled.div`
   width: ${props => (props.outerWidth ? `${props.outerWidth}` : '100vw')};
   height: ${props => (props.outerHeight ? `${props.outerHeight}` : '100vh')};
 
-  position: absolute;
+  position: fixed;
 
   top: ${props => (props.outerTop ? `${props.outerTop}` : '0')};
   left: ${props => (props.outerLeft ? `${props.outerLeft}` : '0')};
+
+  z-index: 100000;
+`;
+
+const InnerBoxPositioning = styled.div`
+  position: absolute;
+  top: ${props => (props.top ? `${props.top}` : '50%')};
+  left: ${props => (props.left ? `${props.left}` : '50%')};
+  transform: translate(-50%, -50%);
 `;
 
 const InnerBox = styled.div`
@@ -26,12 +35,7 @@ const InnerBox = styled.div`
   flex-direction: column;
 
   padding: 32px;
-  background-color: ${props => (props.insideBgColor ? `${props.insideBgColor}` : '#fff')};
-
-  position: absolute;
-  top: ${props => (props.top ? `${props.top}` : '50%')};
-  left: ${props => (props.left ? `${props.left}` : '50%')};
-  transform: translate(-50%, -50%);
+  background-color: ${props => (props.innerBgColor ? `${props.innerBgColor}` : '#fff')};
 
   width: ${props => (props.width ? `${props.width}` : 'auto')};
   height: ${props => (props.height ? `${props.height}` : 'auto')};
@@ -39,6 +43,8 @@ const InnerBox = styled.div`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   border: solid 1px ${colors.WARM_LIGHT};
   border-radius: 4px;
+
+  overflow: scroll;
 `;
 
 const CloseBtnPositioning = styled.div`
@@ -86,28 +92,19 @@ class Modal extends Component {
     super(props);
     this.appendElement = this.appendElement.bind(this);
     this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
-
-  componentDidMount() {
-    // first time modal is opened
-    this.appendElement();
+    this.removeModalFromBodyTag = this.removeModalFromBodyTag.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isOpen) {
-      if (!document.getElementById(uniqId)) {
-        this.appendElement();
-      }
-
       this.openModal(nextProps.children);
     } else {
-      this.closeModal();
+      this.removeModalFromBodyTag();
     }
   }
 
   componentWillUnmount() {
-    this.closeModal();
+    this.removeModalFromBodyTag();
   }
 
   appendElement() {
@@ -152,8 +149,8 @@ class Modal extends Component {
       outerTop,
       outerLeft,
       //
-      outsideBgColor,
-      insideBgColor,
+      outerBgColor,
+      innerBgColor,
       top,
       left,
       height,
@@ -163,12 +160,13 @@ class Modal extends Component {
       btnObjs,
       closeModal,
     } = this.props;
-    
-    ;
+
+    !document.getElementById(uniqId) && this.appendElement();
+    document.body.style.overflow = 'hidden';
 
     return ReactDOM.createPortal(
       <OuterBox
-        outsideBgColor={outsideBgColor}
+        outerBgColor={outerBgColor}
         onClick={e => closeModal()}
         //
         outerWidth={outerWidth}
@@ -176,35 +174,35 @@ class Modal extends Component {
         outerTop={outerTop}
         outerLeft={outerLeft}
       >
-        <InnerBox
-          insideBgColor={insideBgColor}
-          top={top}
-          left={left}
-          height={height}
-          width={width}
-          onClick={e => e.stopPropagation()}
-        >
-          <CloseBtnPositioning>
-            <CloseBtn onClick={() => closeModal()} size="16px" />
-          </CloseBtnPositioning>
-          {headerText && <HeaderText>{headerText}</HeaderText>}
-          {children}
-          {btnObjs && btnObjs.length !== 0 && this.renderBtns(btnObjs, fullWidthBtn)}
-        </InnerBox>
+        <InnerBoxPositioning top={top} left={left}>
+          <InnerBox
+            innerBgColor={innerBgColor}
+            height={height}
+            width={width}
+            onClick={e => e.stopPropagation()}
+          >
+            <CloseBtnPositioning>
+              <CloseBtn onClick={() => closeModal()} size="16px" />
+            </CloseBtnPositioning>
+            {headerText && <HeaderText>{headerText}</HeaderText>}
+            {children}
+            {btnObjs && btnObjs.length !== 0 && this.renderBtns(btnObjs, fullWidthBtn)}
+          </InnerBox>
+        </InnerBoxPositioning>
       </OuterBox>,
       this.modal
     );
   }
 
-  closeModal() {
-    // ReactDOM.unmountComponentAtNode(this.modal);
-    document.body.removeChild(this.modal);
+  removeModalFromBodyTag() {
+    if (document.getElementById(uniqId)) {
+      document.body.removeChild(this.modal);
+      document.body.style.overflow = 'auto';
+    }
   }
 
   render() {
-    if (this.props.isOpen) {
-      return this.openModal(this.props.children);
-    }
+    if (this.props.isOpen) return this.openModal(this.props.children);
     return null;
   }
 }

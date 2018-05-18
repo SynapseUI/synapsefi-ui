@@ -7,13 +7,27 @@ import Button from './Button';
 
 const OuterBox = styled.div`
   background-color: ${props =>
-    props.outsideBgColor ? `${props.outsideBgColor}` : 'rgba(255,255,255,.7)'};
+    props.outerBgColor ? `${props.outerBgColor}` : 'rgba(255,255,255,.7)'};
+
   width: 100vw;
   height: 100vh;
 
+  width: ${props => (props.outerWidth ? `${props.outerWidth}` : '100vw')};
+  height: ${props => (props.outerHeight ? `${props.outerHeight}` : '100vh')};
+
   position: fixed;
-  top: 0;
-  left: 0;
+
+  top: ${props => (props.outerTop ? `${props.outerTop}` : '0')};
+  left: ${props => (props.outerLeft ? `${props.outerLeft}` : '0')};
+
+  z-index: 100000;
+`;
+
+const InnerBoxPositioning = styled.div`
+  position: absolute;
+  top: ${props => (props.top ? `${props.top}` : '50%')};
+  left: ${props => (props.left ? `${props.left}` : '50%')};
+  transform: translate(-50%, -50%);
 `;
 
 const InnerBox = styled.div`
@@ -21,12 +35,7 @@ const InnerBox = styled.div`
   flex-direction: column;
 
   padding: 32px;
-  background-color: ${props => (props.insideBgColor ? `${props.insideBgColor}` : '#fff')};
-
-  position: absolute;
-  top: ${props => (props.top ? `${props.top}` : '50%')};
-  left: ${props => (props.left ? `${props.left}` : '50%')};
-  transform: translate(-50%, -50%);
+  background-color: ${props => (props.innerBgColor ? `${props.innerBgColor}` : '#fff')};
 
   width: ${props => (props.width ? `${props.width}` : 'auto')};
   height: ${props => (props.height ? `${props.height}` : 'auto')};
@@ -34,6 +43,8 @@ const InnerBox = styled.div`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   border: solid 1px ${colors.WARM_LIGHT};
   border-radius: 4px;
+
+  overflow: scroll;
 `;
 
 const CloseBtnPositioning = styled.div`
@@ -55,90 +66,73 @@ const HeaderText = styled.div`
 const BtnWrapper = styled.div`
   flex: 1;
 
-  display: grid;
-  grid-gap: 16px;
-  justify-content: end;
-  align-content: end;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  & > button {
+    &:not(:last-child) {
+      margin-right: 16px;
+    }
+  }
 
   ${props =>
-    props.oneBtn && css`grid-template-columns: ${props => (props.fullWidthBtn ? '1fr' : 'auto')};`};
-
-  ${props =>
-    props.twoBtns &&
+    props.fullWidthBtn &&
     css`
-      grid-template-columns: ${props => (props.fullWidthBtn ? '1fr 1fr' : 'auto auto')};
+      & > button {
+        flex: 1;
+      }
     `};
 `;
 
-const ADD_ME_UNDER_PROVIDER = 'add-me-under-Provider';
 const uniqId = 'uniq-modal-id';
 
-class SandboxModal extends Component {
+class Modal extends Component {
   constructor(props) {
     super(props);
     this.appendElement = this.appendElement.bind(this);
     this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
-
-  componentDidMount() {
-    // first time modal is opened
-    this.appendElement();
-    if (this.props.isOpen) {
-      this.openModal(this.props.children);
-    }
+    this.removeModalFromBodyTag = this.removeModalFromBodyTag.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isOpen) {
-      if (!document.getElementById(uniqId)) {
-        this.appendElement();
-      }
-
       this.openModal(nextProps.children);
     } else {
-      this.closeModal();
+      this.removeModalFromBodyTag();
     }
   }
 
   componentWillUnmount() {
-    this.closeModal();
+    this.removeModalFromBodyTag();
   }
 
   appendElement() {
     this.modal = document.createElement('div');
     this.modal.id = uniqId;
-
-    const divUnderProvider = document.getElementById(ADD_ME_UNDER_PROVIDER);
-
-    divUnderProvider === null
-      ? document.body.appendChild(this.modal)
-      : divUnderProvider.appendChild(this.modal);
+    document.body.appendChild(this.modal);
   }
 
-  renderBtns({ leftBtnObj, rightBtnObj }, fullWidthBtn) {
-    let buttonObjs = [];
-
-    if (leftBtnObj) buttonObjs.push(leftBtnObj);
-    if (rightBtnObj) buttonObjs.push(rightBtnObj);
-
+  renderBtns(btnObjs, fullWidthBtn) {
     return (
-      <BtnWrapper
-        oneBtn={buttonObjs.length === 1}
-        twoBtns={buttonObjs.length === 2}
-        fullWidthBtn={fullWidthBtn}
-      >
-        {buttonObjs.map(({ key, text, cb }, idx) => {
+      <BtnWrapper fullWidthBtn={fullWidthBtn}>
+        {btnObjs.map(({ btnProps, text, cb }, idx) => {
+          const { style, size } = btnProps;
           return (
             <Button
               key={idx}
               onClick={cb && (() => cb())}
-              primary={key === 'primary'}
-              secondary={key === 'secondary'}
-              tertiary={key === 'tertiary'}
-              remove={key === 'remove'}
-              isDisabled={key === 'isDisabled'}
-              isLoading={key === 'isLoading'}
+              //
+              primary={style === 'primary'}
+              secondary={style === 'secondary'}
+              tertiary={style === 'tertiary'}
+              remove={style === 'remove'}
+              isDisabled={style === 'isDisabled'}
+              isLoading={style === 'isLoading'}
+              //
+              small={size === 'small'}
+              medium={size === 'medium'}
+              large={size === 'large'}
             >
               {text}
             </Button>
@@ -150,55 +144,67 @@ class SandboxModal extends Component {
 
   openModal(children) {
     const {
-      outsideBgColor,
-      insideBgColor,
+      outerWidth,
+      outerHeight,
+      outerTop,
+      outerLeft,
+      //
+      outerBgColor,
+      innerBgColor,
       top,
       left,
       height,
       width,
       fullWidthBtn,
       headerText,
-      leftBtnObj,
-      rightBtnObj,
+      btnObjs,
       closeModal,
     } = this.props;
 
-    ReactDOM.render(
-      <OuterBox outsideBgColor={outsideBgColor} onClick={e => closeModal()}>
-        <InnerBox
-          insideBgColor={insideBgColor}
-          top={top}
-          left={left}
-          height={height}
-          width={width}
-          onClick={e => e.stopPropagation()}
-        >
-          <CloseBtnPositioning>
-            <CloseBtn onClick={() => closeModal()} size="16px" />
-          </CloseBtnPositioning>
-          {headerText && <HeaderText>{headerText}</HeaderText>}
-          {children}
-          {(leftBtnObj || rightBtnObj) &&
-            this.renderBtns({ leftBtnObj, rightBtnObj }, fullWidthBtn)}
-        </InnerBox>
+    !document.getElementById(uniqId) && this.appendElement();
+    document.body.style.overflow = 'hidden';
+
+    return ReactDOM.createPortal(
+      <OuterBox
+        outerBgColor={outerBgColor}
+        onClick={e => closeModal()}
+        //
+        outerWidth={outerWidth}
+        outerHeight={outerHeight}
+        outerTop={outerTop}
+        outerLeft={outerLeft}
+      >
+        <InnerBoxPositioning top={top} left={left}>
+          <InnerBox
+            innerBgColor={innerBgColor}
+            height={height}
+            width={width}
+            onClick={e => e.stopPropagation()}
+          >
+            <CloseBtnPositioning>
+              <CloseBtn onClick={() => closeModal()} size="16px" />
+            </CloseBtnPositioning>
+            {headerText && <HeaderText>{headerText}</HeaderText>}
+            {children}
+            {btnObjs && btnObjs.length !== 0 && this.renderBtns(btnObjs, fullWidthBtn)}
+          </InnerBox>
+        </InnerBoxPositioning>
       </OuterBox>,
       this.modal
     );
   }
 
-  closeModal() {
-    ReactDOM.unmountComponentAtNode(this.modal);
-
-    const divUnderProvider = document.getElementById(ADD_ME_UNDER_PROVIDER);
-
-    divUnderProvider === null
-      ? document.body.removeChild(this.modal)
-      : divUnderProvider.removeChild(this.modal);
+  removeModalFromBodyTag() {
+    if (document.getElementById(uniqId)) {
+      document.body.removeChild(this.modal);
+      document.body.style.overflow = 'auto';
+    }
   }
 
   render() {
+    if (this.props.isOpen) return this.openModal(this.props.children);
     return null;
   }
 }
 
-export default SandboxModal;
+export default Modal;

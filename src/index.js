@@ -11,6 +11,7 @@ import FormInput from './components/Input/Input';
 import FormTextarea from './components/Textarea/Textarea';
 import FormCheckboxGroup from './components/CheckboxGroup/CheckboxGroup';
 import FormRadioGroup from './components/RadioGroup/RadioGroup';
+import FormDropdown from './components/Dropdown/Dropdown';
 
 import Colors from './colors';
 
@@ -29,3 +30,4 @@ export const Input = FormInput;
 export const Textarea = FormTextarea;
 export const CheckboxGroup = FormCheckboxGroup;
 export const RadioGroup = FormRadioGroup;
+export const Dropdown = FormDropdown;

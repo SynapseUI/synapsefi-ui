@@ -6,6 +6,8 @@ import styled, { css } from 'styled-components';
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
+import { search } from '../SvgIcons';
+
 const DropdownBar = styled.div`
   width: 18rem;
   height: 2.5rem;
@@ -111,31 +113,27 @@ const MainContainer = styled.div`
 const SearchInput = styled.input`
   border-width: 0px;
   height: 100%;
+  width: 100%;
   margin-bottom: 0px;
 
   outline: none;
+  font-size: 1rem;
+  color: var(--color-warm-light);
 `;
 
 const FlexStartAlign = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  width: 100%;
 `;
 
-const SearchIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="15"
-    height="15"
-    viewBox="0 0 20 20"
-    style={{ marginRight: '0.5rem' }}
-  >
-    <g fill="#C3C3C3" fillRule="nonzero">
-      <path d="M7 2c2.8 0 5 2.2 5 5s-2.2 5-5 5-5-2.2-5-5 2.2-5 5-5zm0-2C3.1 0 0 3.1 0 7s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zM20 18.3L18.3 20 12 13.7V12h1.7z" />
-      <path d="M10.693 11.575l.849-.849 2.545 2.546-.848.848z" />
-    </g>
-  </svg>
-);
+const SearchIcon = styled(search)`
+  fill: var(--color-warm-light);
+  width: 16px;
+  height: 16px;
+  margin-right: 3px;
+`;
 
 class Dropdown extends Component {
   constructor(props) {
@@ -241,9 +239,7 @@ class Dropdown extends Component {
       showMenu,
       dropdownBarStyle,
       empty,
-      cb,
       onChange,
-      field,
       propName,
       searchable,
       options,

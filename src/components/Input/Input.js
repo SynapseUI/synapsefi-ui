@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 
-import { 
-  baseStyling
-} from '../styles/Input.styles';
-
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { baseInputStyling } from '../styles/Input.styles';
 // import { NumberInput } from './NumberInput';
 
 export const MainInput = styled.div`
@@ -52,7 +49,7 @@ const FlexRowRev = styled.div`
 `;
 
 const FlexRowRev__Input = styled.input`
-  ${baseStyling}
+  ${baseInputStyling}
 
   margin: 0px;
   height: 40px;
@@ -152,15 +149,14 @@ export default class Input extends Component {
   renderBaseInput() {
     const {
       autofocus,
-      cb,
       onChange,
+      onFocus,
       propName,
-      field,
       placeholder,
       value,
       inputType,
       disabled,
-    } = this.props.propValues || this.props;
+    } = this.props.propValues || this.props;    
 
     return (
       <FlexRowRev__Input
@@ -168,8 +164,8 @@ export default class Input extends Component {
         autoFocus={autofocus}
         value={value}
         type={inputType || 'text'}
-        onChange={(e) => onChange(e.target.value, propName)}
-        // onBlur={this.props.onBlur}
+        onChange={(e) => onChange(e, propName)}
+        onFocus={onFocus}
         placeholder={placeholder}
         disabled={disabled}
       />
@@ -179,8 +175,8 @@ export default class Input extends Component {
   // renderNumberInput() {
   //   const {
   //     autofocus,
-  //     cb,
-  //     updateField,
+  //     onChange,
+  //     onFocus,
   //     propName,
   //     placeholder,
   //     value,
@@ -193,8 +189,8 @@ export default class Input extends Component {
   //       autoFocus={autofocus}
   //       value={value}
   //       field={propName}
-  //       cb={cb}
-  //       updateField={updateField}
+  //       onChange={onChange}
+  //       onFocus={onFocus}
   //       placeholder={placeholder}
   //       disabled={disabled}
   //       currency={currency}
@@ -214,6 +210,7 @@ export default class Input extends Component {
     // const mainInput = inputType === 'number' ?
     //   this.renderNumberInput() : this.renderBaseInput();
     const mainInput = this.renderBaseInput();
+
     return (
       <FlexColumn>
         <FlexRowRev>
@@ -222,10 +219,7 @@ export default class Input extends Component {
           <FlexRowRev__Divider error={error} />
         </FlexRowRev>
 
-        <ErrorMessage
-          error={error}
-          errorMessage={errorMessage}
-        />
+        <ErrorMessage error={error}/>
       </FlexColumn>
     );
   }

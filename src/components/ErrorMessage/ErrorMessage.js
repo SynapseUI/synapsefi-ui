@@ -1,17 +1,17 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-// import { error } from '../common/svgIcons';
+import { error } from '../SvgIcons';
 
-// const StyledErrorSign = styled(error)`
-//   height: 1rem;
-//   width: 1rem;
-//   margin-right: 0.5rem;
+const StyledErrorSign = styled(error)`
+  height: 1rem;
+  width: 1rem;
+  margin-right: 0.5rem;
 
-//   path:first-child {
-//     fill: var(--color-energy);
-//   }
-// `;
+  path:first-child {
+    fill: var(--color-energy);
+  }
+`;
 
 const FlexColumn__ErrorMessage = styled.span`
   align-items: center;
@@ -30,11 +30,11 @@ const FlexColumn__ErrorMessage = styled.span`
   
 `;
 
-const renderMessage = (errorMessage) => {
-  if (errorMessage) {
+const renderMessage = (error) => {
+  if (error) {
     return [
-      // <StyledErrorSign key='StyledErrorSign'/>,
-      <span key='StyledErrorSign-span'>{errorMessage}</span>
+      <StyledErrorSign key='StyledErrorSign'/>,
+      <span key='StyledErrorSign-span'>{error}</span>
     ];
   }
 
@@ -42,11 +42,11 @@ const renderMessage = (errorMessage) => {
 };
 
 const ErrorMessage = (props) => {
-  const { error, errorMessage, alignedLeft } = props;
+  const { error, alignedLeft } = props;
   if (error) {
     return (
       <FlexColumn__ErrorMessage alignedLeft={alignedLeft}>
-        {renderMessage(errorMessage)}
+        {renderMessage(error)}
       </FlexColumn__ErrorMessage>
     );
   }

@@ -4,12 +4,23 @@ import styled, { css } from 'styled-components';
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
+
 export const MainRadioGroup = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const SelectionButton = styled.div`
+const Group = styled.div`
+  display: flex;
+`;
+
+const Group__RadioButton = styled.input.attrs({
+  type: 'radio'
+})`
+  display: none;
+`;
+
+const RadioButton__Label = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,13 +28,6 @@ const SelectionButton = styled.div`
   cursor: pointer;
   border: 1px solid var(--color-medium-gray);
   border-color: var(--color-medium-gray);
-`;
-
-const Group = styled.div`
-  display: flex;
-`;
-
-const Group__RadioButton = SelectionButton.extend`
   padding: 1rem;
   color: var(--color-body-text);
 
@@ -99,8 +103,11 @@ const Group__RadioButton = SelectionButton.extend`
 const RadioGroup = (props) => {
   const {
     value,
+    field,
     propName,
+    gatherValue,
     onChange,
+    onClick,
     options,
     label,
     description,
@@ -121,25 +128,29 @@ const RadioGroup = (props) => {
         {options.map((item, idx) => {          
           if (item.key === value) selectedIndex = idx;
           return (
-            <Group__RadioButton
+            <RadioButton__Label
               key={idx}
-              disabled={disabled}
-              largeButtons={largeButtons}
-              checked={item.key === value}
               rightOfSelected={idx === selectedIndex + 1}
               style={radioStyle}
-              onClick={() => onChange(item.key, propName)}
+              largeButtons={largeButtons}
+              checked={item.key === value}
+              disabled={disabled}
             >
+              <Group__RadioButton
+                id={propName}
+                defaultValue={item.key}
+                disabled={disabled}
+                checked={item.key === value}
+                onChange={(e) => onChange(e, propName)}
+              />
               {item.text}
-            </Group__RadioButton>
+            </RadioButton__Label>
           );
         })}
-        <ErrorMessage
-          error={error}
-          errorMessage={errorMessage}
-        />
+        <ErrorMessage error={error}/>
       </Group>
 
+      
     </MainRadioGroup>
   );
 };

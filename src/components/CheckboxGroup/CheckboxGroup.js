@@ -24,7 +24,9 @@ const Group = styled.div`
   grid-column-gap: 0.5rem;
 `;
 
-const SelectionButton = styled.div`
+const SelectionButton = styled.input.attrs({
+  type: 'checkbox'
+})`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,6 +38,20 @@ const SelectionButton = styled.div`
 `;
 
 const Group__CheckboxButton = SelectionButton.extend`
+  display: none;
+`;
+
+const CheckBoxGroup__Label = styled.label`
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  cursor: pointer;
+
+  border: 1px solid var(--color-medium-gray);
+  border-color: var(--color-medium-gray);
+
   border-radius: 3px;
 
   ${({ disabled }) =>
@@ -60,18 +76,19 @@ const Group__CheckboxButton = SelectionButton.extend`
       color: var(--color-white);
       border-color: var(--color-warm-light);
     `};
+
 `;
 
 class CheckBoxGroup extends Component {
   constructor(props) {
     super(props);
 
-    let values = this.props.propValues ?
-      this.props.propValues.values
-      : this.props.values;
+    let value = this.props.propValues ?
+      this.props.propValues.value
+      : this.props.value;
 
     this.state = {
-      list: values || [],
+      list: value || [],
     };
 
     this.addOrRemove = this.addOrRemove.bind(this);
@@ -89,10 +106,10 @@ class CheckBoxGroup extends Component {
     return newList;
   }
 
-  componentWillReceiveProps(nextProps) {    
+  componentWillReceiveProps(nextProps) {
     let nextValues = nextProps.propValues ?
-      nextProps.propValues.values
-      : nextProps.values;
+      nextProps.propValues.value
+      : nextProps.value;
 
     this.setState({ list: nextValues });
   }
@@ -131,9 +148,8 @@ class CheckBoxGroup extends Component {
   render() {
     const {
       options,
-      field,
       propName,
-      cb,
+      gatherValue,
       onChange,
       label,
       description,
@@ -151,21 +167,37 @@ class CheckBoxGroup extends Component {
         <FlexColumnRelative>
           <Group width={checkboxWidth || '100px'}>
             {options.map((item, idx) => {
+              const [
+                selectionColor,
+                checked,
+                value
+              ] = [
+                this.props.selectionColor || 'var(--color-authentic)',
+                this.state.list.includes(item.key),
+                item.key
+              ];
+
               return (
-                <Group__CheckboxButton
+                <CheckBoxGroup__Label
                   key={idx}
                   className={checkboxClassName}
                   disabled={disabled}
-                  selectionColor={this.props.selectionColor || 'var(--color-authentic)'}
-                  checked={this.state.list.includes(item.key)}
-                  value={item.key}
-                  onClick={() => {
-                    let newList = this.addOrRemove(item.key);
-                    onChange(newList, propName);
-                  }}
+                  selectionColor={selectionColor}
+                  checked={checked}
+                  value={value}
                 >
+                  <Group__CheckboxButton
+                    id={propName}
+                    disabled={disabled}
+                    defaultChecked={checked}
+                    value={value}
+                    onClick={(e) => {
+                      let value = gatherValue ? this.addOrRemove(e.target.value) :  e;
+                      onChange(value, propName);
+                    }}
+                  />
                   {item.text}
-                </Group__CheckboxButton>
+                </CheckBoxGroup__Label>
               );
             })}
           </Group>

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import onClickOutside from 'react-onclickoutside';
 
 import styled, { css } from 'styled-components';
+import { search } from '../SvgIcons';
 
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-
-import { search } from '../SvgIcons';
+import { baseInputStyling } from '../styles/Input.styles';
 
 const DropdownBar = styled.div`
   width: 18rem;
@@ -111,14 +111,16 @@ const MainContainer = styled.div`
 `;
 
 const SearchInput = styled.input`
+  ${baseInputStyling}
+
   border-width: 0px;
   height: 100%;
-  width: 100%;
   margin-bottom: 0px;
+  font-size: 16px;
 
   outline: none;
-  font-size: 1rem;
-  color: var(--color-warm-light);
+
+  width: 90%;
 `;
 
 const FlexStartAlign = styled.div`
@@ -128,11 +130,10 @@ const FlexStartAlign = styled.div`
   width: 100%;
 `;
 
-const SearchIcon = styled(search)`
+const StyledSearchIcon = styled(search)`
+  width: 15px;
+  height: 15px;
   fill: var(--color-warm-light);
-  width: 16px;
-  height: 16px;
-  margin-right: 3px;
 `;
 
 class Dropdown extends Component {
@@ -161,7 +162,7 @@ class Dropdown extends Component {
     if (searchable) {
       return (
         <FlexStartAlign>
-          <SearchIcon />
+          <StyledSearchIcon style={{ marginRight: '0.5rem' }}/>
           {text}
         </FlexStartAlign>
       );
@@ -185,7 +186,7 @@ class Dropdown extends Component {
       return (
         <MenuItem notSelectable>
           <FlexStartAlign>
-            <SearchIcon />
+            <StyledSearchIcon />
 
             <SearchInput
               value={this.state.inputValue}
@@ -246,8 +247,7 @@ class Dropdown extends Component {
       label,
       description,
       placeholder,
-      error,
-      errorMessage
+      error
     } = this.props.propValues || this.props;
 
     const filteredOptions = this.getOptionsList(options, searchable);
@@ -265,10 +265,7 @@ class Dropdown extends Component {
           style={styles}
           showMenu={this.state.showMenu}
         >
-          <ErrorMessage
-            error={error}
-            errorMessage={errorMessage}
-          />
+          <ErrorMessage error={error}/>
 
           <DropdownBar
             style={dropdownBarStyle}
@@ -294,11 +291,12 @@ class Dropdown extends Component {
                   key={idx}
                   selected={item === this.state.selectedItem}
                   index={idx}
-                  onClick={() => {
+                  value={item.key}
+                  onClick={(e) => {
                     this.setState({
                       selectedItem: item, showMenu: false, empty: false, inputValue: ''
                     });
-                    onChange(item.key, propName);
+                    onChange(e, propName);
                   }}
                 >
                   {item.text}

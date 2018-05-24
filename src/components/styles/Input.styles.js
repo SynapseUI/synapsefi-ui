@@ -1,4 +1,4 @@
-export const baseStyling = `
+export const baseInputStyling = `
   outline: none;
   display: block;
   box-shadow: none;

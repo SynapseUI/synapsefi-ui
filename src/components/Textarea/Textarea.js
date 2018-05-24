@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 
-import {
-  baseStyling
-} from '../styles/Input.styles';
-
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { baseInputStyling } from '../styles/Input.styles'
 
 export const MainTextarea = styled.div`
   display: flex;
@@ -42,7 +39,7 @@ const FlexRowRev__Divider = styled.div`
 `;
 
 const FlexRowRev__Textarea = styled.textarea`
-  ${baseStyling}
+  ${baseInputStyling}
 
   padding-top: calc(8px - (16px * 1.4 - 16px)/2);
   margin: 0px;
@@ -72,7 +69,7 @@ const FlexColumn__ErrorMessage = styled.span`
   position: absolute;
 `;
 
-export default class Textarea extends Component {
+export default class TextArea extends Component {
   constructor(props) {
     super(props);
   }
@@ -110,7 +107,7 @@ export default class Textarea extends Component {
   renderTextareaField() {
     const {
       autofocus,
-      cb,
+      gatherValue,
       onChange,
       error,
       errorMessage,
@@ -125,20 +122,17 @@ export default class Textarea extends Component {
 
         <FlexRowRev>
           <FlexRowRev__Textarea
+            id={propName}
             autoFocus={autofocus}
             value={value}
             type="text"
-            onChange={(e) => onChange(e.target.value, propName)}
+            onChange={(e) => onChange(e, propName)}
             placeholder={placeholder}
           />
-
           <FlexRowRev__Divider error={error}/>
         </FlexRowRev>
 
-        <ErrorMessage
-          error={error}
-          errorMessage={errorMessage}
-        />
+        <ErrorMessage error={error}/>
       </FlexColumn>
     );
   }

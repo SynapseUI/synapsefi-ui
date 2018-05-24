@@ -141,7 +141,7 @@ const RadioGroup = (props) => {
                 defaultValue={item.key}
                 disabled={disabled}
                 checked={item.key === value}
-                onChange={(e) => onChange(e, propName)}
+                onChange={(e) => onChange(e, item.key, propName)}
               />
               {item.text}
             </RadioButton__Label>

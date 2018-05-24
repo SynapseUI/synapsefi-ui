@@ -296,7 +296,7 @@ class Dropdown extends Component {
                     this.setState({
                       selectedItem: item, showMenu: false, empty: false, inputValue: ''
                     });
-                    onChange(e, propName);
+                    onChange(e, item.key, propName);
                   }}
                 >
                   {item.text}

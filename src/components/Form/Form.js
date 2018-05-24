@@ -120,10 +120,16 @@ class Form extends Component {
 
         default:          
           if (!_.isEmpty(formChildren)){
-            const childCopy = formChildren.shift();            
+            const childCopy = formChildren.shift();  
             return React.cloneElement(childCopy, {
-              error: this.state.touch.has(item.propName) && this.state.errors[item.propName],
-              onFocus: () => this.handleTouchUpdate(item.propName)
+              error: this.state.afterSubmission
+                && this.state.touch.has(item.propName)
+                && this.state.errors[item.propName],
+              
+              onFocus: (e) => {
+                if(childCopy.props.onFocus) childCopy.props.onFocus(e);
+                this.handleTouchUpdate(item.propName);
+              }
             });
 
           } else {

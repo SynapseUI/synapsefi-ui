@@ -156,15 +156,18 @@ export default class Input extends Component {
       value,
       inputType,
       disabled,
-    } = this.props.propValues || this.props;    
-
+    } = this.props.propValues || this.props;   
+    
+    const { className, ...remainingProps } = this.props;
+    
     return (
       <FlexRowRev__Input
+        {...remainingProps}
         id={propName}
         autoFocus={autofocus}
         value={value}
         type={inputType || 'text'}
-        onChange={(e) => onChange(e, propName)}
+        onChange={(e) => onChange(e, e.target.value, propName)}
         onFocus={onFocus}
         placeholder={placeholder}
         disabled={disabled}

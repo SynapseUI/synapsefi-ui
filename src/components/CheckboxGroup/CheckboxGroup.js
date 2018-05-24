@@ -192,8 +192,8 @@ class CheckBoxGroup extends Component {
                     defaultChecked={checked}
                     value={value}
                     onClick={(e) => {
-                      let value = gatherValue ? this.addOrRemove(e.target.value) :  e;
-                      onChange(value, propName);
+                      let value = this.addOrRemove(item.key);
+                      onChange(e, value, propName)
                     }}
                   />
                   {item.text}

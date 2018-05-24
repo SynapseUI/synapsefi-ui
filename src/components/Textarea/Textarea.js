@@ -104,38 +104,41 @@ export default class TextArea extends Component {
 
   */
 
-  renderTextareaField() {
-    const {
-      autofocus,
-      gatherValue,
-      onChange,
-      error,
-      errorMessage,
-      field,
-      propName,
-      placeholder,
-      value,
-    } = this.props.propValues || this.props;
+ renderTextareaField() {
+  const {
+    autofocus,
+    gatherValue,
+    onChange,
+    error,
+    errorMessage,
+    field,
+    propName,
+    placeholder,
+    value,
+  } = this.props.propValues || this.props;
 
-    return (
-      <FlexColumn>
+  const { className, ...remainingProps } = this.props;
 
-        <FlexRowRev>
-          <FlexRowRev__Textarea
-            id={propName}
-            autoFocus={autofocus}
-            value={value}
-            type="text"
-            onChange={(e) => onChange(e, propName)}
-            placeholder={placeholder}
-          />
-          <FlexRowRev__Divider error={error}/>
-        </FlexRowRev>
+  return (
+    <FlexColumn>
 
-        <ErrorMessage error={error}/>
-      </FlexColumn>
-    );
-  }
+      <FlexRowRev>
+        <FlexRowRev__Textarea
+          {...remainingProps}
+          id={propName}
+          autoFocus={autofocus}
+          value={value}
+          type="text"
+          onChange={(e) => onChange(e, e.target.value, propName)}
+          placeholder={placeholder}
+        />
+        <FlexRowRev__Divider error={error}/>
+      </FlexRowRev>
+
+      <ErrorMessage error={error}/>
+    </FlexColumn>
+  );
+}
 
   render() {
     const {

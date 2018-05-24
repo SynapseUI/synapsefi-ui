@@ -4,11 +4,11 @@ import styled, { css } from 'styled-components';
 import { error } from '../SvgIcons';
 
 const StyledErrorSign = styled(error)`
-  height: 1rem;
-  width: 1rem;
+  height: 16px;
+  width: 16px;
   margin-right: 0.5rem;
 
-  path:first-child {
+  path:first-of-type {
     fill: var(--color-energy);
   }
 `;
@@ -34,7 +34,7 @@ const renderMessage = (error) => {
   if (error) {
     return [
       <StyledErrorSign key='StyledErrorSign'/>,
-      <span key='StyledErrorSign-span'>{error}</span>
+      <span key='ErrorSignText'>{error}</span>
     ];
   }
 

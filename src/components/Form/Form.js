@@ -26,7 +26,7 @@ class Form extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { 
+    this.state = {
       errors: this.props.validation ?
         this.getErrorsCollection(this.props.validation(), this.props.formValues)
         : {},
@@ -41,16 +41,16 @@ class Form extends Component {
     this.getErrorsCollection = this.getErrorsCollection.bind(this);
   }
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.validation && this.state.afterSubmission){
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.validation && this.state.afterSubmission) {
       const newErrors = this.getErrorsCollection(nextProps.validation(), nextProps.formValues) || {};
       this.setState({ errors: newErrors });
     }
   }
 
-  getErrorsCollection(errors, currentFormValues){
+  getErrorsCollection(errors, currentFormValues) {
     return _.reduce(errors, (memo, errmessage, errKey) => {
-      if(typeof currentFormValues[errKey] !== undefined){
+      if (typeof currentFormValues[errKey] !== undefined) {
         memo[errKey] = errmessage
       }
 
@@ -58,9 +58,9 @@ class Form extends Component {
     }, {});
   }
 
-  handleFormSubmit(e){
+  handleFormSubmit(e) {
     if (e) e.preventDefault();
-    _.isEmpty(this.state.errors) ? 
+    _.isEmpty(this.state.errors) ?
       this.props.handleSubmit(e)
       : this.setState({
         afterSubmission: true,
@@ -68,23 +68,23 @@ class Form extends Component {
       });
   }
 
-  handleTouchUpdate(propName){
-    if (!this.state.touch.has(propName)){
+  handleTouchUpdate(propName) {
+    if (!this.state.touch.has(propName)) {
       let newTouch = new Set(this.state.touch);
       newTouch.add(propName)
       this.setState({ touch: newTouch });
     }
   }
 
-  renderEntireForm() {    
+  renderEntireForm() {
     let formChildren = !!this.props.children ? [...this.props.children] : [];
     const onChangeCollection = this.props.onChangeCollection;
-    
+
     let result = this.props.data.map((item, idx) => {
       if (typeof this.props.formValues[item.propName] === 'undefined') {
         return null;
       }
-      
+
       const propValues = {
         ...item,
         className: item.className || this.props.rowClassName,
@@ -101,33 +101,33 @@ class Form extends Component {
           && this.state.touch.has(item.propName)
           && this.state.errors[item.propName]
       };
-      
+
       switch (item.type) {
         case TYPE_INPUT:
-          return <Input key={idx} propValues={propValues}/>;
+          return <Input key={idx} propValues={propValues} />;
 
         case TYPE_TEXTAREA:
-          return <TextArea key={idx} propValues={propValues}/>;
+          return <TextArea key={idx} propValues={propValues} />;
 
         case TYPE_RADIOGROUP:
-          return <RadioGroup key={idx} propValues={propValues}/>;
+          return <RadioGroup key={idx} propValues={propValues} />;
 
         case TYPE_CHECKBOXGROUP:
-          return <CheckBoxGroup key={idx} propValues={propValues}/>;
+          return <CheckBoxGroup key={idx} propValues={propValues} />;
 
         case TYPE_DROPDOWN:
-          return <Dropdown key={idx} propValues={propValues}/>;
+          return <Dropdown key={idx} propValues={propValues} />;
 
-        default:          
-          if (!_.isEmpty(formChildren)){
-            const childCopy = formChildren.shift();  
+        default:
+          if (!_.isEmpty(formChildren)) {
+            const childCopy = formChildren.shift();
             return React.cloneElement(childCopy, {
               error: this.state.afterSubmission
                 && this.state.touch.has(item.propName)
                 && this.state.errors[item.propName],
-              
+
               onFocus: (e) => {
-                if(childCopy.props.onFocus) childCopy.props.onFocus(e);
+                if (childCopy.props.onFocus) childCopy.props.onFocus(e);
                 this.handleTouchUpdate(item.propName);
               }
             });
@@ -151,7 +151,7 @@ class Form extends Component {
       withInModal,
       customFooter
     } = this.props;
-    
+
     if (customFooter) return React.cloneElement(customFooter, {
       handleSubmit: this.props.handleSubmit.bind(this),
       error: !_.isEmpty(this.props.errors),

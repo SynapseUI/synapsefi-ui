@@ -157,7 +157,6 @@ class CheckBoxGroup extends Component {
       className,
       checkboxWidth,
       error,
-      errorMessage,
       checkboxClassName,
     } = this.props.propValues || this.props;
 
@@ -202,7 +201,7 @@ class CheckBoxGroup extends Component {
             })}
           </Group>
 
-          <ErrorMessage error={error} errorMessage={errorMessage} showSymbol={true} />
+          <ErrorMessage error={error} showSymbol={true} />
         </FlexColumnRelative>
       </MainCheckBoxGroup>
     );

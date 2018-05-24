@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components';
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
-
 export const MainRadioGroup = styled.div`
   display: flex;
   align-items: center;
@@ -103,11 +102,8 @@ const RadioButton__Label = styled.label`
 const RadioGroup = (props) => {
   const {
     value,
-    field,
     propName,
-    gatherValue,
     onChange,
-    onClick,
     options,
     label,
     description,
@@ -115,9 +111,8 @@ const RadioGroup = (props) => {
     className,
     radioStyle,
     disabled,
-    error,
-    errorMessage
-  } = props.propValues || props;
+    error
+} = props.propValues || props;
   
   let selectedIndex;
   return (

@@ -6,7 +6,7 @@ import { error } from '../SvgIcons';
 const StyledErrorSign = styled(error)`
   height: 16px;
   width: 16px;
-  margin-right: 0.5rem;
+  margin-right: 8px;
 
   path:first-of-type {
     fill: var(--color-energy);
@@ -18,7 +18,7 @@ const FlexColumn__ErrorMessage = styled.span`
   color: var(--color-energy);
   display: flex;
   
-  padding: 0.5rem;
+  padding: 8px;
 
   margin-top: 36px;
   position: absolute;

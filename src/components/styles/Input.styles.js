@@ -5,10 +5,10 @@ export const baseInputStyling = `
   resize: none;
 
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 16px;
 
   margin: 0;
-  padding: 0.5rem;
+  padding: 8px;
 
   width: 100%;
 

@@ -4,13 +4,13 @@ import styled, { css } from 'styled-components';
 export const LabelDescription = styled.div`
   display: flex;
   flex-direction: column;
-  width: 32rem;
+  width: 512px;
 
   margin-top: ${props => (props.textarea ? '0.5rem' : '0')};
 `;
 
 export const LabelDescription__Label = styled.label`
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: bold;
   color: var(--color-dark-night);
 

@@ -27,7 +27,7 @@ const RadioButton__Label = styled.label`
   cursor: pointer;
   border: 1px solid var(--color-medium-gray);
   border-color: var(--color-medium-gray);
-  padding: 1rem;
+  padding: 16px;
   color: var(--color-body-text);
 
   border-right-width: 0px;

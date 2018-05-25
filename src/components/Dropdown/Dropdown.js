@@ -9,9 +9,9 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { baseInputStyling } from '../styles/Input.styles';
 
 const DropdownBar = styled.div`
-  width: 18rem;
-  height: 2.5rem;
-  padding: 0.5rem;
+  width: 288px;
+  height: 40px;
+  padding: 8px;
 
   background-color: transparent;
   border-bottom: 1px solid var(--color-medium-gray);
@@ -27,7 +27,7 @@ const DropdownBar = styled.div`
 const DropdownMenu = styled.div`
   width: inherit;
 
-  margin-top: -2.5rem;
+  margin-top: -40px;
 
   position: absolute;
   display: block;
@@ -47,14 +47,14 @@ const DropdownMenu = styled.div`
 const MenuList = styled.div`
   overflow-y: ${props => props.scrollable && 'scroll'};
   height: auto;
-  max-height: ${props => (props.showMenu ? '12.5rem' : '0rem')};
+  max-height: ${props => (props.showMenu ? '200px' : '0px')};
   transition: max-height 0.2s ease-in;
 `;
 
 const MenuItem = styled.div`
   width: inherit;
-  height: 2.5rem;
-  padding: 0.5rem !important;
+  height: 40px;
+  padding: 8px !important;
   cursor: pointer;
 
   display: flex;
@@ -101,7 +101,7 @@ const PlaceHolder = styled.span`
 `;
 
 const DropdownContainer = styled.div`
-  width: 18rem;
+  width: 288px;
   position: relative;
 `;
 
@@ -162,7 +162,7 @@ class Dropdown extends Component {
     if (searchable) {
       return (
         <FlexStartAlign>
-          <StyledSearchIcon style={{ marginRight: '0.5rem' }}/>
+          <StyledSearchIcon style={{ marginRight: '8px' }}/>
           {text}
         </FlexStartAlign>
       );

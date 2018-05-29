@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 
+import Colors from '../../colors';
+
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { baseInputStyling } from '../styles/Input.styles'
@@ -26,15 +28,15 @@ const FlexRowRev = styled.div`
 `;
 
 const FlexRowRev__Divider = styled.div`
-  border-right: thin solid var(--color-medium-gray);
+  border-right: thin solid ${Colors.MEDIUM_GRAY};
   height: inherit;
   transition: box-shadow 0.5s;
 
   ${props =>
     props.error &&
     css`
-      border-color: var(--color-energy) !important;
-      box-shadow: 0 0px 3px 0 var(--color-energy) !important;
+      border-color: ${Colors.ENERGY} !important;
+      box-shadow: 0 0px 3px 0 ${Colors.ENERGY} !important;
     `};
 `;
 
@@ -44,9 +46,8 @@ const FlexRowRev__Textarea = styled.textarea`
   padding-top: calc(8px - (16px * 1.4 - 16px)/2);
   margin: 0px;
   min-height: 80px;
-  font-size: var(--font-size-16);
   border-width: 0px;
-  color: var(--color-dark-night);
+  color: ${Colors.DARK_NIGHT};
   width: 100%;
   &:focus {
     outline-color: none;
@@ -55,16 +56,16 @@ const FlexRowRev__Textarea = styled.textarea`
     background-color: transparent;
   }
   &:focus ~ ${FlexRowRev__Divider} {
-    border-color: var(--color-teal);
-    box-shadow: 0 0px 3px 0 var(--color-teal);
+    border-color: ${Colors.TEAL};
+    box-shadow: 0 0px 3px 0 ${Colors.TEAL};
   }
 `;
 
 const FlexColumn__ErrorMessage = styled.span`
   color: #cf5938;
-  padding: 0.5rem;
+  padding: 8px;
 
-  margin-top: 2rem;
+  margin-top: 32px;
 
   position: absolute;
 `;

@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+import Colors from '../../colors';
+
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
@@ -23,12 +25,12 @@ const RadioButton__Label = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
+  font-size: 16px;
   cursor: pointer;
-  border: 1px solid var(--color-medium-gray);
-  border-color: var(--color-medium-gray);
+  border: 1px solid ${Colors.MEDIUM_GRAY};
+  border-color: ${Colors.MEDIUM_GRAY};
   padding: 16px;
-  color: var(--color-body-text);
+  color: ${Colors.DARK_NIGHT};
 
   border-right-width: 0px;
 
@@ -45,26 +47,26 @@ const RadioButton__Label = styled.label`
 
   ${({ disabled }) => disabled && css`
     cursor: not-allowed;
-    border-color: var(--color-warm-light);
-    color: var(--color-warm-light);
+    border-color: ${Colors.WARM_LIGHT};
+    color: ${Colors.WARM_LIGHT};
   `}
 
   ${({ checked }) => checked && css`
-    border-color: var(--color-authentic);
-    background-color: var(--color-authentic);
-    color: var(--color-white);
+    border-color: ${Colors.AUTHENTIC};
+    background-color: ${Colors.AUTHENTIC};
+    color: ${Colors.WHITE};
   `}
 
   ${({ checked, disabled }) => checked && disabled && css`
-    background-color: var(--color-warm-light);
-    color: var(--color-white);
-    border-color: var(--color-warm-light);
+    background-color: ${Colors.WARM_LIGHT};
+    color: ${Colors.WHITE};
+    border-color: ${Colors.WARM_LIGHT};
   `}
 
   ${({ largeButtons }) => largeButtons && 'overflow-wrap: break-word;'};
 
   ${({ rightOfSelected }) => rightOfSelected && css`
-    border-left-color: var(--color-authentic);
+    border-left-color: ${Colors.AUTHENTIC};
   `}
 `;
 

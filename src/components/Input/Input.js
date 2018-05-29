@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { baseInputStyling } from '../styles/Input.styles';
+import Colors from '../../colors';
 // import { NumberInput } from './NumberInput';
 
 export const MainInput = styled.div`
@@ -14,15 +15,15 @@ export const MainInput = styled.div`
 const FlexRowRev__Divider = styled.div.attrs(
   { className: 'input-divider' }
 )`
-  border-right: thin solid var(--color-medium-gray);
+  border-right: thin solid ${Colors.MEDIUM_GRAY};
   height: 40px;
   transition: box-shadow 0.5s;
 
   ${props =>
     props.error &&
     css`
-      border-color: var(--color-energy) !important;
-      box-shadow: 0 0px 3px 0 var(--color-energy) !important;
+      border-color: ${Colors.ENERGY} !important;
+      box-shadow: 0 0px 3px 0 ${Colors.ENERGY} !important;
     `};
 `;
 
@@ -30,7 +31,7 @@ const AlignedSpan = styled.span`
   display: flex;
   align-self: center;
 
-  ${props => props.disabled && css`color: var(--color-warm-light);`};
+  ${props => props.disabled && css`color: ${Colors.WARM_LIGHT};`};
 `;
 
 const FlexColumn = styled.div`
@@ -55,20 +56,20 @@ const FlexRowRev__Input = styled.input`
   height: 40px;
   font-size: 16px;
   border-width: 0px;
-  color: var(--color-dark-base);
+  color: ${Colors.DARK_NIGHT};
 
   &:disabled {
-    color: var(--color-warm-light);
+    color: ${Colors.WARM_LIGHT};
     cursor: not-allowed;
 
     & ~ ${FlexRowRev__Divider} {
-      border-color: var(--color-warm-light);
+      border-color: ${Colors.WARM_LIGHT};
     }
   }
 
   &:focus ~ ${FlexRowRev__Divider} {
-    border-color: var(--color-teal);
-    box-shadow: 0 0px 3px 0 var(--color-teal);
+    border-color: ${Colors.TEAL};
+    box-shadow: 0 0px 3px 0 ${Colors.TEAL};
   }
 `;
 
@@ -154,7 +155,6 @@ export default class Input extends Component {
       propName,
       placeholder,
       value,
-      inputType,
       disabled,
     } = this.props.propValues || this.props;   
     
@@ -166,7 +166,6 @@ export default class Input extends Component {
         id={propName}
         autoFocus={autofocus}
         value={value}
-        type={inputType || 'text'}
         onChange={(e) => onChange(e, e.target.value, propName)}
         onFocus={onFocus}
         placeholder={placeholder}

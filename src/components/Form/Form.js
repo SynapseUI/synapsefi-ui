@@ -102,7 +102,7 @@ class Form extends Component {
           && this.state.errors[item.propName]
       };
 
-      switch (item.type) {
+      switch (item.formType) {
         case TYPE_INPUT:
           return <Input key={idx} propValues={propValues} />;
 

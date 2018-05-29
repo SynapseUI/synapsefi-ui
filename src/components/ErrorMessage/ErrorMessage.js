@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { error } from '../SvgIcons';
+import Colors from '../../colors';
 
 const StyledErrorSign = styled(error)`
   height: 16px;
@@ -9,16 +10,17 @@ const StyledErrorSign = styled(error)`
   margin-right: 8px;
 
   path:first-of-type {
-    fill: var(--color-energy);
+    fill: ${Colors.ENERGY};
   }
 `;
 
 const FlexColumn__ErrorMessage = styled.span`
   align-items: center;
-  color: var(--color-energy);
+  color: ${Colors.ENERGY};
   display: flex;
   
   padding: 8px;
+  font-size: 16px;
 
   margin-top: 36px;
   position: absolute;
@@ -27,7 +29,6 @@ const FlexColumn__ErrorMessage = styled.span`
     margin-top: 0px;
     position: relative;
   `)}
-  
 `;
 
 const renderMessage = (error) => {

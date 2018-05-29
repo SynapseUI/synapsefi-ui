@@ -3,6 +3,7 @@ import onClickOutside from 'react-onclickoutside';
 
 import styled, { css } from 'styled-components';
 import { search } from '../SvgIcons';
+import Colors from '../../colors';
 
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -14,7 +15,7 @@ const DropdownBar = styled.div`
   padding: 8px;
 
   background-color: transparent;
-  border-bottom: 1px solid var(--color-medium-gray);
+  border-bottom: 1px solid ${Colors.MEDIUM_GRAY};
 
   box-sizing: border-box;
 
@@ -33,7 +34,7 @@ const DropdownMenu = styled.div`
   display: block;
   visibility: hidden;
 
-  background-color: var(--color-main-background);
+  background-color: ${Colors.WHITE};
 
   overflow-y: hidden;
   overflow-x: hidden;
@@ -52,18 +53,19 @@ const MenuList = styled.div`
 `;
 
 const MenuItem = styled.div`
-  width: inherit;
+  // width: inherit;
   height: 40px;
   padding: 8px !important;
   cursor: pointer;
 
   display: flex;
   justify-content: space-between;
+  align-items: center
 
-  color: var(--color-dark-night);
-  background-color: var(--color-white);
+  color: ${Colors.DARK_NIGHT};
+  background-color: ${Colors.WHITE};
 
-  ${props => props.notSelectable ? 'color: var(--color-medium-gray);' : ''}
+  ${props => props.notSelectable ? `color: ${Colors.MEDIUM_GRAY};` : ''}
 `;
 
 const TabItem = MenuItem.extend.attrs({
@@ -71,14 +73,14 @@ const TabItem = MenuItem.extend.attrs({
 })`
   &:hover, &:focus {
     outline: none;
-    background-color: var(--color-evening);
-    color: var(--color-silk-white);
+    background-color: ${Colors.EVENING};
+    color: ${Colors.SILK_WHITE};
   }
 
   ${props => (props.selected && css`
     outline: none;
-    background-color: var(--color-evening);
-    color: var(--color-silk-white);
+    background-color: ${Colors.EVENING};
+    color: ${Colors.SILK_WHITE};
   `)}
 `;
 
@@ -88,7 +90,7 @@ const DownArrow = styled.div`
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
 
-  border-top: 6px solid var(--color-medium-gray);
+  border-top: 6px solid ${Colors.MEDIUM_GRAY};
 
   border-radius: 2px;
 
@@ -97,7 +99,7 @@ const DownArrow = styled.div`
 `;
 
 const PlaceHolder = styled.span`
-  color: ${props => props.empty && 'var(--color-warm-light)'};
+  color: ${props => props.empty && Colors.WARM_LIGHT};
 `;
 
 const DropdownContainer = styled.div`
@@ -131,9 +133,9 @@ const FlexStartAlign = styled.div`
 `;
 
 const StyledSearchIcon = styled(search)`
-  width: 15px;
-  height: 15px;
-  fill: var(--color-warm-light);
+  width: 16px;
+  height: 16px;
+  fill: ${Colors.WARM_LIGHT};
 `;
 
 class Dropdown extends Component {

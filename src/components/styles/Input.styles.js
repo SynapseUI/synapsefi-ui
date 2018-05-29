@@ -1,3 +1,5 @@
+import Colors from '../../colors';
+
 export const baseInputStyling = `
   outline: none;
   display: block;
@@ -13,16 +15,17 @@ export const baseInputStyling = `
   width: 100%;
 
   border-radius: 0px;
-  color: var(--color-dark-base);
-  background-color: var(--color-input-background);
+  color: ${Colors.DARK_NIGHT};
+  background-color: ${Colors.WHITE};
 
   &::placeholder, &::-webkit-datetime-edit {
-    color: var(--color-warm-light);
+    color: ${Colors.WARM_LIGHT};
+    font-size: 16px;
   }
 
   &:focus {
-    color: var(--color-dark-base);
-    background-color: var(--color-input-background);
+    color: ${Colors.DARK_NIGHT};
+    background-color: ${Colors.WHITE};
 
     outline: none;
   }

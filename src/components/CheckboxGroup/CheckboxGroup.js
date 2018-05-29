@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import Colors from '../../colors';
 
 export const MainCheckBoxGroup = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ const Group = styled.div`
   display: grid;
   grid-auto-columns: ${props => props.width && props.width};
   grid-auto-flow: column;
-  grid-column-gap: 0.5rem;
+  grid-column-gap: 8px;
 `;
 
 const SelectionButton = styled.input.attrs({
@@ -33,8 +34,8 @@ const SelectionButton = styled.input.attrs({
   height: 40px;
   cursor: pointer;
 
-  border: 1px solid var(--color-medium-gray);
-  border-color: var(--color-medium-gray);
+  border: 1px solid ${Colors.MEDIUM_GRAY};
+  border-color: ${Colors.MEDIUM_GRAY};
 `;
 
 const Group__CheckboxButton = SelectionButton.extend`
@@ -47,10 +48,12 @@ const CheckBoxGroup__Label = styled.label`
   justify-content: center;
   align-items: center;
   height: 40px;
+  font-size: 16px;
+
   cursor: pointer;
 
-  border: 1px solid var(--color-medium-gray);
-  border-color: var(--color-medium-gray);
+  border: 1px solid ${Colors.MEDIUM_GRAY};
+  border-color: ${Colors.MEDIUM_GRAY};
 
   border-radius: 3px;
 
@@ -58,8 +61,8 @@ const CheckBoxGroup__Label = styled.label`
     disabled &&
     css`
       cursor: not-allowed;
-      border-color: var(--color-warm-light);
-      color: var(--color-warm-light);
+      border-color: ${Colors.WARM_LIGHT};
+      color: ${Colors.WARM_LIGHT};
     `} ${({ checked, selectionColor }) =>
       checked &&
       `
@@ -72,9 +75,9 @@ const CheckBoxGroup__Label = styled.label`
     checked &&
     disabled &&
     css`
-      background-color: var(--color-warm-light);
-      color: var(--color-white);
-      border-color: var(--color-warm-light);
+      background-color: ${Colors.WARM_LIGHT};
+      color: ${Colors.WHITE};
+      border-color: ${Colors.WARM_LIGHT};
     `};
 
 `;
@@ -171,7 +174,7 @@ class CheckBoxGroup extends Component {
                 checked,
                 value
               ] = [
-                this.props.selectionColor || 'var(--color-authentic)',
+                this.props.selectionColor || `${Colors.AUTHENTIC}`,
                 this.state.list.includes(item.key),
                 item.key
               ];

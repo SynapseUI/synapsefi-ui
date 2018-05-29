@@ -1,31 +1,35 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import Colors from '../../colors';
 
 export const LabelDescription = styled.div`
   display: flex;
   flex-direction: column;
-  width: 512px;
+  
+  width: 25%;
 
-  margin-top: ${props => (props.textarea ? '0.5rem' : '0')};
+  margin-top: ${props => (props.textarea ? '8px' : '0')};
 `;
 
 export const LabelDescription__Label = styled.label`
   font-size: 16px;
   font-weight: bold;
-  color: var(--color-dark-night);
+  color: ${Colors.DARK_NIGHT};
+  line-height: normal;
 
   display: flex;
   align-self: left;
 
-  ${(props) => props.onlyLabel && 'padding-top: 0.5rem'};
-  ${(props) => props.disabled && 'color: var(--color-warm-light)'};
+  ${(props) => props.onlyLabel && 'padding-top: 8px'};
+  ${(props) => props.disabled && `color: ${Colors.WARM_LIGHT}`};
 `;
 
 export const LabelDescription__Description = styled.div`
-  color: var(--color-evening);
+  color: ${Colors.EVENING};
   text-align: left;
   font-size: 13px;
   white-space: pre-wrap;
+  line-height: normal;
 
   margin-top: 5px;
   width: 75%;

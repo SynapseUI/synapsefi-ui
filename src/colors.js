@@ -4,7 +4,7 @@ export const TEAL = 'TEAL';
 // Dark to White
 export const DARK = 'DARK';
 export const DARK_NIGHT = 'DARK_NIGHT';
-export const NIHGT = 'NIGHT';
+export const NIGHT = 'NIGHT';
 export const EVENING = 'EVENING';
 export const MEDIUM_GRAY = 'MEDIUM_GRAY';
 export const WARM_LIGHT = 'WARM_LIGHT';
@@ -44,7 +44,7 @@ export default {
   // Dark to White
   [DARK]: '#262626',
   [DARK_NIGHT]: '#333333',
-  [NIHGT]: '#494949',
+  [NIGHT]: '#494949',
   [EVENING]: '#666666',
   [MEDIUM_GRAY]: '#8c8c8c',
   [WARM_LIGHT]: '#cccccc',

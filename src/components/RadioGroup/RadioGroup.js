@@ -26,9 +26,11 @@ const RadioButton__Label = styled.label`
   justify-content: center;
   align-items: center;
   font-size: 16px;
+  line-height: 8px;
   cursor: pointer;
   border: 1px solid ${Colors.MEDIUM_GRAY};
   border-color: ${Colors.MEDIUM_GRAY};
+  box-sizing: border-box;
   padding: 16px;
   color: ${Colors.DARK_NIGHT};
 

@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { withRouter } from 'react-router';
+
 import styled from 'styled-components';
-import { Button } from 'synapsefi-ui';
 import PropTypes from 'prop-types';
 
-import Input from './Input/Input';
-import TextArea from './TextArea/TextArea';
-import CheckBoxGroup from './CheckBoxGroup/CheckBoxGroup';
-import RadioGroup from './RadioGroup/RadioGroup';
-import Dropdown from './Dropdown/Dropdown';
+import {
+  Button,
+  Input,
+  TextArea,
+  CheckboxGroup,
+  RadioGroup,
+  Dropdown
+} from '../../index';
 
 const TYPE_INPUT = 'TYPE_INPUT';
 const TYPE_TEXTAREA = 'TYPE_TEXTAREA';
@@ -39,6 +41,7 @@ class Form extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleTouchUpdate = this.handleTouchUpdate.bind(this);
     this.getErrorsCollection = this.getErrorsCollection.bind(this);
+    this.getCloneOfChild = this.getCloneOfChild.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -60,11 +63,14 @@ class Form extends Component {
 
   handleFormSubmit(e) {
     if (e) e.preventDefault();
-    _.isEmpty(this.state.errors) ?
+    const errors = this.getErrorsCollection(this.props.validation(), this.props.formValues);
+    
+    _.isEmpty(errors) ?
       this.props.handleSubmit(e)
       : this.setState({
         afterSubmission: true,
-        touch: new Set(Object.keys(this.props.formValues))
+        touch: new Set(Object.keys(this.props.formValues)),
+        errors
       });
   }
 
@@ -78,7 +84,7 @@ class Form extends Component {
 
   renderEntireForm() {
     let formChildren = !!this.props.children ? [...this.props.children] : [];
-    const onChangeCollection = this.props.onChangeCollection;
+    const onChangeCollection = this.props.onChangeCollection || {};
 
     let result = this.props.data.map((item, idx) => {
       if (typeof this.props.formValues[item.propName] === 'undefined') {
@@ -91,7 +97,8 @@ class Form extends Component {
         value: this.props.formValues[item.propName],
         onChange: onChangeCollection[item.propName]
           || onChangeCollection[item.type]
-          || onChangeCollection['default'],
+          || onChangeCollection['default']
+          || this.props.onChange,
 
         onFocus: () => this.handleTouchUpdate(item.propName),
 
@@ -113,34 +120,37 @@ class Form extends Component {
           return <RadioGroup key={idx} propValues={propValues} />;
 
         case TYPE_CHECKBOXGROUP:
-          return <CheckBoxGroup key={idx} propValues={propValues} />;
+          return <CheckboxGroup key={idx} propValues={propValues} />;
 
         case TYPE_DROPDOWN:
           return <Dropdown key={idx} propValues={propValues} />;
 
         default:
           if (!_.isEmpty(formChildren)) {
-            const childCopy = formChildren.shift();
-            return React.cloneElement(childCopy, {
-              error: this.state.afterSubmission
-                && this.state.touch.has(item.propName)
-                && this.state.errors[item.propName],
-
-              onFocus: (e) => {
-                if (childCopy.props.onFocus) childCopy.props.onFocus(e);
-                this.handleTouchUpdate(item.propName);
-              }
-            });
-
+            const child = formChildren.shift();
+            return this.getCloneOfChild(child, item);
           } else {
             return null;
           }
-
-          return !_.isEmpty(formChildren) ? formChildren.shift() : null;
       }
     });
+    
+    return result.concat(formChildren.map(this.getCloneOfChild));
+  }
 
-    return result.concat(formChildren);
+  getCloneOfChild(child, item){    
+    const propName = item.propName || child.props.propName;
+
+    return React.cloneElement(child, {
+      error: this.state.afterSubmission
+        && this.state.touch.has(propName)
+        && this.state.errors[propName],
+
+      onFocus: (e) => {
+        if (child.props.onFocus) child.props.onFocus(e);
+        this.handleTouchUpdate(propName);
+      }
+    });
   }
 
   renderFooter() {

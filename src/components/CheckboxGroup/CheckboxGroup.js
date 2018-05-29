@@ -43,7 +43,7 @@ const Group__CheckboxButton = SelectionButton.extend`
 `;
 
 const CheckBoxGroup__Label = styled.label`
-
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;

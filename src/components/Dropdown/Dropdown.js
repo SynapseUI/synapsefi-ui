@@ -23,6 +23,7 @@ const DropdownBar = styled.div`
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const DropdownMenu = styled.div`
@@ -53,9 +54,9 @@ const MenuList = styled.div`
 `;
 
 const MenuItem = styled.div`
-  // width: inherit;
+  box-sizing: border-box;
   height: 40px;
-  padding: 8px !important;
+  padding: 8px;
   cursor: pointer;
 
   display: flex;
@@ -65,7 +66,10 @@ const MenuItem = styled.div`
   color: ${Colors.DARK_NIGHT};
   background-color: ${Colors.WHITE};
 
-  ${props => props.notSelectable ? `color: ${Colors.MEDIUM_GRAY};` : ''}
+  ${props => props.firstMenuItem ? `
+    color: ${Colors.MEDIUM_GRAY};
+    border-bottom: 1px solid transparent;
+  ` : ''}
 `;
 
 const TabItem = MenuItem.extend.attrs({
@@ -204,7 +208,7 @@ class Dropdown extends Component {
     }
 
     return (
-      <MenuItem notSelectable onClick={this.toggleMenu}>
+      <MenuItem firstMenuItem onClick={this.toggleMenu}>
         <PlaceHolder empty={this.state.empty}>{this.getPlaceHolderText(searchable, placeholder)}</PlaceHolder>
 
         <DownArrow />

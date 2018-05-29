@@ -26,7 +26,7 @@ class App extends React.Component {
       description: '',
       switch: 'ON',
       pets: '',
-
+      airport: ''
     }
   }
 

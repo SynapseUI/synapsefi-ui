@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './sandbox/entry.js',
+  entry: './example/entry.js',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -27,6 +27,6 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: 'sandbox/',
+    contentBase: 'example/',
   },
 };

@@ -1,5 +1,3 @@
-#Readme
-
 # Synapse UI
 Synapse UI components built with styled-components
 
@@ -9,6 +7,11 @@ Synapse UI components built with styled-components
 ```sh
 npm install synapse-ui
 ```
+
+##### Current Peer Dependencies
+
+- styled-components
+- react-onclickoutside
 
 
 

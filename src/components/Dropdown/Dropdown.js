@@ -105,6 +105,7 @@ const DownArrow = styled.div`
 
 const PlaceHolder = styled.span`
   color: ${props => props.empty && Colors.WARM_LIGHT};
+  font-size: 16px;
 `;
 
 const DropdownContainer = styled.div`

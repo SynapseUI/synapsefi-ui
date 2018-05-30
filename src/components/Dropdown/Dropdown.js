@@ -56,6 +56,7 @@ const MenuList = styled.div`
 const MenuItem = styled.div`
   box-sizing: border-box;
   height: 40px;
+  font-size: 16px;
   padding: 8px;
   cursor: pointer;
 
@@ -126,7 +127,7 @@ const SearchInput = styled.input`
 
   outline: none;
 
-  width: 90%;
+  width: 85%;
 `;
 
 const FlexStartAlign = styled.div`
@@ -134,6 +135,7 @@ const FlexStartAlign = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  font-size: 16px;
 `;
 
 const StyledSearchIcon = styled(search)`

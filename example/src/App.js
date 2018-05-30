@@ -35,16 +35,31 @@ class App extends React.Component {
       <Main>
         <p>Testing App Component</p>
 
+        <Dropdown
+          searchable
+          value={this.state.airport}
+          onChange={(e, value) => this.setState({ airport: value })}
+          label="Airport"
+          placeholder="Airport"
+          options={[
+            { key: 'SFO', text: 'San Francisco' },
+            { key: 'JFK', text: 'John F. Kennedy Airport' },
+            { key: 'ORD', text: 'O\'Hare International Airport' }
+          ]}
+        />
+
         <Input
           value={this.state.name}
           onChange={(e) => this.setState({ name: e.target.value })}
           label="Name"
+          placeholder="Name"
         />
 
         <Textarea
           value={this.state.description}
           onChange={(e) => this.setState({ description: e.target.value })}
           label="Description"
+          placeholder="Description"
         />
 
         <RadioGroup
@@ -67,17 +82,7 @@ class App extends React.Component {
           ]}
         />
 
-        <Dropdown
-          searchable
-          value={this.state.airport}
-          onChange={(e, value) => this.setState({ airport: value })}
-          label="Airport"
-          options={[
-            { key: 'SFO', text: 'San Francisco' },
-            { key: 'JFK', text: 'John F. Kennedy Airport' },
-            { key: 'ORD', text: 'O\'Hare International Airport' }
-          ]}
-        />
+        
       </Main>
     )
   }

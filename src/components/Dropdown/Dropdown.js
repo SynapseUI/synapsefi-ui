@@ -46,17 +46,22 @@ class Dropdown extends Component {
 
     this.state = {
       showMenu: false,
-      selectedItem: Util.getSelectedItem(currentValue, placeholder, options),
-      empty: !currentValue,
+
+      selection: multiselect ? 
+        Util.getSelectedItems(currentValue, options)
+        : Util.getSelectedItem(currentValue, placeholder, options),
+      
+      firstLine: Util.getTextOfSelection(currentValue, options, placeholder, multiselect),
       inputValue: '',
-      selectedItems: multiselect ? Util.getSelectedItems(currentValue, options) : []
     };
   
     this.toggleMenu = this.toggleMenu.bind(this);
     this.updateSelection = this.updateSelection.bind(this);
+    this.selectAllOptions = this.selectAllOptions.bind(this);
 
     this.getPlaceHolderText = this.getPlaceHolderText.bind(this);
     this.getFirstLine = this.getFirstLine.bind(this);
+    this.renderTabItems = this.renderTabItems.bind(this);
   }
 
   // -------------------------------------------------------------------------------------
@@ -76,25 +81,44 @@ class Dropdown extends Component {
   updateSelection(e, item, propName){
     const {
       multiselect,
-      onChange
-    } = this.props;
+      onChange,
+      options,
+      placeholder
+    } = this.props.propValues || this.props;
 
-    // debugger;
+    let newSelection = item.key;
+    if (multiselect) newSelection = DataUtil.addOrRemove(item.key, this.state.selection);
 
-    if(multiselect){
-      const newList = DataUtil.addOrRemove(item.key, this.state.selectedItems);
-      
-      this.setState({
-        selectedItems: newList,
-        empty: _.isEmpty(newList)
-      })
-    } else {
-      this.setState({
-        selectedItem: item, showMenu: false, empty: false, inputValue: ''
-      });
+    let firstLine = Util.getTextOfSelection(newSelection, options, placeholder, multiselect);
+    
+    this.setState({
+      selection: newSelection,
+      showMenu: multiselect ? true : false,
+      inputValue: multiselect ? this.state.inputValue : '',
+      firstLine
+    }, () => onChange(e, newSelection, propName));
+  }
+
+  selectAllOptions(e){
+    const {
+      onChange,
+      options,
+      propName,
+      placeholder
+    } = this.props.propValues || this.props;
+
+    let newSelection = [];
+    let firstLine = placeholder;
+
+    if (this.state.selection.length !== this.props.options.length){
+      newSelection = options.map((o) => o.key);
+      firstLine = 'ALL';
     }
-
-    onChange(e, item.key, propName);
+    
+    this.setState({
+      selection: newSelection,
+      firstLine
+    }, () => onChange(e, newSelection, propName));
   }
 
   // -------------------------------------------------------------------------------------
@@ -102,47 +126,33 @@ class Dropdown extends Component {
   // -------------------------------------------------------------------------------------
 
   getPlaceHolderText(searchable, placeholder) {
-    let text = placeholder;
-
-    if(this.props.multiselect){
-      text = Util.toStringList(this.state.selectedItems, placeholder);
-    }
-
-    if(!this.state.empty && !this.props.multiselect){
-      text = this.state.selectedItem ? this.state.selectedItem.text : placeholder;
-    }
-
-    if (searchable) {
-      return (
-        <Styles.FlexStartAlign empty={this.state.empty}>
-          <Styles.StyledSearchIcon style={{ marginRight: '8px' }}/>
-          {text}
-        </Styles.FlexStartAlign>
-      );
-    }
-    
-    return <Styles.FlexStartAlign empty={this.state.empty}>{text}</Styles.FlexStartAlign>;
+    return (
+      <Styles.FlexStartAlign 
+        empty={_.isEmpty(this.state.selection)} 
+        searchable={searchable}>
+        <Styles.FirstListWrapper>
+          {searchable && <Styles.StyledSearchIcon />}
+          <Styles.PlaceHolder searchable={searchable}>{this.state.firstLine}</Styles.PlaceHolder>
+        </Styles.FirstListWrapper>
+      </Styles.FlexStartAlign>
+    );
   }
 
-  getFirstLine(searchable, placeholder) {
-    let text = this.props.multiselect ? 
-      Util.toStringList(this.state.selectedItems, placeholder)
-      : this.getPlaceHolderText(searchable, placeholder);
-    
-    if(this.state.selectedItem) text = this.state.selectedItem.text    
-
+  getFirstLine(searchable, placeholder) {    
     if (searchable) {
       return (
         <Styles.MenuItem notSelectable>
           <Styles.FlexStartAlign>
-            <Styles.StyledSearchIcon />
+            <Styles.FirstListWrapper>
+              <Styles.StyledSearchIcon />
 
-            <Styles.SearchInput
-              value={this.state.inputValue}
-              placeholder={text}
-              innerRef={input => input && input.focus()}
-              onChange={e => this.setState({ inputValue: e.target.value })}
-            />
+              <Styles.SearchInput
+                value={this.state.inputValue}
+                placeholder={this.state.firstLine}
+                innerRef={input => input && input.focus()}
+                onChange={e => this.setState({ inputValue: e.target.value })}
+              />
+            </Styles.FirstListWrapper>
           </Styles.FlexStartAlign>
 
           <Styles.DownArrow onClick={this.toggleMenu} />
@@ -152,11 +162,57 @@ class Dropdown extends Component {
 
     return (
       <Styles.MenuItem firstMenuItem onClick={this.toggleMenu}>
-        <Styles.PlaceHolder empty={this.state.empty}>{text}</Styles.PlaceHolder>
+        <Styles.FirstListWrapper>
+          <Styles.PlaceHolder empty={_.isEmpty(this.state.selection)}>
+            {this.state.firstLine}
+          </Styles.PlaceHolder>
+        </Styles.FirstListWrapper>
 
         <Styles.DownArrow />
       </Styles.MenuItem>
     );
+  }
+
+  renderTabItems(filteredOptions){
+    const {
+      propName,
+      multiselect
+    } = this.props.propValues || this.props;
+
+    let tabs = filteredOptions.map((item, idx) => {
+      return (
+        <Styles.TabItem
+          key={idx}
+          selected={item.key === this.state.selection}
+          index={idx}
+          value={item.key}
+          onClick={(e) => this.updateSelection(e, item, propName)}
+        >
+          {multiselect && <Styles.StyledCheckedSquare
+            selected={this.state.selection.includes(item.key)}/>
+          }
+          {item.text}
+        </Styles.TabItem>
+      );
+    });
+
+    if (multiselect) tabs.push(
+      <Styles.TabItem
+        key={'all'}
+        selected={
+          this.state.selection.length === this.props.options.length
+        }
+        index={tabs.length}
+        value={'all'}
+        onClick={(e) => this.selectAllOptions(e)}
+      >
+        <Styles.StyledCheckedSquare
+            selected={this.state.selection.length === this.props.options.length}/>
+          ALL
+        </Styles.TabItem>
+    )
+
+    return tabs;
   }
 
   // -------------------------------------------------------------------------------------
@@ -219,21 +275,7 @@ class Dropdown extends Component {
             <Styles.MenuList
               scrollable={filteredOptions.length > 5}
               showMenu={this.state.showMenu}>
-              {filteredOptions.map((item, idx) => (
-                <Styles.TabItem
-                  key={idx}
-                  selected={item === this.state.selectedItem}
-                  index={idx}
-                  value={item.key}
-                  onClick={(e) => this.updateSelection(e, item, propName)}
-                >
-                  {this.props.multiselect &&
-                    <Styles.StyledCheckedSquare
-                      selected={this.state.selectedItems.includes(item.key)}/>
-                  }
-                  {item.text}
-                </Styles.TabItem>
-              ))}
+              { this.renderTabItems(filteredOptions) }
             </Styles.MenuList>
           </Styles.DropdownMenu>
 

@@ -48,7 +48,7 @@ class App extends React.Component {
         <p>Testing App Component</p>
 
         <Dropdown
-          // searchable
+          searchable
           multiselect
           value={this.state.airport}
           onChange={(e, value) => {

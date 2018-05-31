@@ -34,3 +34,22 @@ export const getOptionsList = (options, searchable, inputValue) => {
 export const toStringList = (selectedItems, placeHolder) => {
   return _.isEmpty(selectedItems) ? placeHolder : _.join(selectedItems, ', ')
 }
+
+export const getTextOfSelection = (value, options, placeholder, isMultiselect = false) => {
+  let text = placeholder;
+
+  if(!value || _.isEmpty(value)) return placeholder;
+
+  if (!isMultiselect){
+    return options.find(o => o.key === value).text;
+  } else {
+    let collection = options.reduce((memo, o) => {
+      if(value.includes(o.key)) memo.push(o.text);
+      return memo;
+    }, []);
+
+    return toStringList(collection);
+  }
+
+  return placeholder || '';
+}

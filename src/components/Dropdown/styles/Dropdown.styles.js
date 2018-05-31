@@ -37,6 +37,8 @@ export const DropdownBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  
 `;
 
 export const DropdownMenu = styled.div`
@@ -73,8 +75,11 @@ export const MenuItem = styled.div`
   padding: 8px;
   cursor: pointer;
 
+  overflow: hidden;
+  white-space: nowrap;
+
   display: flex;
-  // justify-content: space-between;
+  justify-content: ${props => props.firstMenuItem ? 'space-between' : ''};
   align-items: center
 
   color: ${Colors.DARK_NIGHT};
@@ -117,9 +122,12 @@ export const DownArrow = styled.div`
 `;
 
 export const PlaceHolder = styled.span`
-  color: ${props => props.empty && Colors.WARM_LIGHT};
+  color: ${props => props.empty && css`${Colors.WARM_LIGHT}`};
   font-size: 16px;
+  // width: ${props => props.searchable && css`85%` || css`100%`};
   width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 export const DropdownContainer = styled.div`
@@ -143,20 +151,37 @@ export const SearchInput = styled.input`
   outline: none;
 
   width: 85%;
+  padding-left: 0px;
 `;
 
 export const FlexStartAlign = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
+  
   font-size: 16px;
-
+  
   color: ${props => props.empty && Colors.WARM_LIGHT};
+  // width: ${props => props.searchable && css`90%` || css`100%`};
+  width: 100%;
+
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 export const StyledSearchIcon = styled(search)`
   width: 16px;
   height: 16px;
   fill: ${Colors.WARM_LIGHT};
+  margin-right: 8px;
+`;
+
+export const FirstListWrapper = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `;

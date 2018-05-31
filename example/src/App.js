@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import _ from 'lodash';
 
 import {
   Input,
@@ -28,6 +29,17 @@ class App extends React.Component {
       pets: '',
       airport: ['SFO']
     }
+
+    this.updateField = this.updateField.bind(this);
+    this.callToRedux = _.debounce(this.callToRedux.bind(this), 1000);
+  }
+
+  callToRedux(value){
+    console.log('Updating field now to Redux: ', value);
+  }
+
+  updateField(e, value, field){
+    this.setState({ [field]: value }, this.callToRedux(value))
   }
 
   render(){
@@ -36,10 +48,12 @@ class App extends React.Component {
         <p>Testing App Component</p>
 
         <Dropdown
-          searchable
+          // searchable
           multiselect
           value={this.state.airport}
-          onChange={(e, value) => this.setState({ airport: value })}
+          onChange={(e, value) => {
+            this.setState({ airport: value });
+          }}
           label="Airport"
           placeholder="Airport"
           options={[
@@ -51,7 +65,9 @@ class App extends React.Component {
 
         <Input
           value={this.state.name}
-          onChange={(e) => this.setState({ name: e.target.value })}
+          onChange={this.updateField}
+          propName="name"
+          // onChange={(e) => _.debounce(() => this.setState({ name: e.target.value }), 1000)}
           label="Name"
           placeholder="Name"
         />

@@ -146,6 +146,7 @@ export default class TextArea extends Component {
       className,
       description,
       label,
+      labelWidth,
       style
     } = this.props.propValues || this.props;
 
@@ -154,6 +155,7 @@ export default class TextArea extends Component {
         <Label
           largeInput={true}
           label={label}
+          labelWidth={labelWidth}
           description={description}
           checkForPadding={true}
         />

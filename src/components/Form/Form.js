@@ -83,9 +83,11 @@ class Form extends Component {
   }
 
   renderEntireForm() {
-    let formChildren = !!this.props.children ? [...this.props.children] : [];
+    let formChildren = !!this.props.children ?
+      React.Children.map(this.props.children, (child) => child) : [];
+    
     const onChangeCollection = this.props.onChangeCollection || {};
-
+    
     let result = this.props.data.map((item, idx) => {
       if (typeof this.props.formValues[item.propName] === 'undefined') {
         return null;

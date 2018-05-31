@@ -133,9 +133,9 @@ export default class Input extends Component {
         and change the coloring of Divider.
   */
 
-  renderLabel(label, description, disabled) {
+  renderLabel(label, description, labelWidth, disabled) {
     if (label) {
-      return <Label label={label} description={description} disabled={disabled} />;
+      return <Label label={label} labelWidth={labelWidth} description={description} disabled={disabled} />;
     }
 
     return null;
@@ -228,12 +228,12 @@ export default class Input extends Component {
 
   render() {
     const {
-      className, description, label, style, disabled
-    } = this.props.propValues || this.props;
+      className, description, label, labelWidth, style, disabled
+    } = this.props.propValues || this.props;    
 
     return (
       <MainInput className={className} style={style}>
-        {this.renderLabel(label, description, disabled)}
+        {this.renderLabel(label, description, labelWidth, disabled)}
         {this.renderInputField()}
       </MainInput>
     );

@@ -110,6 +110,7 @@ const RadioGroup = (props) => {
     onChange,
     options,
     label,
+    labelWidth,
     description,
     largeButtons,
     className,
@@ -121,7 +122,7 @@ const RadioGroup = (props) => {
   let selectedIndex;
   return (
     <MainRadioGroup className={className}>
-      <Label label={label} description={description} disabled={disabled} />
+      <Label label={label} labelWidth={labelWidth} description={description} disabled={disabled} />
 
       <Group>
         {options.map((item, idx) => {          

@@ -2,12 +2,31 @@ import React, { Component } from 'react';
 import onClickOutside from 'react-onclickoutside';
 
 import styled, { css } from 'styled-components';
-import { search } from '../SvgIcons';
+import { search, check_filled_square } from '../SvgIcons';
 import Colors from '../../colors';
 
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { baseInputStyling } from '../styles/Input.styles';
+
+const StyledCheckedSquare = styled(check_filled_square)`
+  height: 20px;
+  width: 20px;
+
+  margin-right: 16px;
+  border: 2px solid #8c8c8c;
+  border: ${props => (props.selected && css`none`)};
+  box-sizing: border-box;
+
+  path:first-of-type {
+    fill: white;
+    ${props => (props.selected && css`
+      fill: ${Colors.TEAL};
+      border: none;
+    `)}
+  }
+  
+`;
 
 const DropdownBar = styled.div`
   width: 288px;
@@ -61,7 +80,7 @@ const MenuItem = styled.div`
   cursor: pointer;
 
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center
 
   color: ${Colors.DARK_NIGHT};
@@ -106,6 +125,7 @@ const DownArrow = styled.div`
 const PlaceHolder = styled.span`
   color: ${props => props.empty && Colors.WARM_LIGHT};
   font-size: 16px;
+  width: 100%;
 `;
 
 const DropdownContainer = styled.div`
@@ -137,6 +157,8 @@ const FlexStartAlign = styled.div`
   align-items: center;
   width: 100%;
   font-size: 16px;
+
+  color: ${props => props.empty && Colors.WARM_LIGHT};
 `;
 
 const StyledSearchIcon = styled(search)`
@@ -144,6 +166,10 @@ const StyledSearchIcon = styled(search)`
   height: 16px;
   fill: ${Colors.WARM_LIGHT};
 `;
+
+const toStringList = (selectedItems, placeHolder) => {
+  return _.isEmpty(selectedItems) ? placeHolder : _.join(selectedItems, ', ')
+}
 
 class Dropdown extends Component {
   constructor(props) {
@@ -158,19 +184,34 @@ class Dropdown extends Component {
       selectedItem: this.getSelectedItem(value),
       empty: !value,
       inputValue: '',
-    };
+      selectedItems: this.props.multiselect ? this.getSelectedItems(value) : []
+    };    
 
     this.getPlaceHolderText = this.getPlaceHolderText.bind(this);
     this.getFirstLine = this.getFirstLine.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.addOrRemove = this.addOrRemove.bind(this);
   }
 
   getPlaceHolderText(searchable, placeholder) {
-    const text = this.state.empty ? placeholder : this.state.selectedItem.text;
+    let text = placeholder;
+
+    if(this.props.multiselect){
+      text = toStringList(this.state.selectedItems, placeholder);
+    }
+    console.log("get placeholder text:", text);
+
+    if(!this.state.empty && !this.props.multiselect){
+      text = this.state.selectedItem ? this.state.selectedItem.text : placeholder;
+    }
+
+
+    
+    // const text = this.state.empty ? placeholder : this.state.selectedItem.text;
 
     if (searchable) {
       return (
-        <FlexStartAlign>
+        <FlexStartAlign empty={this.state.empty}>
           <StyledSearchIcon style={{ marginRight: '8px' }}/>
           {text}
         </FlexStartAlign>
@@ -190,7 +231,25 @@ class Dropdown extends Component {
     return selectedItem;
   }
 
+  getSelectedItems(value){
+    return this.props.options.reduce((memo, o) => {
+      if(value.includes(o.key)){
+        memo.push(o.key);
+      }
+      return memo;
+    }, []);
+  }
+
   getFirstLine(searchable, placeholder) {
+    let text = this.props.multiselect ? 
+      toStringList(this.state.selectedItems, placeholder)
+      : this.getPlaceHolderText(searchable, placeholder);
+    
+    if(this.state.selectedItem) text = this.state.selectedItem.text
+
+    console.log('text:', text);
+    
+
     if (searchable) {
       return (
         <MenuItem notSelectable>
@@ -199,7 +258,7 @@ class Dropdown extends Component {
 
             <SearchInput
               value={this.state.inputValue}
-              placeholder={this.state.selectedItem.text}
+              placeholder={text}
               innerRef={input => input && input.focus()}
               onChange={e => this.setState({ inputValue: e.target.value })}
             />
@@ -212,7 +271,7 @@ class Dropdown extends Component {
 
     return (
       <MenuItem firstMenuItem onClick={this.toggleMenu}>
-        <PlaceHolder empty={this.state.empty}>{this.getPlaceHolderText(searchable, placeholder)}</PlaceHolder>
+        <PlaceHolder empty={this.state.empty}>{text}</PlaceHolder>
 
         <DownArrow />
       </MenuItem>
@@ -241,6 +300,18 @@ class Dropdown extends Component {
     this.setState({ showMenu: false, inputValue: '' });
   }
 
+  addOrRemove(key) {
+    let newList = [...this.state.selectedItems];
+    if (newList.includes(key)) {
+      let idx = newList.indexOf(key);
+      newList = newList.slice(0, idx).concat(newList.slice(idx + 1));
+    } else {
+      newList.push(key);
+    }
+
+    return newList;
+  }
+
   render() {
     const {
       className,
@@ -254,6 +325,7 @@ class Dropdown extends Component {
       searchable,
       options,
       label,
+      labelWidth,
       description,
       placeholder,
       error
@@ -261,11 +333,19 @@ class Dropdown extends Component {
 
     const filteredOptions = this.getOptionsList(options, searchable);
 
+    console.log('this.state: ', this.state);
+
+    let firstLineText = this.props.multiselect ? 
+      toStringList(this.state.selectedItems, placeholder)
+      : this.getPlaceHolderText(searchable, placeholder);
+    
+
     return (
       <MainContainer className={className}>
         <Label
           key={`label-${key}`}
           label={label}
+          labelWidth={labelWidth}
           description={description}
         />
 
@@ -279,11 +359,12 @@ class Dropdown extends Component {
           <DropdownBar
             style={dropdownBarStyle}
             onClick={this.toggleMenu}>
-
-            <PlaceHolder
+            
+            {this.getPlaceHolderText(searchable, placeholder)}
+            {/*<PlaceHolder
               empty={this.state.empty}>
-              {this.getPlaceHolderText(searchable, placeholder)}
-            </PlaceHolder>
+              {firstLineText}
+            </PlaceHolder>*/}
 
             <DownArrow />
           </DropdownBar>
@@ -302,12 +383,25 @@ class Dropdown extends Component {
                   index={idx}
                   value={item.key}
                   onClick={(e) => {
-                    this.setState({
-                      selectedItem: item, showMenu: false, empty: false, inputValue: ''
-                    });
+
+                    if(this.props.multiselect){
+                      const newList = this.addOrRemove(item.key);
+                      this.setState({
+                        selectedItems: newList,
+                        empty: _.isEmpty(newList)
+                      })
+                    } else {
+                      this.setState({
+                        selectedItem: item, showMenu: false, empty: false, inputValue: ''
+                      });
+                    }
+
                     onChange(e, item.key, propName);
                   }}
                 >
+                  {this.props.multiselect &&
+                    <StyledCheckedSquare selected={this.state.selectedItems.includes(item.key)}/>
+                  }
                   {item.text}
                 </TabItem>
               ))}

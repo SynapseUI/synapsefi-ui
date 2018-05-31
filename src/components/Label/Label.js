@@ -6,7 +6,7 @@ export const LabelDescription = styled.div`
   display: flex;
   flex-direction: column;
   
-  width: 25%;
+  width: ${props => (props.labelWidth ? props.labelWidth : '25%')};
 
   margin-top: ${props => (props.textarea ? '8px' : '0')};
 `;
@@ -73,10 +73,10 @@ const renderLabel = (label, description, checkForPadding, disabled) => {
 */
 
 const Label = ({
-  label, description, largeInput, checkForPadding, disabled
-}) => {
+  label, description, labelWidth, largeInput, checkForPadding, disabled
+}) => {  
   return (
-    <LabelDescription className="label-description" largeInput={largeInput}>
+    <LabelDescription labelWidth={labelWidth} className="label-description" largeInput={largeInput}>
       { renderLabel(label, description, checkForPadding, disabled) }
 
       {description &&

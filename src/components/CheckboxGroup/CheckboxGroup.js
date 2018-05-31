@@ -155,6 +155,7 @@ class CheckBoxGroup extends Component {
       gatherValue,
       onChange,
       label,
+      labelWidth,
       description,
       disabled,
       className,
@@ -165,7 +166,7 @@ class CheckBoxGroup extends Component {
 
     return (
       <MainCheckBoxGroup className={className}>
-        <Label label={label} description={description} disabled={disabled} />
+        <Label label={label} labelWidth={labelWidth} description={description} disabled={disabled} />
         <FlexColumnRelative>
           <Group width={checkboxWidth || '100px'}>
             {options.map((item, idx) => {

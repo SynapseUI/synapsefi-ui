@@ -116,12 +116,11 @@ class Modal extends Component {
   renderBtns(btnObjs, fullWidthBtn) {
     return (
       <BtnWrapper fullWidthBtn={fullWidthBtn}>
-        {btnObjs.map(({ btnProps, text, cb }, idx) => {
-          const { style, size } = btnProps;
+        {btnObjs.map(({ style, size, text, onClick }, idx) => {
           return (
             <Button
               key={idx}
-              onClick={cb && (() => cb())}
+              onClick={onClick && (() => onClick())}
               //
               primary={style === 'primary'}
               secondary={style === 'secondary'}

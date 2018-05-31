@@ -39,7 +39,7 @@ class FormApp extends React.Component {
       card_preferences: [],
       api_version: '',
       other_preference: '',
-      from_node: '',
+      from_node: [],
       compliance_notes: ''
     };
 
@@ -101,8 +101,10 @@ class FormApp extends React.Component {
             label='Other Preferences'
           />
 
-          <Dropdown
+          {/*<Dropdown
             key="test-dropdown"
+            multiselect
+            searchable
             value={this.state.from_node}
             onChange={this.updateField}
             options={[
@@ -113,7 +115,7 @@ class FormApp extends React.Component {
             propName='from_node'
             placeholder='Node'
             label='From Node'
-          />
+          />*/}
 
           <Textarea
             key="test-textarea"

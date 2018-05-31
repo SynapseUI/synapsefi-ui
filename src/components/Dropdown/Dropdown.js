@@ -40,7 +40,7 @@ class Dropdown extends Component {
       searchable,
       placeholder,
       options
-    } = this.props;
+    } = this.props.propValues || this.props;
 
     const currentValue = propValues ? propValues.value : value;
 
@@ -110,7 +110,7 @@ class Dropdown extends Component {
     let newSelection = [];
     let firstLine = placeholder;
 
-    if (this.state.selection.length !== this.props.options.length){
+    if (this.state.selection.length !== options.length){
       newSelection = options.map((o) => o.key);
       firstLine = 'ALL';
     }
@@ -176,7 +176,8 @@ class Dropdown extends Component {
   renderTabItems(filteredOptions){
     const {
       propName,
-      multiselect
+      multiselect,
+      options
     } = this.props.propValues || this.props;
 
     let tabs = filteredOptions.map((item, idx) => {
@@ -200,16 +201,16 @@ class Dropdown extends Component {
       <Styles.TabItem
         key={'all'}
         selected={
-          this.state.selection.length === this.props.options.length
+          this.state.selection.length === options.length
         }
         index={tabs.length}
         value={'all'}
         onClick={(e) => this.selectAllOptions(e)}
       >
         <Styles.StyledCheckedSquare
-            selected={this.state.selection.length === this.props.options.length}/>
-          ALL
-        </Styles.TabItem>
+            selected={this.state.selection.length === options.length}/>
+        ALL
+      </Styles.TabItem>
     )
 
     return tabs;
@@ -289,15 +290,18 @@ class Dropdown extends Component {
 
 Dropdown.propTypes = {
   singleOrMultiselectValue: function(props){
-    let value = props.value || props.propValues.value;
+    const{
+      value,
+      multiselect
+    } = props.propValues || props;
     
-    if (Array.isArray(value) && !props.multiselect){
+    if (Array.isArray(value) && !multiselect){
       return new Error(
         `Invalid prop value, value must be an Array if multiselect is set.`
       );
     }
 
-    if (typeof value === 'string' && props.multiselect){
+    if (typeof value === 'string' && multiselect){
       return new Error(
         `Invalid prop value, value must be a String if multiselect is not set.`
       );

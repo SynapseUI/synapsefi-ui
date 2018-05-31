@@ -107,6 +107,22 @@ export default [
     //   .required('User Permission is required')
   },
 
+  {
+    formType: 'TYPE_DROPDOWN',
+    label: 'From Node: ',
+    placeholder: 'From Node',
+    propName: 'from_node',
+    multiselect: true,
+    searchable: true,
+    options: [
+      { key: 'DEPOSIT-US', text: 'Deposit' },
+      { key: 'SUBNET', text: 'Subnet' },
+      { key: 'CARD-US', text: 'card' },
+    ],
+    // validation: yup.string()
+    //   .required('User Permission is required')
+  }
+
   // {
   //   formType: 'OTHER',
   //   propName: 'other_preference',

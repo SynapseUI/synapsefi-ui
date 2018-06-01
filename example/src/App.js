@@ -103,6 +103,9 @@ class App extends React.Component {
         />
 
         <ErrorMessage
+          pageLevel
+          textOnly
+          display={true}
           label="error message"
           // success
           error

@@ -51,7 +51,7 @@ const renderTextOnlyAlert = props => {
     height: 48px;
     width: 100%;
     padding: 14px 16px;
-    background-color: ${pageLevel? backgroundColor : 'transparent'};
+    background-color: ${pageLevel ? backgroundColor : 'transparent'};
     align-items: center;
   `;
 
@@ -95,6 +95,7 @@ const FlexColumn__ErrorMessage = styled.div`
 
   /* margin-top: 36px; */
   position: absolute;
+  box-sizing: border-box;
 
   ${props =>
     props.alignedLeft &&

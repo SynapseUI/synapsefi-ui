@@ -7,7 +7,8 @@ import {
   Textarea,
   CheckboxGroup,
   RadioGroup,
-  Dropdown
+  Dropdown,
+  ErrorMessage
 } from '../../src/index';
 
 const Main = styled.div`
@@ -47,6 +48,7 @@ class App extends React.Component {
       <Main>
         <p>Testing App Component</p>
 
+
         <Dropdown
           searchable
           multiselect
@@ -62,6 +64,7 @@ class App extends React.Component {
             { key: 'ORD', text: 'O\'Hare International Airport' }
           ]}
         />
+
 
         <Input
           value={this.state.name}
@@ -99,6 +102,13 @@ class App extends React.Component {
           ]}
         />
 
+        <ErrorMessage
+          label="error message"
+          // success
+          error
+          // warning
+          message="Test error message: the quick fox jumped over the lazy doggy"
+        />
         
       </Main>
     )

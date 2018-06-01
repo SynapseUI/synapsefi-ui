@@ -13,34 +13,17 @@ import Colors from '../../colors';
 // ---------------------------------------- Common Style -----------------------------------
 // -----------------------------------------------------------------------------------------
 
-// const StyledAlertSign = styled(error)`
-
-//   path:first-of-type {
-//     ${props => props.error && css`fill: ${Colors.ENERGY};`}
-//     ${props => props.success && css`fill: ${Colors.AUTHENTIC};`}
-//     ${props => props.warning && css`fill: ${Colors.CREATIVE};`}
-//     /* fill: ${Colors.ENERGY}; */
-//   }
-// `;
-
 const renderTextOnlyAlert = props => {
   const { warning, success, error, message } = props;
 
-  // let sign =
-  //   (warning && warningIcon) ||
-  //   (success && successIcon) ||
-  //   (error && errorIcon);
-  // let color =
-  //   (warning && Colors.CREATIVE) ||
-  //   (success && Colors.AUTHENTIC) ||
-  //   (error && Colors.ENERGY);
-   let sign, color;
+  let sign = warningIcon;
+  let color = Colors.ENERGY;
 
   if (error) {
     sign = warningIcon;
     color = Colors.ENERGY;
   } else if (success) {
-    sign = checkIcon;
+    sign = successIcon;
     color = Colors.AUTHENTIC;
   } else if (warning) {
     sign = warningIcon;
@@ -48,8 +31,8 @@ const renderTextOnlyAlert = props => {
   }
 
   const StyledAlertSign = styled(sign)`
-    height: 16px;
-    width: 16px;
+    height: 20px;
+    width: 20px;
     margin-right: 8px;
 
     path:first-of-type {
@@ -58,14 +41,45 @@ const renderTextOnlyAlert = props => {
       `};
     }
   `;
-  const StyledAlertText = styled.span`
+  const Background = styled.div`
+    box-sizing: border-box;
+    display: flex;
+    height: 48px;
+    width: fit-content;
+    padding: 14px 16px;
+    background-color: pink;
+    align-items: center;
+  `;
+
+  const StyledAlertText = styled.div`
     color: ${color};
   `;
 
-  return [
-    <StyledAlertSign key="AlertSign" />,
-    <StyledAlertText key="AlertText">{message}</StyledAlertText>,
-  ];
+  const CloseIcon = styled(closeIcon)`
+    height: 12px;
+    width: 12px;
+    margin-left: 8px;
+    cursor: pointer;
+
+    path:first-of-type {
+      ${css`
+        fill: ${Colors.MEDIUM_GRAY};
+      `};
+    }
+  `;
+
+  // return [
+  //   <StyledAlertSign key="AlertSign" />,
+  //   <StyledAlertText key="AlertText">{message}</StyledAlertText>,
+  // ];
+
+  return (
+    <Background>
+      <StyledAlertSign key="AlertSign" />
+      <StyledAlertText key="AlertText">{message}</StyledAlertText>
+      <CloseIcon onClose={props.onClose} />
+    </Background>
+  );
 };
 
 const FlexColumn__ErrorMessage = styled.div`
@@ -88,8 +102,8 @@ const FlexColumn__ErrorMessage = styled.div`
 `;
 
 const ErrorMessage = props => {
-  const { message, alignedLeft, display } = props;
-  if (display) {
+  const { message, alignedLeft, show } = props;
+  if (show) {
     return (
       <FlexColumn__ErrorMessage alignedLeft={alignedLeft} {...props}>
         {renderTextOnlyAlert(props)}

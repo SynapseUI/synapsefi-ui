@@ -28,7 +28,8 @@ class App extends React.Component {
       description: '',
       switch: 'ON',
       pets: '',
-      airport: ['SFO']
+      airport: ['SFO'],
+      showAlert: true,
     }
 
     this.updateField = this.updateField.bind(this);
@@ -105,10 +106,10 @@ class App extends React.Component {
         <ErrorMessage
           pageLevel
           textOnly
-          display={true}
+          show={this.state.showAlert}
           label="error message"
-          // success
-          error
+          success
+          // error
           // warning
           message="Test error message: the quick fox jumped over the lazy doggy"
         />

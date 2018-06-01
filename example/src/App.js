@@ -105,13 +105,13 @@ class App extends React.Component {
 
         <ErrorMessage
           pageLevel
-          textOnly
           show={this.state.showAlert}
           label="error message"
           success
           // error
           // warning
           message="Test error message: the quick fox jumped over the lazy doggy"
+          onClose={() => {this.setState({showAlert: false})}}
         />
         
       </Main>

@@ -14,20 +14,24 @@ import Colors from '../../colors';
 // -----------------------------------------------------------------------------------------
 
 const renderTextOnlyAlert = props => {
-  const { warning, success, error, message } = props;
+  const { warning, success, error, message, pageLevel } = props;
 
-  let sign = warningIcon;
-  let color = Colors.ENERGY;
+  let sign = errorIcon;
+  let textColor = Colors.ENERGY;
+  let backgroundColor = Colors.LIGHT_ENERGY;
 
   if (error) {
     sign = warningIcon;
-    color = Colors.ENERGY;
+    textColor = Colors.ENERGY;
+    backgroundColor = Colors.LIGHT_ENERGY;
   } else if (success) {
     sign = successIcon;
-    color = Colors.AUTHENTIC;
+    textColor = Colors.AUTHENTIC;
+    backgroundColor = Colors.LIGHT_AUTHENTIC;
   } else if (warning) {
     sign = warningIcon;
-    color = Colors.CREATIVE;
+    textColor = Colors.CREATIVE;
+    backgroundColor = Colors.LIGHT_CREATIVE;
   }
 
   const StyledAlertSign = styled(sign)`
@@ -37,7 +41,7 @@ const renderTextOnlyAlert = props => {
 
     path:first-of-type {
       ${css`
-        fill: ${color};
+        fill: ${textColor};
       `};
     }
   `;
@@ -45,14 +49,14 @@ const renderTextOnlyAlert = props => {
     box-sizing: border-box;
     display: flex;
     height: 48px;
-    width: fit-content;
+    width: 100%;
     padding: 14px 16px;
-    background-color: pink;
+    background-color: ${pageLevel? backgroundColor : 'transparent'};
     align-items: center;
   `;
 
   const StyledAlertText = styled.div`
-    color: ${color};
+    color: ${pageLevel && warning ? Colors.DARK_NIGHT : textColor};
   `;
 
   const CloseIcon = styled(closeIcon)`
@@ -60,6 +64,9 @@ const renderTextOnlyAlert = props => {
     width: 12px;
     margin-left: 8px;
     cursor: pointer;
+    display: ${pageLevel ? '' : 'none'};
+    margin-left: auto;
+    padding-left: 16px;
 
     path:first-of-type {
       ${css`
@@ -68,21 +75,17 @@ const renderTextOnlyAlert = props => {
     }
   `;
 
-  // return [
-  //   <StyledAlertSign key="AlertSign" />,
-  //   <StyledAlertText key="AlertText">{message}</StyledAlertText>,
-  // ];
-
   return (
     <Background>
       <StyledAlertSign key="AlertSign" />
       <StyledAlertText key="AlertText">{message}</StyledAlertText>
-      <CloseIcon onClose={props.onClose} />
+      <CloseIcon onClick={props.onClose} />
     </Background>
   );
 };
 
 const FlexColumn__ErrorMessage = styled.div`
+  width: 100%;
   align-items: center;
 
   display: flex;

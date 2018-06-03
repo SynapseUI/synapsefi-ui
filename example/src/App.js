@@ -27,7 +27,7 @@ class App extends React.Component {
       description: '',
       switch: 'ON',
       pets: '',
-      airport: ['SFO']
+      airport: 'SFO'
     }
 
     this.updateField = this.updateField.bind(this);
@@ -49,7 +49,7 @@ class App extends React.Component {
 
         <Dropdown
           searchable
-          multiselect
+          // multiselect
           value={this.state.airport}
           onChange={(e, value) => {
             this.setState({ airport: value });

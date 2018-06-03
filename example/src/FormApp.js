@@ -83,7 +83,16 @@ class FormApp extends React.Component {
           formClassName='main-form'
           formValues={this.state}
           handleSubmit={this.handleSubmit}
-          validation={this.handleErrorCheck}
+          additionalActionButton={
+            [
+              {
+                type: 'tertiary',
+                text: 'Cancel',
+                action: () => console.log('cancel')
+              }
+            ]
+          }
+          // validation={this.handleErrorCheck}
           onChange={this.updateField}
           // onChangeCollection={{
           //   default: this.updateField

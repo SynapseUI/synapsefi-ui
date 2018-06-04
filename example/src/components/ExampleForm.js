@@ -1,17 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import _ from 'lodash';
 
-import ExampleModalBasic from '../src/components/ExampleModalBasic';
-import ExampleForm from '../src/components/ExampleForm';
+import { Input, Textarea, CheckboxGroup, RadioGroup, Dropdown } from 'package';
 
 const Main = styled.div`
-  font-family: "Roboto";
   & > * {
     padding: 32px 16px;
   }
 `;
 
-class App extends React.Component {
+class ExampleForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -20,35 +19,27 @@ class App extends React.Component {
       description: '',
       switch: 'ON',
       pets: '',
-<<<<<<< HEAD
-      airport: 'SFO'
-    }
+      airport: ['SFO'],
+    };
 
     this.updateField = this.updateField.bind(this);
     this.callToRedux = _.debounce(this.callToRedux.bind(this), 1000);
   }
 
-  callToRedux(value){
+  callToRedux(value) {
     console.log('Updating field now to Redux: ', value);
   }
 
-  updateField(e, value, field){
-    this.setState({ [field]: value }, this.callToRedux(value))
-=======
-      airport: '',
-    };
->>>>>>> bd1829512ed925bd4e99fe83ad18b361d4645752
+  updateField(e, value, field) {
+    this.setState({ [field]: value }, this.callToRedux(value));
   }
 
   render() {
     return (
       <Main>
-        <p>Testing App Component</p>
-<<<<<<< HEAD
-
-        <Dropdown
+        {/* <Dropdown
           searchable
-          // multiselect
+          multiselect
           value={this.state.airport}
           onChange={(e, value) => {
             this.setState({ airport: value });
@@ -60,7 +51,7 @@ class App extends React.Component {
             { key: 'JFK', text: 'John F. Kennedy Airport' },
             { key: 'ORD', text: 'O\'Hare International Airport' }
           ]}
-        />
+        /> */}
 
         <Input
           value={this.state.name}
@@ -73,39 +64,27 @@ class App extends React.Component {
 
         <Textarea
           value={this.state.description}
-          onChange={(e) => this.setState({ description: e.target.value })}
+          onChange={e => this.setState({ description: e.target.value })}
           label="Description"
           placeholder="Description"
         />
 
         <RadioGroup
           value={this.state.switch}
-          onChange={(e) => this.setState({ switch: e.target.value })}
+          onChange={e => this.setState({ switch: e.target.value })}
           label="Light Switch"
-          options={[
-            { key: 'ON', text: 'On' },
-            { key: 'OFF', text: 'Off' }
-          ]}
+          options={[{ key: 'ON', text: 'On' }, { key: 'OFF', text: 'Off' }]}
         />
 
         <CheckboxGroup
           value={this.state.pets}
           onChange={(e, value) => this.setState({ pets: value })}
           label="Light Switch"
-          options={[
-            { key: 'CAT', text: 'Cat' },
-            { key: 'DOG', text: 'Dog' }
-          ]}
+          options={[{ key: 'CAT', text: 'Cat' }, { key: 'DOG', text: 'Dog' }]}
         />
-
-        
-=======
-        <ExampleModalBasic />
-        <ExampleForm />
->>>>>>> bd1829512ed925bd4e99fe83ad18b361d4645752
       </Main>
     );
   }
 }
 
-export default App;
+export default ExampleForm;

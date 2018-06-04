@@ -34,9 +34,9 @@ class ExampleModalBasic extends Component {
         height={'500px'}
         width={'700px'}
       >
-        {[...Array(10).keys()].map(item => {
+        {[...Array(10).keys()].map((item, idx) => {
           return (
-            <div style={font}>
+            <div key={idx} style={font}>
               Sandwich your modal contents in between Opening and closing Modal tag Like this:
             </div>
           );

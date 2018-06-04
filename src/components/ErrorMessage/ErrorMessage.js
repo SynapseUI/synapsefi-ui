@@ -39,6 +39,7 @@ const FlexColumn__ErrorMessage = styled.div`
 const renderTextOnlyAlert = props => {
   const { warning, success, error, message, pageLevel } = props;
 
+  // defaults to error styling
   let sign = errorIcon;
   let textColor = Colors.ENERGY;
   let backgroundColor = Colors.LIGHT_ENERGY;
@@ -57,6 +58,16 @@ const renderTextOnlyAlert = props => {
     backgroundColor = Colors.LIGHT_CREATIVE;
   }
 
+  const Background = styled.div`
+    box-sizing: border-box;
+    display: flex;
+    height: 48px;
+    width: 100%;
+    padding: 14px 16px;
+    background-color: ${pageLevel ? backgroundColor : 'transparent'};
+    align-items: center;
+  `;
+
   const StyledAlertSign = styled(sign)`
     height: 20px;
     width: 20px;
@@ -67,15 +78,6 @@ const renderTextOnlyAlert = props => {
         fill: ${textColor};
       `};
     }
-  `;
-  const Background = styled.div`
-    box-sizing: border-box;
-    display: flex;
-    height: 48px;
-    width: 100%;
-    padding: 14px 16px;
-    background-color: ${pageLevel ? backgroundColor : 'transparent'};
-    align-items: center;
   `;
 
   const StyledAlertText = styled.div`

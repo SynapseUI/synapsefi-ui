@@ -107,8 +107,8 @@ class App extends React.Component {
           pageLevel
           hide={this.state.hideAlert}
           // success={true}
-          // error={true}
-          warning={true}
+          error={true}
+          // warning={true}
           message="Test alert message: the quick brown fox jumped over the lazy doggy"
           onClose={() => {this.setState({hideAlert: true})}}
           // this might be better if I can make close icon work without the 'hide' prop; it would have to be a stateful component

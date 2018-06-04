@@ -9,9 +9,32 @@ import {
 } from '../SvgIcons';
 import Colors from '../../colors';
 
-// -----------------------------------------------------------------------------------------
-// ---------------------------------------- Common Style -----------------------------------
-// -----------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
+// -------------------------------- Styled Components-----------------------------------
+// -------------------------------------------------------------------------------------
+
+const FlexColumn__ErrorMessage = styled.div`
+  ${props =>
+    props.pageLevel &&
+    css`
+      width: 100%;
+    `};
+  align-items: center;
+  display: flex;
+  font-size: 16px;
+  position: absolute;
+  box-sizing: border-box;
+
+  ${props =>
+    props.alignedLeft &&
+    css`
+      margin-top: 0px;
+      position: relative;
+    `};
+`;
+// -------------------------------------------------------------------------------------
+// --------------------------------- Render Methods ------------------------------------
+// -------------------------------------------------------------------------------------
 
 const renderTextOnlyAlert = props => {
   const { warning, success, error, message, pageLevel } = props;
@@ -84,30 +107,9 @@ const renderTextOnlyAlert = props => {
   );
 };
 
-const FlexColumn__ErrorMessage = styled.div`
-  width: 100%;
-  align-items: center;
-
-  display: flex;
-
-  /* padding: 8px; */
-  font-size: 16px;
-
-  /* margin-top: 36px; */
-  position: absolute;
-  box-sizing: border-box;
-
-  ${props =>
-    props.alignedLeft &&
-    css`
-      margin-top: 0px;
-      position: relative;
-    `};
-`;
-
 const ErrorMessage = props => {
-  const { message, alignedLeft, show } = props;
-  if (show) {
+  const { message, alignedLeft, hide, pageLevel } = props;
+  if (hide === false) {
     return (
       <FlexColumn__ErrorMessage alignedLeft={alignedLeft} {...props}>
         {renderTextOnlyAlert(props)}

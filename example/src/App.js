@@ -29,7 +29,7 @@ class App extends React.Component {
       switch: 'ON',
       pets: '',
       airport: ['SFO'],
-      showAlert: true,
+      hideAlert: false,
     }
 
     this.updateField = this.updateField.bind(this);
@@ -105,13 +105,14 @@ class App extends React.Component {
 
         <ErrorMessage
           pageLevel
-          show={this.state.showAlert}
+          // show={this.state.showAlert}
+          hide={this.state.hideAlert}
           label="error message"
           // success
           // error
           warning
-          message="Test error message: the quick fox jumped over the lazy doggy"
-          onClose={() => {this.setState({showAlert: false})}}
+          message="Test error message: the quick brown fox jumped over the lazy doggy"
+          onClose={() => {this.setState({hideAlert: true})}}
         />
         
       </Main>

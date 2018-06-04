@@ -5,8 +5,12 @@ import {
   Form,
   Input,
   Textarea,
-  Dropdown
+  Dropdown,
+  Label
 } from '../../src/index';
+
+import DropdownBar from '../../src/components/Dropdown/components/DropdownBar'
+import DropdownMenu from '../../src/components/Dropdown/components/DropdownMenu'
 
 import Colors from '../../src/colors';
 
@@ -40,7 +44,9 @@ class FormApp extends React.Component {
       api_version: '',
       other_preference: '',
       from_node: [],
-      compliance_notes: ''
+      compliance_notes: '',
+
+      showOptionalDropdown: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -98,19 +104,53 @@ class FormApp extends React.Component {
           //   default: this.updateField
           // }}
         >
-          <Input
-            key="test-input"
-            value={this.state.other_preference}
-            onChange={e => this.setState({
-              other_preference: e.target.value
-            })}
-            onBlur={() => console.log('blur')}
-            onFocus={() => console.log('focus')}
-            propName='other_preference'
-            label='Other Preferences'
-          />
+        {/*<CustomDropdownContainer
+          showMenu={this.state.showOptionalDropdown}
+          onOutsideClick={() => this.setState({ showOptionalDropdown: false })}>
+        */} 
+          <DropdownBar
+            style={{ borderBottom: 'none' }}
+            showMenu={this.state.showOptionalDropdown}
+            onClick={() => this.setState({ showOptionalDropdown: !this.state.showOptionalDropdown })}>
+            <Label label="To User" />
+          </DropdownBar>
 
-          {/*<Dropdown
+          <DropdownMenu
+            showMenu={this.state.showOptionalDropdown}
+            onOutsideClick={() => this.setState({ showOptionalDropdown: false })}
+
+            verticalOffset={'16px'}
+            style={{ padding: '16px' }}
+          >
+            <div>
+              <h3 style={{ textAlign: 'center'}}>Account Info</h3>
+              <Input
+                key="test-input-1"
+                value={this.state.other_preference}
+                onChange={e => this.setState({
+                  other_preference: e.target.value
+                })}
+                onBlur={() => console.log('blur')}
+                onFocus={() => console.log('focus')}
+                propName='other_preference'
+                label='From'
+              />
+              <Input
+                key="test-input-2"
+                value={this.state.other_preference}
+                onChange={e => this.setState({
+                  other_preference: e.target.value
+                })}
+                onBlur={() => console.log('blur')}
+                onFocus={() => console.log('focus')}
+                propName='other_preference'
+                label='To'
+              />
+            </div>
+          </DropdownMenu>
+       {/*</CustomDropdownContainer>*/}
+
+          <Dropdown
             key="test-dropdown"
             multiselect
             searchable
@@ -124,7 +164,7 @@ class FormApp extends React.Component {
             propName='from_node'
             placeholder='Node'
             label='From Node'
-          />*/}
+          />
 
           <Textarea
             key="test-textarea"
@@ -136,6 +176,8 @@ class FormApp extends React.Component {
             placeholder='Enter a Description'
             description='Enter a Description'
           />
+
+          
         </Form>
       </Main>
     )

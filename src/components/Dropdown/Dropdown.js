@@ -17,6 +17,8 @@ import * as Colors from '../../colors';
 
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import DropdownBar from './components/DropdownBar';
+import DropdownMenu from './components/DropdownMenu';
 
 // -------------------------------------------------------------------------------------
 // --------------------------------- Imported Styles -----------------------------------
@@ -262,14 +264,13 @@ class Dropdown extends Component {
         >
           <ErrorMessage error={error}/>
 
-          <Styles.DropdownBar
+          <DropdownBar
             style={dropdownBarStyle}
             onClick={this.toggleMenu}>
             {this.getPlaceHolderText(searchable, placeholder)}
-            <Styles.DownArrow />
-          </Styles.DropdownBar>
+          </DropdownBar>
 
-          <Styles.DropdownMenu 
+          <DropdownMenu 
             showMenu={this.state.showMenu}>
             {this.getFirstLine(searchable, placeholder)}
 
@@ -278,7 +279,7 @@ class Dropdown extends Component {
               showMenu={this.state.showMenu}>
               { this.renderTabItems(filteredOptions) }
             </Styles.MenuList>
-          </Styles.DropdownMenu>
+          </DropdownMenu>
 
         </Styles.DropdownContainer>
 

@@ -8,8 +8,10 @@ import {
   CheckboxGroup,
   RadioGroup,
   Dropdown,
-  ErrorMessage
+  ErrorMessage,
+  AlertMessage
 } from '../../src/index';
+import AlertMessage from '../../src/components/AlertMessage/AlertMessage';
 
 const Main = styled.div`
   font-family: Roboto;
@@ -106,7 +108,7 @@ class App extends React.Component {
           show alert
         </button>
         
-        <ErrorMessage
+        <AlertMessage
           pageLevel
           hide={this.state.hideAlert}
           // success={true}

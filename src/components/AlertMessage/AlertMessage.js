@@ -78,17 +78,12 @@ const renderAlert = props => {
   }
 
   const FlexColumn__AlertMessage = styled.div`
-    align-items: center;
+    height: 32px;
     display: flex;
     font-size: 16px;
     position: absolute;
     box-sizing: border-box;
-
-    /* ${alignedLeft &&
-      css`
-        margin-top: 0px;
-        position: relative;
-      `}; */
+    align-items: center;
     ${pageLevel &&
       css`
         width: 100%;
@@ -96,25 +91,20 @@ const renderAlert = props => {
         top: 0;
         right: 0;
         left: 0;
-        margin: 0;
-        padding: 0;
+        padding: 14px 16px;
+        height: 48px;
         animation: ${slideInDown} 0.2s linear;
+        background-color: ${backgroundColor};
       `};
-  `;
-
-  const Background = styled.div`
-    box-sizing: border-box;
-    display: flex;
-    height: 48px;
-    width: 100%;
-    padding: 14px 16px;
-    background-color: ${pageLevel ? backgroundColor : 'transparent'};
-    align-items: center;
   `;
 
   const StyledAlertSign = styled(sign)`
     height: 20px;
-    width: 20px;
+    width: 26px;
+    ${warning && 
+      css`
+        fill: ${textColor};
+      `};
     margin-right: 8px;
 
     path:first-of-type {
@@ -122,10 +112,6 @@ const renderAlert = props => {
         fill: ${textColor};
       `};
     }
-    /* ${pageLevel &&
-      css`
-        animation: ${buzz} 0.5s linear;
-      `}; */
   `;
 
   const StyledAlertText = styled.div`
@@ -150,11 +136,9 @@ const renderAlert = props => {
 
   return (
     <FlexColumn__AlertMessage {...props}>
-      <Background>
-        <StyledAlertSign key="AlertSign" />
-        <StyledAlertText key="AlertText">{message}</StyledAlertText>
-        <CloseIcon onClick={props.onClose} />
-      </Background>
+      <StyledAlertSign key="AlertSign" />
+      <StyledAlertText key="AlertText">{message}</StyledAlertText>
+      <CloseIcon onClick={props.onClose} />
     </FlexColumn__AlertMessage>
   );
 };

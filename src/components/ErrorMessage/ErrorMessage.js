@@ -33,7 +33,7 @@ const FlexColumn__ErrorMessage = styled.div`
     `};
 `;
 // -------------------------------------------------------------------------------------
-// --------------------------------- Render Methods ------------------------------------
+// ------------------------------ SubRender Methods ------------------------------------
 // -------------------------------------------------------------------------------------
 
 const renderTextOnlyAlert = props => {
@@ -44,7 +44,7 @@ const renderTextOnlyAlert = props => {
   let backgroundColor = Colors.LIGHT_ENERGY;
 
   if (error) {
-    sign = warningIcon;
+    sign = errorIcon;
     textColor = Colors.ENERGY;
     backgroundColor = Colors.LIGHT_ENERGY;
   } else if (success) {

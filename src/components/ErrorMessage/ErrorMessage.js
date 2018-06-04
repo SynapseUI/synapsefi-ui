@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 import {
   error as errorIcon,
@@ -13,31 +13,51 @@ import Colors from '../../colors';
 // -------------------------------- Styled Components-----------------------------------
 // -------------------------------------------------------------------------------------
 
-const FlexColumn__ErrorMessage = styled.div`
-  ${props =>
-    props.pageLevel &&
-    css`
-      width: 100%;
-    `};
-  align-items: center;
-  display: flex;
-  font-size: 16px;
-  position: absolute;
-  box-sizing: border-box;
 
-  ${props =>
-    props.alignedLeft &&
-    css`
-      margin-top: 0px;
-      position: relative;
-    `};
+const buzz = keyframes`
+  from,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translate3d(-2px, 0, 0);
+    transform: translate3d(-2px, 0, 0);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translate3d(2px, 0, 0);
+    transform: translate3d(2px, 0, 0);
+  }
 `;
+
+const slideInDown = keyframes`
+  from {
+    -webkit - transform: translatey(-100%);
+    transform: translatey(-100%);
+    /* visibility: visible; */
+  }
+
+  to {
+    -webkit - transform: translatey(0);
+    transform: translatey(0);
+  }
+`;
+
 // -------------------------------------------------------------------------------------
 // ------------------------------ SubRender Methods ------------------------------------
 // -------------------------------------------------------------------------------------
 
-const renderTextOnlyAlert = props => {
-  const { warning, success, error, message, pageLevel } = props;
+const renderAlert = props => {
+  const { warning, success, error, message, pageLevel, alignedLeft } = props;
 
   // defaults to error styling
   let sign = errorIcon;
@@ -57,6 +77,30 @@ const renderTextOnlyAlert = props => {
     textColor = Colors.CREATIVE;
     backgroundColor = Colors.LIGHT_CREATIVE;
   }
+
+  const FlexColumn__ErrorMessage = styled.div`
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+    position: absolute;
+    box-sizing: border-box;
+
+    /* ${alignedLeft &&
+      css`
+        margin-top: 0px;
+        position: relative;
+      `}; */
+    ${pageLevel && css`
+      width: 100%;
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      margin: 0;
+      padding: 0;
+      animation: ${slideInDown} 0.2s linear;
+    `};
+  `;
 
   const Background = styled.div`
     box-sizing: border-box;
@@ -78,6 +122,9 @@ const renderTextOnlyAlert = props => {
         fill: ${textColor};
       `};
     }
+    /* ${pageLevel && css`
+        animation: ${buzz} 0.5s linear;
+    `}; */
   `;
 
   const StyledAlertText = styled.div`
@@ -101,11 +148,13 @@ const renderTextOnlyAlert = props => {
   `;
 
   return (
-    <Background>
-      <StyledAlertSign key="AlertSign" />
-      <StyledAlertText key="AlertText">{message}</StyledAlertText>
-      <CloseIcon onClick={props.onClose} />
-    </Background>
+    <FlexColumn__ErrorMessage {...props}>
+      <Background>
+        <StyledAlertSign key="AlertSign" />
+        <StyledAlertText key="AlertText">{message}</StyledAlertText>
+        <CloseIcon onClick={props.onClose} />
+      </Background>
+    </FlexColumn__ErrorMessage>
   );
 };
 
@@ -115,13 +164,8 @@ const ErrorMessage = props => {
   // ---------------------------------------------------------------------------------------
   const { message, alignedLeft, hide, pageLevel } = props;
   if (hide === false) {
-    return (
-      <FlexColumn__ErrorMessage alignedLeft={alignedLeft} {...props}>
-        {renderTextOnlyAlert(props)}
-      </FlexColumn__ErrorMessage>
-    );
+    return renderAlert(props);
   }
-
   return null;
 };
 

@@ -100,7 +100,7 @@ const renderAlert = props => {
 
   const StyledAlertSign = styled(sign)`
     height: 20px;
-    width: 26px;
+    width: 20px;
     ${warning && 
       css`
         fill: ${textColor};

@@ -56,7 +56,7 @@ const slideInDown = keyframes`
 // -------------------------------------------------------------------------------------
 
 const renderAlert = props => {
-  const { warning, success, error, message, pageLevel, alignedLeft } = props;
+  const { warning, success, error, message, pageLevel } = props;
 
   // defaults to error styling
   let sign = errorIcon;

@@ -44,7 +44,7 @@ const InnerBox = styled.div`
   border: solid 1px ${colors.WARM_LIGHT};
   border-radius: 4px;
 
-  overflow: scroll;
+  overflow: auto;
 `;
 
 const CloseBtnPositioning = styled.div`

@@ -38,13 +38,12 @@ export const DropdownBar = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  
 `;
 
 export const DropdownMenu = styled.div`
   width: inherit;
 
-  margin-top: -40px;
+  margin-top: ${props => props.verticalOffset ? 'calc(props.verticalOffset - 40px)': '-40px'};
 
   position: absolute;
   display: block;
@@ -122,6 +121,7 @@ export const DownArrow = styled.div`
 `;
 
 export const PlaceHolder = styled.span`
+  
   color: ${props => props.empty && css`${Colors.WARM_LIGHT}`};
   font-size: 16px;
   // width: ${props => props.searchable && css`85%` || css`100%`};

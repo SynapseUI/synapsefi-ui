@@ -5,8 +5,12 @@ import {
   Form,
   Input,
   Textarea,
-  Dropdown
+  Dropdown,
+  Label
 } from '../../src/index';
+
+import DropdownBar from '../../src/components/Dropdown/components/DropdownBar'
+import DropdownMenu from '../../src/components/Dropdown/components/DropdownMenu'
 
 import Colors from '../../src/colors';
 
@@ -40,7 +44,9 @@ class FormApp extends React.Component {
       api_version: '',
       other_preference: '',
       from_node: [],
-      compliance_notes: ''
+      compliance_notes: '',
+
+      showOptionalDropdown: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -83,28 +89,26 @@ class FormApp extends React.Component {
           formClassName='main-form'
           formValues={this.state}
           handleSubmit={this.handleSubmit}
+          additionalActionButton={
+            [
+              {
+                type: 'tertiary',
+                text: 'Cancel',
+                action: () => console.log('cancel')
+              }
+            ]
+          }
           validation={this.handleErrorCheck}
           onChange={this.updateField}
           // onChangeCollection={{
           //   default: this.updateField
           // }}
         >
-          <Input
-            key="test-input"
-            value={this.state.other_preference}
-            onChange={e => this.setState({
-              other_preference: e.target.value
-            })}
-            onBlur={() => console.log('blur')}
-            onFocus={() => console.log('focus')}
-            propName='other_preference'
-            label='Other Preferences'
-          />
 
-          {/*<Dropdown
+          <Dropdown
             key="test-dropdown"
             multiselect
-            searchable
+            // searchable
             value={this.state.from_node}
             onChange={this.updateField}
             options={[
@@ -115,7 +119,7 @@ class FormApp extends React.Component {
             propName='from_node'
             placeholder='Node'
             label='From Node'
-          />*/}
+          />
 
           <Textarea
             key="test-textarea"
@@ -127,6 +131,8 @@ class FormApp extends React.Component {
             placeholder='Enter a Description'
             description='Enter a Description'
           />
+
+          
         </Form>
       </Main>
     )

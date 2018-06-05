@@ -19,9 +19,31 @@ const TYPE_RADIOGROUP = 'TYPE_RADIOGROUP';
 const TYPE_CHECKBOXGROUP = 'TYPE_CHECKBOXGROUP';
 const TYPE_DROPDOWN = 'TYPE_DROPDOWN';
 
+const renderButtons = (buttonData) => {
+  if (!buttonData) return null;
+
+  return buttonData.map((btn, idx) => {
+    return (
+      <Button
+        key={idx}
+        type="button"
+        tertiary={btn.type === 'tertiary'}
+        secondary={btn.type === 'secondary'}
+        onClick={btn.action}
+      >
+      {btn.text}
+    </Button>
+    )
+  });
+}
+
 const FlexEnd = styled.div`
   display: flex;
   justify-content: flex-end;
+
+  button {
+    margin-left: 8px;
+  }
 `;
 
 class Form extends Component {
@@ -63,7 +85,8 @@ class Form extends Component {
 
   handleFormSubmit(e) {
     if (e) e.preventDefault();
-    const errors = this.getErrorsCollection(this.props.validation(), this.props.formValues);
+    const validationResult = this.props.validation ? this.props.validation() : {};
+    const errors = this.getErrorsCollection(validationResult, this.props.formValues);
     
     _.isEmpty(errors) ?
       this.props.handleSubmit(e)
@@ -158,6 +181,7 @@ class Form extends Component {
   renderFooter() {
     const {
       handleSubmit,
+      additionalActionButton,
       checkIfErrors,
       formValues,
       withInModal,
@@ -172,6 +196,7 @@ class Form extends Component {
 
     return (
       <FlexEnd>
+        {renderButtons(additionalActionButton)}
         <Button type="submit">Submit</Button>
       </FlexEnd>
     )
@@ -191,9 +216,7 @@ class Form extends Component {
 
 Form.propTypes = {
   formValues: PropTypes.object,
-  validation: PropTypes.func,
   handleSubmit: PropTypes.func,
-  onChangeCollection: PropTypes.object
 }
 
 export default Form;

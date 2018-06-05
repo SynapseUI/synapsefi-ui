@@ -17,12 +17,9 @@ export const ARSENIC = 'ARSENIC';
 
 // Secondary
 export const CREATIVE = 'CREATIVE';
-export const LIGHT_CREATIVE = 'LIGHT_CREATIVE';
 export const AUTHENTIC = 'AUTHENTIC';
-export const LIGHT_AUTHENTIC = 'LIGHT_AUTHENTIC';
 export const SUMMER_GREEN = 'SUMMER_GREEN';
 export const ENERGY = 'ENERGY';
-export const LIGHT_ENERGY = 'LIGHT_ENERGY';
 export const DARK_ENERGY = 'DARK_ENERGY';
 export const DEEP_ENERGY = 'DEEP_ENERGY';
 export const DARK_TEAL = 'DARK_TEAL';
@@ -58,12 +55,9 @@ export default {
   [ARSENIC]: '#364149',
   // Secondary
   [CREATIVE]: '#fdbd39',
-  [LIGHT_CREATIVE]: '#fff4cc',
   [AUTHENTIC]: '#8cc478',
-  [LIGHT_AUTHENTIC]: '#f5fbed',
   [SUMMER_GREEN]: '#2d9b00',
   [ENERGY]: '#cf5938',
-  [LIGHT_ENERGY]: '#ffdbd1',
   [DARK_ENERGY]: '#ae361f',
   [DEEP_ENERGY]: '#912f1c',
   [DARK_TEAL]: '#1c8290',

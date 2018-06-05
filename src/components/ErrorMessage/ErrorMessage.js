@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { error } from '../SvgIcons';
 import Colors from '../../colors';
 
-const StyledErrorSign = styled(error)`
+const StyledErrorSign = styled(error) `
   height: 16px;
   width: 16px;
   margin-right: 8px;
@@ -34,7 +34,7 @@ const FlexColumn__ErrorMessage = styled.span`
 const renderMessage = (error) => {
   if (error) {
     return [
-      <StyledErrorSign key='StyledErrorSign'/>,
+      <StyledErrorSign key='StyledErrorSign' />,
       <span key='ErrorSignText'>{error}</span>
     ];
   }

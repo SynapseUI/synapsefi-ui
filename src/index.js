@@ -6,6 +6,7 @@ import table from './components/Table';
 
 import FormLabel from './components/Label/Label';
 import FormErrorMessage from './components/ErrorMessage/ErrorMessage';
+import FormAlertMessage from './components/AlertMessage/AlertMessage';
 
 import FormInput from './components/Input/Input';
 import FormTextarea from './components/Textarea/Textarea';
@@ -27,6 +28,7 @@ export const Table = table;
 
 export const Label = FormLabel;
 export const ErrorMessage = FormErrorMessage;
+export const AlertMessage = FormAlertMessage;
  
 export const Input = FormInput;
 export const Textarea = FormTextarea;

@@ -33,6 +33,10 @@ class ExampleModalBasic extends Component {
         headerText={'I am a Header'}
         height={'500px'}
         width={'700px'}
+        innerBgColor={'pink'}
+        outerBgColor={'blue'}
+        top={'70%'}
+        left={'30%'}
       >
         {[...Array(10).keys()].map((item, idx) => {
           return (

@@ -70,6 +70,14 @@ class Dropdown extends Component {
   // --------------------------------- Handler Methods -----------------------------------
   // -------------------------------------------------------------------------------------
 
+  checkIfSelectionEmpty(){
+    const { multiselect } = this.props.propValues || this.props;
+
+    return multiselect ?
+      _.isEmpty(this.state.selection)
+      : _.isEmpty(this.state.selection.key);
+  }
+
   toggleMenu() {
     let newInput = this.state.inputValue;
     if (this.state.showMenu) newInput = '';
@@ -88,10 +96,12 @@ class Dropdown extends Component {
       placeholder
     } = this.props.propValues || this.props;
 
-    let newSelection = item.key;
-    if (multiselect) newSelection = DataUtil.addOrRemove(item.key, this.state.selection);
-
-    let firstLine = Util.getTextOfSelection(newSelection, options, placeholder, multiselect);
+    let newSelection = item;
+    let firstLine = item.text;
+    if (multiselect){
+      newSelection = DataUtil.addOrRemove(item.key, this.state.selection);
+      firstLine = Util.getTextOfSelection(newSelection, options, placeholder, multiselect);
+    }
     
     this.setState({
       selection: newSelection,
@@ -130,7 +140,7 @@ class Dropdown extends Component {
   getPlaceHolderText(searchable, placeholder) {
     return (
       <Styles.FlexStartAlign 
-        empty={_.isEmpty(this.state.selection)} 
+        empty={this.checkIfSelectionEmpty()} 
         searchable={searchable}>
         <Styles.FirstListWrapper>
           {searchable && <Styles.StyledSearchIcon />}
@@ -144,7 +154,7 @@ class Dropdown extends Component {
     if (searchable) {
       return (
         <Styles.MenuItem notSelectable>
-          <Styles.FlexStartAlign>
+          <Styles.FlexStartAlign empty={this.checkIfSelectionEmpty()} >
             <Styles.FirstListWrapper>
               <Styles.StyledSearchIcon />
 
@@ -165,7 +175,7 @@ class Dropdown extends Component {
     return (
       <Styles.MenuItem firstMenuItem onClick={this.toggleMenu}>
         <Styles.FirstListWrapper>
-          <Styles.PlaceHolder empty={_.isEmpty(this.state.selection)}>
+          <Styles.PlaceHolder empty={_.isEmpty(this.state.selection.key)}>
             {this.state.firstLine}
           </Styles.PlaceHolder>
         </Styles.FirstListWrapper>

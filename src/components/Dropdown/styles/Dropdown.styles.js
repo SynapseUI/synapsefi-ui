@@ -121,6 +121,7 @@ export const DownArrow = styled.div`
 `;
 
 export const PlaceHolder = styled.span`
+  
   color: ${props => props.empty && css`${Colors.WARM_LIGHT}`};
   font-size: 16px;
   // width: ${props => props.searchable && css`85%` || css`100%`};

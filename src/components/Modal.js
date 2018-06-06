@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import colors from '../colors';
 import CloseBtn from './CloseBtn';
 import Button from './Button';
+import BtnGroup from './BtnGroup';
 
 const OuterBox = styled.div`
   background-color: ${props =>
@@ -63,28 +64,6 @@ const HeaderText = styled.div`
   margin-bottom: 32px;
 `;
 
-const BtnWrapper = styled.div`
-  flex: 1;
-
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-
-  & > button {
-    &:not(:last-child) {
-      margin-right: 16px;
-    }
-  }
-
-  ${props =>
-    props.fullWidthBtn &&
-    css`
-      & > button {
-        flex: 1;
-      }
-    `};
-`;
-
 const uniqId = 'uniq-modal-id';
 
 class Modal extends Component {
@@ -111,34 +90,6 @@ class Modal extends Component {
     this.modal = document.createElement('div');
     this.modal.id = uniqId;
     document.body.appendChild(this.modal);
-  }
-
-  renderBtns(btnObjs, fullWidthBtn) {
-    return (
-      <BtnWrapper fullWidthBtn={fullWidthBtn}>
-        {btnObjs.map(({ style, size, text, onClick }, idx) => {
-          return (
-            <Button
-              key={idx}
-              onClick={onClick && (() => onClick())}
-              //
-              primary={style === 'primary'}
-              secondary={style === 'secondary'}
-              tertiary={style === 'tertiary'}
-              remove={style === 'remove'}
-              isDisabled={style === 'isDisabled'}
-              isLoading={style === 'isLoading'}
-              //
-              small={size === 'small'}
-              medium={size === 'medium'}
-              large={size === 'large'}
-            >
-              {text}
-            </Button>
-          );
-        })}
-      </BtnWrapper>
-    );
   }
 
   openModal(children) {
@@ -185,7 +136,10 @@ class Modal extends Component {
             </CloseBtnPositioning>
             {headerText && <HeaderText>{headerText}</HeaderText>}
             {children}
-            {btnObjs && btnObjs.length !== 0 && this.renderBtns(btnObjs, fullWidthBtn)}
+            {btnObjs &&
+            btnObjs.length !== 0 && (
+              <BtnGroup btnObjs={btnObjs} fullWidthBtn={fullWidthBtn} bottom />
+            )}
           </InnerBox>
         </InnerBoxPositioning>
       </OuterBox>,

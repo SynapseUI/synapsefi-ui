@@ -37,8 +37,8 @@ class App extends React.Component {
           message='Test Msg: The quick brown fox jumped over the lazy dog'
           pageLevel
           onClose={() => this.setState({hide:true})}
-          warning={true}
-          // error={true}
+          // warning={true}
+          error={true}
           // success={true}
         />
       </Main>

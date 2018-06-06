@@ -61,20 +61,20 @@ const renderAlert = props => {
   // defaults to error styling
   let sign = errorIcon;
   let textColor = Colors.ENERGY;
-  let backgroundColor = Colors.LIGHT_ENERGY;
+  let backgroundColor = '#ffdbd1';
 
   if (error) {
     sign = errorIcon;
     textColor = Colors.ENERGY;
-    backgroundColor = Colors.LIGHT_ENERGY;
+    backgroundColor = '#ffdbd1'
   } else if (success) {
     sign = successIcon;
     textColor = Colors.AUTHENTIC;
-    backgroundColor = Colors.LIGHT_AUTHENTIC;
+    backgroundColor = '#f5fbed'
   } else if (warning) {
     sign = warningIcon;
     textColor = Colors.CREATIVE;
-    backgroundColor = Colors.LIGHT_CREATIVE;
+    backgroundColor = '#fff4cc';
   }
 
   const FlexColumn__AlertMessage = styled.div`

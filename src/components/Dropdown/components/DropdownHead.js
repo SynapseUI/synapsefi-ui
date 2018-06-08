@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import * as Styles from '../styles/Dropdown.styles';
 
-const DropdownBar = (props) => {
+const DropdownHead = (props) => {
   const {
     showMenu,
     style,
@@ -12,14 +12,14 @@ const DropdownBar = (props) => {
   } = props;
 
   return (
-    <Styles.DropdownBar
+    <Styles.DropdownHead
       style={style}
       onClick={onClick}
     >
       {children}
       <Styles.DownArrow />
-    </Styles.DropdownBar>
+    </Styles.DropdownHead>
   );
 }
 
-export default DropdownBar;
+export default DropdownHead;

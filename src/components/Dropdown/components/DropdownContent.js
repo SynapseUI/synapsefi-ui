@@ -4,22 +4,22 @@ import onClickOutside from 'react-onclickoutside';
 
 import * as Styles from '../styles/Dropdown.styles';
 
-const DropdownMenu = (props) => {
+const DropdownContent = (props) => {
   const {
     children,
-    showMenu,
+    showContent,
     style,
     verticalOffset
   } = props;
 
   return (
-    <Styles.DropdownMenu
+    <Styles.DropdownContent
       style={style}
-      showMenu={showMenu}
+      showContent={showContent}
       verticalOffset={verticalOffset}>
       {children}
-    </Styles.DropdownMenu>
+    </Styles.DropdownContent>
   );
 }
 
-export default DropdownMenu;
+export default DropdownContent;

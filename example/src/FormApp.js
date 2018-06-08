@@ -9,8 +9,8 @@ import {
   Label
 } from '../../src/index';
 
-import DropdownBar from '../../src/components/Dropdown/components/DropdownBar'
-import DropdownMenu from '../../src/components/Dropdown/components/DropdownMenu'
+import DropdownHead from '../../src/components/Dropdown/components/DropdownHead'
+import DropdownContent from '../../src/components/Dropdown/components/DropdownContent'
 
 import Colors from '../../src/colors';
 
@@ -43,6 +43,8 @@ class FormApp extends React.Component {
       card_preferences: [],
       api_version: '',
       from_node: [],
+
+      showExampleDropdown: false
 
     };
 
@@ -119,6 +121,17 @@ class FormApp extends React.Component {
             label='From Node'
           />
 
+          <DropdownHead onClick={() => this.setState({showExampleDropdown: !this.state.showExampleDropdown})}>
+            <Label label="Example"/>
+          </DropdownHead>
+
+          <DropdownContent
+            showContent={this.state.showExampleDropdown}
+            verticalOffset='16px'
+          >
+            <p>Hi</p>
+            <p>There</p>
+          </DropdownContent>
           
         </Form>
       </Main>

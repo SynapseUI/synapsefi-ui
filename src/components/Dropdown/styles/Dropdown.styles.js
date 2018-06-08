@@ -22,7 +22,7 @@ export const StyledCheckedSquare = styled(check_filled_square)`
   }
 `;
 
-export const DropdownBar = styled.div`
+export const DropdownHead = styled.div`
   width: 288px;
   height: 40px;
   padding: 8px;
@@ -40,7 +40,7 @@ export const DropdownBar = styled.div`
 
 `;
 
-export const DropdownMenu = styled.div`
+export const DropdownContent = styled.div`
   width: inherit;
 
   margin-top: ${props => props.verticalOffset ? 'calc(props.verticalOffset - 40px)': '-40px'};
@@ -54,8 +54,8 @@ export const DropdownMenu = styled.div`
   overflow-y: hidden;
   overflow-x: hidden;
 
-  visibility: ${props => props.showMenu && 'visible'};
-  box-shadow: ${props => props.showMenu && '0 1px 3px 0 rgba(0, 0, 0, 0.5)'};
+  visibility: ${props => props.showContent && 'visible'};
+  box-shadow: ${props => props.showContent && '0 1px 3px 0 rgba(0, 0, 0, 0.5)'};
 
   z-index: 2;
 `;

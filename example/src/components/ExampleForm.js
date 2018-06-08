@@ -37,7 +37,7 @@ class ExampleForm extends React.Component {
   render() {
     return (
       <Main>
-        {/* <Dropdown
+        <Dropdown
           searchable
           multiselect
           value={this.state.airport}
@@ -51,7 +51,7 @@ class ExampleForm extends React.Component {
             { key: 'JFK', text: 'John F. Kennedy Airport' },
             { key: 'ORD', text: 'O\'Hare International Airport' }
           ]}
-        /> */}
+        />
 
         <Input
           autofocus={true}

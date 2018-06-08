@@ -17,8 +17,8 @@ import * as Colors from '../../colors';
 
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import DropdownBar from './components/DropdownBar';
-import DropdownMenu from './components/DropdownMenu';
+import DropdownHead from './components/DropdownHead';
+import DropdownContent from './components/DropdownContent';
 
 // -------------------------------------------------------------------------------------
 // --------------------------------- Imported Styles -----------------------------------
@@ -244,7 +244,7 @@ class Dropdown extends Component {
       key,
       styles,
       showMenu,
-      dropdownBarStyle,
+      dropdownHeadStyle,
       empty,
       onChange,
       propName,
@@ -280,14 +280,14 @@ class Dropdown extends Component {
         >
           <ErrorMessage error={error}/>
 
-          <DropdownBar
-            style={dropdownBarStyle}
+          <DropdownHead
+            style={dropdownHeadStyle}
             onClick={this.toggleMenu}>
             {this.getPlaceHolderText(searchable, placeholder)}
-          </DropdownBar>
+          </DropdownHead>
 
-          <DropdownMenu 
-            showMenu={this.state.showMenu}>
+          <DropdownContent
+            showContent={this.state.showMenu}>
             {this.getFirstLine(searchable, placeholder)}
 
             <Styles.MenuList
@@ -295,7 +295,7 @@ class Dropdown extends Component {
               showMenu={this.state.showMenu}>
               { this.renderTabItems(filteredOptions) }
             </Styles.MenuList>
-          </DropdownMenu>
+          </DropdownContent>
 
         </Styles.DropdownContainer>
 

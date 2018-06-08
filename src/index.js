@@ -15,8 +15,8 @@ import FormCheckboxGroup from './components/CheckboxGroup/CheckboxGroup';
 import FormRadioGroup from './components/RadioGroup/RadioGroup';
 import FormDropdown from './components/Dropdown/Dropdown';
 
-import FormDropdownMenu from './components/Dropdown/components/DropdownMenu';
-import FormDropdownBar from './components/Dropdown/components/DropdownBar';
+import FormDropdownContent from './components/Dropdown/components/DropdownContent';
+import FormDropdownHead from './components/Dropdown/components/DropdownHead';
 
 import MainForm from './components/Form/Form';
 
@@ -41,7 +41,7 @@ export const CheckboxGroup = FormCheckboxGroup;
 export const RadioGroup = FormRadioGroup;
 export const Dropdown = FormDropdown;
 
-export const DropdownMenu = FormDropdownMenu;
-export const DropdownBar = FormDropdownBar;
+export const DropdownContent = FormDropdownContent;
+export const DropdownHead = FormDropdownHead;
 
 export const Form = MainForm;

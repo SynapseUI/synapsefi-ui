@@ -29,4 +29,5 @@ module.exports = {
   devServer: {
     contentBase: 'example/',
   },
+  devtool: 'source-map'
 };

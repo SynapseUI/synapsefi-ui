@@ -43,10 +43,10 @@ const renderMessage = (error) => {
 };
 
 const ErrorMessage = (props) => {
-  const { error, alignedLeft } = props;
+  const { error, alignedLeft, errorStyle } = props;
   if (error) {
     return (
-      <FlexColumn__ErrorMessage alignedLeft={alignedLeft}>
+      <FlexColumn__ErrorMessage alignedLeft={alignedLeft} style={errorStyle}>
         {renderMessage(error)}
       </FlexColumn__ErrorMessage>
     );

@@ -117,7 +117,7 @@ export default class Input extends Component {
 
       autofocus - {true/false} - will auto focus on the input on mount
 
-      errorMessage - will appear under the input if the value is invalid
+      error - will appear under the input if the value is invalid
 
       placeholder - placeholder for input
 
@@ -193,8 +193,8 @@ export default class Input extends Component {
 
   renderInputField() {
     const {
-      errorMessage,
       error,
+      errorStyle,
       type,
       inputType,
       currency,
@@ -212,7 +212,7 @@ export default class Input extends Component {
           <FlexRowRev__Divider error={error} />
         </FlexRowRev>
 
-        <ErrorMessage error={error}/>
+        <ErrorMessage error={error} errorStyle={errorStyle}/>
       </FlexColumn>
     );
   }

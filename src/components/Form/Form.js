@@ -126,7 +126,7 @@ class Form extends Component {
         options: item.options,
         error: this.state.afterSubmission
           && this.state.touch.has(item.propName)
-          && this.state.errors[item.propName]
+          && this.state.errors[item.propName],
       };
 
       switch (item.formType) {
@@ -177,7 +177,6 @@ class Form extends Component {
     const {
       handleSubmit,
       additionalActionButton,
-      checkIfErrors,
       formValues,
       withInModal,
       customFooter

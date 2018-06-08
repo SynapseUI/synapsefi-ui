@@ -5,7 +5,7 @@ export default [
     formType: FormTypeConstants.TYPE_INPUT,
     autoFocus: true,
     propName: 'email',
-    // label: 'Email',
+    label: 'Email',
     placeholder: 'Enter User Email',
     // validation: yup.string()
     //   .min(5, "C'mon, your email is longer than that")
@@ -16,7 +16,7 @@ export default [
   {
     formType: FormTypeConstants.TYPE_INPUT,
     propName: 'username',
-    // label: 'User Name',
+    label: 'User Name',
     placeholder: 'Enter a User Name',
     // validation: yup.string()
     //   .min(5, "C'mon, your username is longer than that")

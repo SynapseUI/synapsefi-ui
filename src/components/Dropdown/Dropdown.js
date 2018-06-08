@@ -255,6 +255,7 @@ class Dropdown extends Component {
       description,
       placeholder,
       error,
+      errorStyle,
       multiselect
     } = this.props.propValues || this.props;
 
@@ -278,7 +279,7 @@ class Dropdown extends Component {
           style={styles}
           showMenu={this.state.showMenu}
         >
-          <ErrorMessage error={error}/>
+          <ErrorMessage error={error} errorStyle={errorStyle}/>
 
           <DropdownHead
             style={dropdownHeadStyle}

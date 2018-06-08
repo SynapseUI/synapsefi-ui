@@ -116,7 +116,8 @@ const RadioGroup = (props) => {
     className,
     radioStyle,
     disabled,
-    error
+    error,
+    errorStyle
 } = props.propValues || props;
   
   let selectedIndex;
@@ -147,7 +148,7 @@ const RadioGroup = (props) => {
             </RadioButton__Label>
           );
         })}
-        <ErrorMessage error={error}/>
+        <ErrorMessage error={error} errorStyle={errorStyle}/>
       </Group>
 
       

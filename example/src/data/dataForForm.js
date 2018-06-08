@@ -19,7 +19,7 @@ export default [
     formType: 'TYPE_INPUT',
     autofocus: true,
     propName: 'email',
-    label: 'Email',
+    // label: 'Email',
     placeholder: 'Enter User Email',
     // validation: yup.string()
     //   .min(5, "C'mon, your email is longer than that")
@@ -96,7 +96,7 @@ export default [
 
   {
     formType: 'TYPE_DROPDOWN',
-    label: 'API Version: ',
+    // label: 'API Version: ',
     placeholder: 'V3.1 // KYC 3.0 // Language',
     propName: 'api_version',
     options: [

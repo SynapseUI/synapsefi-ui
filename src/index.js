@@ -1,4 +1,5 @@
 import button from './components/Button';
+import btnGroup from './components/BtnGroup';
 import closeBtn from './components/CloseBtn';
 import modal from './components/Modal';
 import * as svgIcons from './components/SvgIcons';
@@ -24,6 +25,7 @@ import Colors from './colors';
 export const colors = Colors;
 
 export const Button = button;
+export const BtnGroup = btnGroup;
 export const CloseBtn = closeBtn;
 export const Modal = modal;
 export const SvgIcons = svgIcons;

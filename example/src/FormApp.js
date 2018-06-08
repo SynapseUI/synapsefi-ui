@@ -42,11 +42,8 @@ class FormApp extends React.Component {
       user_permission: '',
       card_preferences: [],
       api_version: '',
-      other_preference: '',
       from_node: [],
-      compliance_notes: '',
 
-      showOptionalDropdown: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -77,6 +74,7 @@ class FormApp extends React.Component {
   }
 
   handleSubmit(e){
+    debugger;
     if (e) e.preventDefault();
     console.log('Submiting this.state in FormApp', this.state);
   }
@@ -119,17 +117,6 @@ class FormApp extends React.Component {
             propName='from_node'
             placeholder='Node'
             label='From Node'
-          />
-
-          <Textarea
-            key="test-textarea"
-            className='user-page-input-row'
-            value={this.state.compliance_notes}
-            onChange={e => this.setState({ compliance_notes: e.target.value })}
-            propName='compliance_notes'
-            label='Comppliance Notes'
-            placeholder='Enter a Description'
-            description='Enter a Description'
           />
 
           

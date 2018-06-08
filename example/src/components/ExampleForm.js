@@ -54,11 +54,13 @@ class ExampleForm extends React.Component {
         /> */}
 
         <Input
+          autofocus={true}
           value={this.state.name}
           onChange={this.updateField}
           propName="name"
           // onChange={(e) => _.debounce(() => this.setState({ name: e.target.value }), 1000)}
           label="Name"
+          labelWidth="600px"
           placeholder="Name"
         />
 

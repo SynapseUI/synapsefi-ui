@@ -74,7 +74,7 @@ const renderLabel = (label, description, checkForPadding, disabled) => {
 
 const Label = ({
   label, description, labelWidth, largeInput, checkForPadding, disabled
-}) => {  
+}) => {
   return (
     <LabelDescription labelWidth={labelWidth} className="label-description" largeInput={largeInput}>
       { renderLabel(label, description, checkForPadding, disabled) }

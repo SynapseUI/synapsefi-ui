@@ -96,11 +96,14 @@ class Dropdown extends Component {
       placeholder
     } = this.props.propValues || this.props;
 
+    let singleSelection;
     let newSelection = item;
     let firstLine = item.text;
     if (multiselect){
       newSelection = DataUtil.addOrRemove(item.key, this.state.selection);
       firstLine = Util.getTextOfSelection(newSelection, options, placeholder, multiselect);
+    } else {
+      singleSelection = item.key;
     }
     
     this.setState({
@@ -108,7 +111,10 @@ class Dropdown extends Component {
       showMenu: multiselect ? true : false,
       inputValue: multiselect ? this.state.inputValue : '',
       firstLine
-    }, () => onChange(e, newSelection, propName));
+    }, () => {
+      if(!multiselect) onChange(e, newSelection.key, propName)
+      else onChange(e, newSelection, propName)
+    });
   }
 
   selectAllOptions(e){

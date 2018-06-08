@@ -85,6 +85,7 @@ class Form extends Component {
 
   handleFormSubmit(e) {
     if (e) e.preventDefault();
+    debugger;
     const validationResult = this.props.validation ? this.props.validation() : {};
     const errors = this.getErrorsCollection(validationResult, this.props.formValues);
     
@@ -108,8 +109,8 @@ class Form extends Component {
   renderEntireForm() {
     let formChildren = !!this.props.children ?
       React.Children.map(this.props.children, (child) => child) : [];
-    
-    const onChangeCollection = this.props.onChangeCollection || {};
+
+      const onChangeCollection = this.props.onChangeCollection || {};
     
     let result = this.props.data.map((item, idx) => {
       if (typeof this.props.formValues[item.propName] === 'undefined') {

@@ -14,7 +14,7 @@ import DropdownContent from '../../src/components/Dropdown/components/DropdownCo
 
 import Colors from '../../src/colors';
 
-import dataForForm from './data/dataForForm';
+import dataForForm from './data/FormApp.data';
 
 const Main = styled.div`
   .main-form {

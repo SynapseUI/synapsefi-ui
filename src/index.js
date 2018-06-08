@@ -19,6 +19,7 @@ import FormDropdownContent from './components/Dropdown/components/DropdownConten
 import FormDropdownHead from './components/Dropdown/components/DropdownHead';
 
 import MainForm from './components/Form/Form';
+import MainFormTypeConstants from './components/Form/util/FormTypeConstants';
 
 import Colors from './colors';
 
@@ -45,3 +46,5 @@ export const DropdownContent = FormDropdownContent;
 export const DropdownHead = FormDropdownHead;
 
 export const Form = MainForm;
+export const FormTypeConstants = MainFormTypeConstants();
+

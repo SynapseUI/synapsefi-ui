@@ -82,7 +82,6 @@ export default class Input extends Component {
   constructor(props) {
     super(props);
 
-    this.renderLabel = this.renderLabel.bind(this);
     this.renderSymbol = this.renderSymbol.bind(this);
 
     this.renderInputField = this.renderInputField.bind(this);
@@ -133,14 +132,6 @@ export default class Input extends Component {
         and change the coloring of Divider.
   */
 
-  renderLabel(label, description, labelWidth, disabled) {
-    if (label) {
-      return <Label label={label} labelWidth={labelWidth} description={description} disabled={disabled} />;
-    }
-
-    return null;
-  }
-
   renderSymbol(type, disabled) {
     if (type) return <AlignedSpan disabled={disabled}>{symbols[type]}</AlignedSpan>;
 
@@ -149,7 +140,7 @@ export default class Input extends Component {
 
   renderBaseInput() {
     const {
-      autofocus,
+      autoFocus,
       onChange,
       onFocus,
       propName,
@@ -164,7 +155,7 @@ export default class Input extends Component {
       <FlexRowRev__Input
         {...remainingProps}
         id={propName}
-        autoFocus={autofocus}
+        autoFocus={autoFocus}
         value={value}
         onChange={(e) => onChange(e, e.target.value, propName)}
         onFocus={onFocus}
@@ -176,7 +167,7 @@ export default class Input extends Component {
 
   // renderNumberInput() {
   //   const {
-  //     autofocus,
+  //     autoFocus,
   //     onChange,
   //     onFocus,
   //     propName,
@@ -188,7 +179,7 @@ export default class Input extends Component {
 
   //   return (
   //     <NumberInput
-  //       autoFocus={autofocus}
+  //       autoFocus={autoFocus}
   //       value={value}
   //       field={propName}
   //       onChange={onChange}
@@ -233,7 +224,13 @@ export default class Input extends Component {
 
     return (
       <MainInput className={className} style={style}>
-        {this.renderLabel(label, description, labelWidth, disabled)}
+        <Label
+          label={label}
+          labelWidth={labelWidth}
+          description={description}
+          disabled={disabled}
+        />
+        {/* {this.renderLabel(label, description, labelWidth, disabled)} */}
         {this.renderInputField()}
       </MainInput>
     );

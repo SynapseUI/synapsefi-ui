@@ -76,7 +76,6 @@ class FormApp extends React.Component {
   }
 
   handleSubmit(e){
-    debugger;
     if (e) e.preventDefault();
     console.log('Submiting this.state in FormApp', this.state);
   }

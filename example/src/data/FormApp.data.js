@@ -3,7 +3,7 @@ import { FormTypeConstants } from '../../../src/index';
 export default [
   {
     formType: FormTypeConstants.TYPE_INPUT,
-    autofocus: true,
+    autoFocus: true,
     propName: 'email',
     // label: 'Email',
     placeholder: 'Enter User Email',
@@ -16,7 +16,7 @@ export default [
   {
     formType: FormTypeConstants.TYPE_INPUT,
     propName: 'username',
-    label: 'User Name',
+    // label: 'User Name',
     placeholder: 'Enter a User Name',
     // validation: yup.string()
     //   .min(5, "C'mon, your username is longer than that")

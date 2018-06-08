@@ -54,7 +54,7 @@ class ExampleForm extends React.Component {
         />
 
         <Input
-          autofocus={true}
+          autoFocus
           value={this.state.name}
           onChange={this.updateField}
           propName="name"

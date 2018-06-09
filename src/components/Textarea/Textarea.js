@@ -99,7 +99,7 @@ export default class TextArea extends Component {
 
       autofocus - {true/false} - will auto focus on the textarea on mount
 
-      errorMessage - will appear under the textarea if the value is invalid
+      error - will appear under the textarea if the value is invalid
 
       placeholder - placeholder for textarea
 
@@ -111,7 +111,7 @@ export default class TextArea extends Component {
     gatherValue,
     onChange,
     error,
-    errorMessage,
+    errorStyle,
     field,
     propName,
     placeholder,
@@ -136,7 +136,7 @@ export default class TextArea extends Component {
         <FlexRowRev__Divider error={error}/>
       </FlexRowRev>
 
-      <ErrorMessage error={error}/>
+      <ErrorMessage error={error} errorStyle={errorStyle}/>
     </FlexColumn>
   );
 }

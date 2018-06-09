@@ -10,14 +10,9 @@ import {
   TextArea,
   CheckboxGroup,
   RadioGroup,
-  Dropdown
+  Dropdown,
+  FormTypeConstants
 } from '../../index';
-
-const TYPE_INPUT = 'TYPE_INPUT';
-const TYPE_TEXTAREA = 'TYPE_TEXTAREA';
-const TYPE_RADIOGROUP = 'TYPE_RADIOGROUP';
-const TYPE_CHECKBOXGROUP = 'TYPE_CHECKBOXGROUP';
-const TYPE_DROPDOWN = 'TYPE_DROPDOWN';
 
 const renderButtons = (buttonData) => {
   if (!buttonData) return null;
@@ -108,8 +103,8 @@ class Form extends Component {
   renderEntireForm() {
     let formChildren = !!this.props.children ?
       React.Children.map(this.props.children, (child) => child) : [];
-    
-    const onChangeCollection = this.props.onChangeCollection || {};
+
+      const onChangeCollection = this.props.onChangeCollection || {};
     
     let result = this.props.data.map((item, idx) => {
       if (typeof this.props.formValues[item.propName] === 'undefined') {
@@ -131,23 +126,23 @@ class Form extends Component {
         options: item.options,
         error: this.state.afterSubmission
           && this.state.touch.has(item.propName)
-          && this.state.errors[item.propName]
+          && this.state.errors[item.propName],
       };
 
       switch (item.formType) {
-        case TYPE_INPUT:
+        case FormTypeConstants.TYPE_INPUT:
           return <Input key={idx} propValues={propValues} />;
 
-        case TYPE_TEXTAREA:
+        case FormTypeConstants.TYPE_TEXTAREA:
           return <TextArea key={idx} propValues={propValues} />;
 
-        case TYPE_RADIOGROUP:
+        case FormTypeConstants.TYPE_RADIOGROUP:
           return <RadioGroup key={idx} propValues={propValues} />;
 
-        case TYPE_CHECKBOXGROUP:
+        case FormTypeConstants.TYPE_CHECKBOXGROUP:
           return <CheckboxGroup key={idx} propValues={propValues} />;
 
-        case TYPE_DROPDOWN:
+        case FormTypeConstants.TYPE_DROPDOWN:
           return <Dropdown key={idx} propValues={propValues} />;
 
         default:
@@ -182,7 +177,6 @@ class Form extends Component {
     const {
       handleSubmit,
       additionalActionButton,
-      checkIfErrors,
       formValues,
       withInModal,
       customFooter

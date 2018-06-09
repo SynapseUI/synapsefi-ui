@@ -74,7 +74,10 @@ const renderLabel = (label, description, checkForPadding, disabled) => {
 
 const Label = ({
   label, description, labelWidth, largeInput, checkForPadding, disabled
-}) => {  
+}) => {
+
+  if ((!label || label === '') && (!description || description === '')) return null;
+
   return (
     <LabelDescription labelWidth={labelWidth} className="label-description" largeInput={largeInput}>
       { renderLabel(label, description, checkForPadding, disabled) }

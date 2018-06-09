@@ -1,23 +1,9 @@
-const [
-  TYPE_INPUT,
-  TYPE_TEXTAREA,
-  TYPE_CHECKBOXGROUP,
-  TYPE_RADIOGROUP,
-  TYPE_DROPDOWN,
-  OTHER
-] = [
-  'TYPE_INPUT',
-  'TYPE_TEXTAREA',
-  'TYPE_CHECKBOXGROUP',
-  'TYPE_RADIOGROUP',
-  'TYPE_DROPDOWN',
-  'OTHER'
-];
+import { FormTypeConstants } from '../../../src/index';
 
 export default [
   {
-    formType: 'TYPE_INPUT',
-    autofocus: true,
+    formType: FormTypeConstants.TYPE_INPUT,
+    autoFocus: true,
     propName: 'email',
     label: 'Email',
     placeholder: 'Enter User Email',
@@ -28,7 +14,7 @@ export default [
   },
 
   {
-    formType: 'TYPE_INPUT',
+    formType: FormTypeConstants.TYPE_INPUT,
     propName: 'username',
     label: 'User Name',
     placeholder: 'Enter a User Name',
@@ -38,7 +24,7 @@ export default [
   },
 
   {
-    formType: 'TYPE_INPUT',
+    formType: FormTypeConstants.TYPE_INPUT,
     propName: 'website',
     label: 'Website',
     placeholder: 'Enter a Website',
@@ -49,7 +35,7 @@ export default [
   },
 
   {
-    formType: 'TYPE_INPUT',
+    formType: FormTypeConstants.TYPE_INPUT,
     propName: 'amount',
     currency: true,
     inputType: 'number',
@@ -60,7 +46,7 @@ export default [
   },
 
   {
-    formType: 'TYPE_TEXTAREA',
+    formType: FormTypeConstants.TYPE_TEXTAREA,
     propName: 'description',
     label: 'Description',
     placeholder: 'Enter a Description',
@@ -71,7 +57,7 @@ export default [
   },
 
   {
-    formType: 'TYPE_RADIOGROUP',
+    formType: FormTypeConstants.TYPE_RADIOGROUP,
     propName: 'user_permission',
     label: 'Permission',
     options: [
@@ -83,7 +69,7 @@ export default [
   },
 
   {
-    formType: 'TYPE_CHECKBOXGROUP',
+    formType: FormTypeConstants.TYPE_CHECKBOXGROUP,
     propName: 'card_preferences',
     label: 'Card Preferences',
     options: [
@@ -95,7 +81,7 @@ export default [
   },
 
   {
-    formType: 'TYPE_DROPDOWN',
+    formType: FormTypeConstants.TYPE_DROPDOWN,
     label: 'API Version: ',
     placeholder: 'V3.1 // KYC 3.0 // Language',
     propName: 'api_version',
@@ -108,7 +94,7 @@ export default [
   },
 
   {
-    formType: 'TYPE_DROPDOWN',
+    formType: FormTypeConstants.TYPE_DROPDOWN,
     label: 'From Node: ',
     placeholder: 'From Node',
     propName: 'from_node',

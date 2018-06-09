@@ -17,8 +17,8 @@ import * as Colors from '../../colors';
 
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import DropdownBar from './components/DropdownBar';
-import DropdownMenu from './components/DropdownMenu';
+import DropdownHead from './components/DropdownHead';
+import DropdownContent from './components/DropdownContent';
 
 // -------------------------------------------------------------------------------------
 // --------------------------------- Imported Styles -----------------------------------
@@ -96,11 +96,14 @@ class Dropdown extends Component {
       placeholder
     } = this.props.propValues || this.props;
 
+    let singleSelection;
     let newSelection = item;
     let firstLine = item.text;
     if (multiselect){
       newSelection = DataUtil.addOrRemove(item.key, this.state.selection);
       firstLine = Util.getTextOfSelection(newSelection, options, placeholder, multiselect);
+    } else {
+      singleSelection = item.key;
     }
     
     this.setState({
@@ -108,7 +111,10 @@ class Dropdown extends Component {
       showMenu: multiselect ? true : false,
       inputValue: multiselect ? this.state.inputValue : '',
       firstLine
-    }, () => onChange(e, newSelection, propName));
+    }, () => {
+      if(!multiselect) onChange(e, newSelection.key, propName)
+      else onChange(e, newSelection, propName)
+    });
   }
 
   selectAllOptions(e){
@@ -238,7 +244,7 @@ class Dropdown extends Component {
       key,
       styles,
       showMenu,
-      dropdownBarStyle,
+      dropdownHeadStyle,
       empty,
       onChange,
       propName,
@@ -249,6 +255,7 @@ class Dropdown extends Component {
       description,
       placeholder,
       error,
+      errorStyle,
       multiselect
     } = this.props.propValues || this.props;
 
@@ -272,16 +279,16 @@ class Dropdown extends Component {
           style={styles}
           showMenu={this.state.showMenu}
         >
-          <ErrorMessage error={error}/>
+          <ErrorMessage error={error} errorStyle={errorStyle}/>
 
-          <DropdownBar
-            style={dropdownBarStyle}
+          <DropdownHead
+            style={dropdownHeadStyle}
             onClick={this.toggleMenu}>
             {this.getPlaceHolderText(searchable, placeholder)}
-          </DropdownBar>
+          </DropdownHead>
 
-          <DropdownMenu 
-            showMenu={this.state.showMenu}>
+          <DropdownContent
+            showContent={this.state.showMenu}>
             {this.getFirstLine(searchable, placeholder)}
 
             <Styles.MenuList
@@ -289,7 +296,7 @@ class Dropdown extends Component {
               showMenu={this.state.showMenu}>
               { this.renderTabItems(filteredOptions) }
             </Styles.MenuList>
-          </DropdownMenu>
+          </DropdownContent>
 
         </Styles.DropdownContainer>
 

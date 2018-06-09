@@ -9,12 +9,12 @@ import {
   Label
 } from '../../src/index';
 
-import DropdownBar from '../../src/components/Dropdown/components/DropdownBar'
-import DropdownMenu from '../../src/components/Dropdown/components/DropdownMenu'
+import DropdownHead from '../../src/components/Dropdown/components/DropdownHead'
+import DropdownContent from '../../src/components/Dropdown/components/DropdownContent'
 
 import Colors from '../../src/colors';
 
-import dataForForm from './data/dataForForm';
+import dataForForm from './data/FormApp.data';
 
 const Main = styled.div`
   .main-form {
@@ -42,11 +42,10 @@ class FormApp extends React.Component {
       user_permission: '',
       card_preferences: [],
       api_version: '',
-      other_preference: '',
       from_node: [],
-      compliance_notes: '',
 
-      showOptionalDropdown: false
+      showExampleDropdown: false
+
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -121,17 +120,17 @@ class FormApp extends React.Component {
             label='From Node'
           />
 
-          <Textarea
-            key="test-textarea"
-            className='user-page-input-row'
-            value={this.state.compliance_notes}
-            onChange={e => this.setState({ compliance_notes: e.target.value })}
-            propName='compliance_notes'
-            label='Comppliance Notes'
-            placeholder='Enter a Description'
-            description='Enter a Description'
-          />
+          <DropdownHead onClick={() => this.setState({showExampleDropdown: !this.state.showExampleDropdown})}>
+            <Label label="Example"/>
+          </DropdownHead>
 
+          <DropdownContent
+            showContent={this.state.showExampleDropdown}
+            verticalOffset='16px'
+          >
+            <p>Hi</p>
+            <p>There</p>
+          </DropdownContent>
           
         </Form>
       </Main>

@@ -201,8 +201,6 @@ class Form extends Component {
   render() {
     const StyledForm = getDefaultStyledForm(this.props.formClassName);
 
-    console.log('StyledForm:', this.props.formClassName, _.isEmpty(this.props.formClassName));
-
     return (
       <StyledForm
         className={this.props.formClassName}

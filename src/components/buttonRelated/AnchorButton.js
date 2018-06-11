@@ -1,6 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import colors from '../../colors';
+
+const primaryColor = `
+  color:  ${colors.TEAL}
+  &:hover { color: ${colors.DARK_TEAL};}
+  &:active { color: ${colors.DEEP_TEAL};}
+`;
+
+const tertiaryColor = `
+  color:  ${colors.EVENING}
+  &:hover { color: ${colors.NIGHT};}
+  &:active { color: ${colors.DARK_NIGHT};}
+`;
+
+const removeColor = `
+  color:  ${colors.ENERGY}
+  &:hover { color: ${colors.DARK_ENERGY};}
+  &:active { color: ${colors.DEEP_ENERGY};}
+`;
 
 // -----------------------------------------------------------------------------------------
 // ------------------------------------ Styled Components ----------------------------------
@@ -11,14 +29,19 @@ const Button = styled.button`
   outline: none;
 
   font-size: ${props => (props.fontSize ? props.fontSize : '14px')};
-  color: ${props => (props.color ? props.color : colors.TEAL)};
 
+  ${primaryColor};
+
+  ${props => props.primary && css`${primaryColor};`};
+  ${props => props.tertiary && css`${tertiaryColor};`};
+  ${props => props.remove && css`${removeColor};`};
+
+  color: ${props => props.color && props.color};
   &:hover {
-    color: ${props => (props.hoverColor ? props.hoverColor : colors.DARK_TEAL)};
+    color: ${props => props.hoverColor && props.hoverColor};
   }
-
   &:active {
-    color: ${props => (props.activeColor ? props.activeColor : colors.DEEP_TEAL)};
+    color: ${props => props.activeColor && props.activeColor};
   }
 `;
 

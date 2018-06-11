@@ -10,7 +10,9 @@ const ExAnchorButtons = () => {
       <AnchorButton text="basic" />
       <AnchorButton text="different size" fontSize="30px" />
       <AnchorButton text="hover red" hoverColor="red" />
-      <AnchorButton text="actice green" activeColor="green" />
+      <AnchorButton text="active yellow" activeColor="yellow" />
+      <AnchorButton text="remove" fontSize="30px" remove />
+      <AnchorButton text="tertiary" fontSize="30px" tertiary />
     </Wrapper>
   );
 };

@@ -1,7 +1,8 @@
 import React from 'react';
-import styled, { css, keyframes } from 'styled-components';
-import colors from '../colors';
-import * as SvgIcons from '../components/SvgIcons';
+import styled, { css } from 'styled-components';
+
+import colors from '../../colors';
+import * as SvgIcons from '../SvgIcons';
 
 const absCenterPositioning = `
   position: absolute;

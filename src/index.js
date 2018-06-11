@@ -1,6 +1,6 @@
 import button from './components/Button';
 import btnGroup from './components/ButtonGroup';
-import closeBtn from './components/CloseBtn';
+import closeBtn from './components/CloseButton';
 import modal from './components/Modal';
 import * as svgIcons from './components/SvgIcons';
 import table from './components/Table';
@@ -27,7 +27,7 @@ export const colors = Colors;
 
 export const Button = button;
 export const ButtonGroup = btnGroup;
-export const CloseBtn = closeBtn;
+export const CloseButton = closeBtn;
 export const Modal = modal;
 export const SvgIcons = svgIcons;
 export const Table = table;

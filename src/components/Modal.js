@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css } from 'styled-components';
 import colors from '../colors';
-import CloseBtn from './CloseBtn';
+import CloseButton from './CloseButton';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 
@@ -48,7 +48,7 @@ const InnerBox = styled.div`
   overflow: auto;
 `;
 
-const CloseBtnPositioning = styled.div`
+const CloseButtonPositioning = styled.div`
   position: absolute;
   top: 32px;
   right: 32px;
@@ -131,9 +131,9 @@ class Modal extends Component {
             width={width}
             onClick={e => e.stopPropagation()}
           >
-            <CloseBtnPositioning>
-              <CloseBtn onClick={() => closeModal()} size="16px" />
-            </CloseBtnPositioning>
+            <CloseButtonPositioning>
+              <CloseButton onClick={() => closeModal()} size="16px" />
+            </CloseButtonPositioning>
             {headerText && <HeaderText>{headerText}</HeaderText>}
             {children}
             {btnObjs &&

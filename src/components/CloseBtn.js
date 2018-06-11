@@ -14,8 +14,8 @@ const StyledSvgIcons = styled(SvgIcons.close)`
   }
 `;
 
-const CloseBtn = props => {
+const CloseButton = props => {
   return <StyledSvgIcons {...props} />;
 };
 
-export default CloseBtn;
+export default CloseButton;

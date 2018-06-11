@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import ExampleModalBasic from '../src/components/ExampleModalBasic';
 import ExModalBtns from '../src/components/ExModalBtns';
-import ExBtnGroup from './components/ExBtnGroup';
+import ExButtonGroup from './components/ExButtonGroup';
 import ExampleForm from '../src/components/ExampleForm';
 import AlertMessage from '../../src/components/AlertMessage/AlertMessage';
 
@@ -34,7 +34,7 @@ class App extends React.Component {
         <p>Testing App Component</p>
         {/* <ExampleModalBasic /> */}
         {/* <ExModalBtns /> */}
-        {/* <ExBtnGroup /> */}
+        {/* <ExButtonGroup /> */}
         <ExampleForm />
         <AlertMessage 
           hide={this.state.hide}

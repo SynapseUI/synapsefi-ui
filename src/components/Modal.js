@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import colors from '../colors';
 import CloseBtn from './CloseBtn';
 import Button from './Button';
-import BtnGroup from './BtnGroup';
+import ButtonGroup from './ButtonGroup';
 
 const OuterBox = styled.div`
   background-color: ${props =>
@@ -138,7 +138,7 @@ class Modal extends Component {
             {children}
             {btnObjs &&
             btnObjs.length !== 0 && (
-              <BtnGroup btnObjs={btnObjs} fullWidthBtn={fullWidthBtn} bottom />
+              <ButtonGroup btnObjs={btnObjs} fullWidthBtn={fullWidthBtn} bottom />
             )}
           </InnerBox>
         </InnerBoxPositioning>

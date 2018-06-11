@@ -1,4 +1,4 @@
-import { BtnGroup } from 'package';
+import { ButtonGroup } from 'package';
 
 import React from 'react';
 
@@ -13,12 +13,12 @@ const btnObjs = [
   },
 ];
 
-const ExBtnGroup = () => {
+const ExButtonGroup = () => {
   return (
     <div>
-      <BtnGroup btnObjs={btnObjs} fullWidthBtn />
+      <ButtonGroup btnObjs={btnObjs} fullWidthBtn />
     </div>
   );
 };
 
-export default ExBtnGroup;
+export default ExButtonGroup;

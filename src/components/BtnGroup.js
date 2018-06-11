@@ -25,7 +25,7 @@ const BtnWrapper = styled.div`
     `};
 `;
 
-const BtnGroup = props => {
+const ButtonGroup = props => {
   return (
     <BtnWrapper fullWidthBtn={props.fullWidthBtn} bottom={props.bottom}>
       {props.btnObjs.map(({ style, size, text, onClick }, idx) => {
@@ -53,4 +53,4 @@ const BtnGroup = props => {
   );
 };
 
-export default BtnGroup;
+export default ButtonGroup;

@@ -85,7 +85,7 @@ class FormApp extends React.Component {
       <Main>
         <Form
           data={dataForForm}
-          formClassName='main-form'
+          // formClassName='main-form'
           formValues={this.state}
           handleSubmit={this.handleSubmit}
           additionalActionButton={

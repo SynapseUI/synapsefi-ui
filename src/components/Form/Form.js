@@ -19,16 +19,16 @@ import { getDefaultStyledForm } from './util/getDefaultStyledForm';
 const renderButtons = (buttonData) => {
   if (!buttonData) return null;
 
-  return buttonData.map((btn, idx) => {
+  return buttonData.map((button, idx) => {
     return (
       <Button
         key={idx}
         type="button"
-        tertiary={btn.type === 'tertiary'}
-        secondary={btn.type === 'secondary'}
-        onClick={btn.action}
+        tertiary={button.style === 'tertiary'}
+        secondary={button.style === 'secondary'}
+        onClick={button.action}
       >
-      {btn.text}
+      {button.text}
     </Button>
     )
   });
@@ -178,7 +178,7 @@ class Form extends Component {
   renderFooter() {
     const {
       handleSubmit,
-      additionalActionButton,
+      additionalButtons,
       formValues,
       withInModal,
       customFooter
@@ -190,10 +190,12 @@ class Form extends Component {
       errorMessage: 'Missing required fields'
     });
 
+    const submitText = this.props.submitButtonText || 'Submit';
+
     return (
       <FlexEnd>
-        {renderButtons(additionalActionButton)}
-        <Button type="submit">Submit</Button>
+        { renderButtons(additionalButtons) }
+        <Button type="submit">{submitText}</Button>
       </FlexEnd>
     )
   }

@@ -88,10 +88,11 @@ class FormApp extends React.Component {
           // formClassName='main-form'
           formValues={this.state}
           handleSubmit={this.handleSubmit}
-          additionalActionButton={
+          submitButtonText="Custom Submit"
+          additionalButtons={
             [
               {
-                type: 'tertiary',
+                style: 'tertiary',
                 text: 'Cancel',
                 action: () => console.log('cancel')
               }

@@ -35,8 +35,8 @@ class App extends React.Component {
         {/* <ExampleModalBasic /> */}
         {/* <ExModalBtns /> */}
         {/* <ExButtonGroup /> */}
-        <ExampleForm />
-        <AlertMessage 
+        {/* <ExampleForm /> */}
+        {/* <AlertMessage 
           hide={this.state.hide}
           message='Test Msg: The quick brown fox jumped over the lazy dog'
           pageLevel
@@ -44,7 +44,7 @@ class App extends React.Component {
           // warning={true}
           error={true}
           // success={true}
-        />
+        /> */}
       </Main>
     );
   }

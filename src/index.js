@@ -1,6 +1,8 @@
-import button from './components/Button';
-import btnGroup from './components/ButtonGroup';
-import closeBtn from './components/CloseButton';
+import anchorButton from './components/buttonRelated/AnchorButton'
+import btnGroup from './components/buttonRelated/ButtonGroup';
+import button from './components/buttonRelated/Button';
+import closeBtn from './components/buttonRelated/CloseButton';
+
 import modal from './components/Modal';
 import * as svgIcons from './components/SvgIcons';
 import table from './components/Table';
@@ -25,9 +27,12 @@ import Colors from './colors';
 
 export const colors = Colors;
 
+// button related
+export const AnchorButton = anchorButton;
 export const Button = button;
 export const ButtonGroup = btnGroup;
 export const CloseButton = closeBtn;
+
 export const Modal = modal;
 export const SvgIcons = svgIcons;
 export const Table = table;

@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css } from 'styled-components';
 import colors from '../colors';
-import CloseButton from './CloseButton';
-import Button from './Button';
-import ButtonGroup from './ButtonGroup';
+import CloseButton from './buttonRelated/CloseButton';
+import ButtonGroup from './buttonRelated/ButtonGroup';
 
 const OuterBox = styled.div`
   background-color: ${props =>

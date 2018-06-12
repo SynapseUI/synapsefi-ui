@@ -95,6 +95,7 @@ class Form extends Component {
   }
 
   handleTouchUpdate(propName) {
+    // debugger;
     if (!this.state.touch.has(propName)) {
       let newTouch = new Set(this.state.touch);
       newTouch.add(propName)
@@ -129,6 +130,8 @@ class Form extends Component {
         error: this.state.afterSubmission
           && this.state.touch.has(item.propName)
           && this.state.errors[item.propName],
+
+        autoFocus: !this.state.touch.has(item.propName) && item.autoFocus
       };
 
       switch (item.formType) {

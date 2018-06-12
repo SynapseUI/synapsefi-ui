@@ -89,15 +89,15 @@ class FormApp extends React.Component {
           formValues={this.state}
           handleSubmit={this.handleSubmit}
           submitButtonText="Custom Submit"
-          additionalButtons={
-            [
-              {
-                style: 'tertiary',
-                text: 'Cancel',
-                action: () => console.log('cancel')
-              }
-            ]
-          }
+          // additionalButtons={
+          //   [
+          //     {
+          //       style: 'tertiary',
+          //       text: 'Cancel',
+          //       action: () => console.log('cancel')
+          //     }
+          //   ]
+          // }
           validation={this.handleErrorCheck}
           onChange={this.updateField}
           // onChangeCollection={{

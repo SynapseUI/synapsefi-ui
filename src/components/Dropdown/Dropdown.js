@@ -195,10 +195,13 @@ class Dropdown extends Component {
     const {
       propName,
       multiselect,
+      displayComponent,
       options
     } = this.props.propValues || this.props;
 
+    
     let tabs = filteredOptions.map((item, idx) => {
+      const display = !!displayComponent ? displayComponent({item}) : item.text;
       return (
         <Styles.TabItem
           key={idx}
@@ -210,7 +213,7 @@ class Dropdown extends Component {
           {multiselect && <Styles.StyledCheckedSquare
             selected={this.state.selection.includes(item.key)}/>
           }
-          {item.text}
+          {display}
         </Styles.TabItem>
       );
     });

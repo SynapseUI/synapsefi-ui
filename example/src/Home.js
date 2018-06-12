@@ -41,7 +41,7 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      currentPage: 'app',
+      currentPage: 'form',
     };
   }
 

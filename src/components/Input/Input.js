@@ -148,6 +148,7 @@ export default class Input extends Component {
       value,
       disabled,
     } = this.props.propValues || this.props;   
+
     
     const { className, ...remainingProps } = this.props;
     

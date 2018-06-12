@@ -14,7 +14,7 @@ import {
   FormTypeConstants
 } from '../../index';
 
-import { getDefaultStyledForm } from './util/getDefaultStyledForm';
+import { getDefaultStyledForm, DefaultStyleForm } from './util/getDefaultStyledForm';
 
 const renderButtons = (buttonData) => {
   if (!buttonData) return null;
@@ -54,6 +54,8 @@ class Form extends Component {
       afterSubmission: false,
       touch: new Set()
     };
+
+    // this.StyledForm = getDefaultStyledForm(this.props.formClassName);
 
     this.renderEntireForm = this.renderEntireForm.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
@@ -95,7 +97,6 @@ class Form extends Component {
   }
 
   handleTouchUpdate(propName) {
-    // debugger;
     if (!this.state.touch.has(propName)) {
       let newTouch = new Set(this.state.touch);
       newTouch.add(propName)
@@ -123,7 +124,10 @@ class Form extends Component {
           || onChangeCollection['default']
           || this.props.onChange,
 
-        onFocus: () => this.handleTouchUpdate(item.propName),
+        onBlur: () => {
+          this.handleTouchUpdate(item.propName);
+          if(this.props.onBlur) this.props.onBlur()
+        },
 
         disabled: item.disabled,
         options: item.options,
@@ -204,15 +208,23 @@ class Form extends Component {
   }
 
   render() {
-    const StyledForm = getDefaultStyledForm(this.props.formClassName);
+    if(this.props.formClassName){
+      return (
+        <form
+          className={this.props.formClassName}
+          onSubmit={this.handleFormSubmit}>
+          {this.renderEntireForm()}
+          {this.renderFooter()}
+        </form>
+      );
+    }
 
     return (
-      <StyledForm
-        className={this.props.formClassName}
+      <DefaultStyleForm
         onSubmit={this.handleFormSubmit}>
         {this.renderEntireForm()}
         {this.renderFooter()}
-      </StyledForm>
+      </DefaultStyleForm>
     );
   }
 }

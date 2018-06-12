@@ -19,6 +19,10 @@ const defaultFormCSS = `
   }
 `;
 
+export const DefaultStyleForm = styled.form`
+  ${defaultFormCSS}
+`;
+
 export const getDefaultStyledForm = (formClassName) => {
   return styled.form.attrs({
     className: formClassName
@@ -26,3 +30,11 @@ export const getDefaultStyledForm = (formClassName) => {
     ${_.isEmpty(formClassName) ? `${defaultFormCSS}` : ''}
   `;
 }
+
+// export const DefaultStyleForm = (props) => {
+//   return styled.form.attrs({
+//     className: props.formClassName
+//   })`
+//     ${_.isEmpty(props.formClassName) ? `${defaultFormCSS}` : ''}
+//   `;
+// }

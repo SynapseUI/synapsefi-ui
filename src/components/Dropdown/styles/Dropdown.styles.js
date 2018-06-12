@@ -93,7 +93,7 @@ export const PlaceHolder = styled.span`
 `;
 
 export const DropdownContainer = styled.div`
-  width: 288px;
+  width: ${props => props.width ? `${props.width}` : '288px'};
   position: relative;
 `;
 

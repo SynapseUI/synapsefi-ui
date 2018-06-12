@@ -19,10 +19,8 @@ const defaultFormCSS = `
   }
 `;
 
-export const getDefaultStyledForm = (formClassName) => {
-  return styled.form.attrs({
-    className: formClassName
-  })`
-    ${_.isEmpty(formClassName) ? `${defaultFormCSS}` : ''}
-  `;
-}
+const DefaultStyledForm = styled.form`
+  ${defaultFormCSS}
+`;
+
+export default DefaultStyledForm;

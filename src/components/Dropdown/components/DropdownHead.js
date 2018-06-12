@@ -5,7 +5,7 @@ import { DownArrow } from '../styles/Dropdown.styles';
 import Colors from '../../../colors';
 
 const StyledDropdownHead = styled.div`
-  width: 288px;
+  width: inherit;
   height: 40px;
   padding: 8px;
 

@@ -14,7 +14,7 @@ import {
   FormTypeConstants
 } from '../../index';
 
-import { getDefaultStyledForm, DefaultStyleForm } from './util/getDefaultStyledForm';
+import DefaultStyledForm from './util/DefaultStyledForm';
 
 const renderButtons = (buttonData) => {
   if (!buttonData) return null;
@@ -220,11 +220,11 @@ class Form extends Component {
     }
 
     return (
-      <DefaultStyleForm
+      <DefaultStyledForm
         onSubmit={this.handleFormSubmit}>
         {this.renderEntireForm()}
         {this.renderFooter()}
-      </DefaultStyleForm>
+      </DefaultStyledForm>
     );
   }
 }

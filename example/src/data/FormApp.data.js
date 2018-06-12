@@ -3,7 +3,7 @@ import { FormTypeConstants } from '../../../src/index';
 export default [
   {
     formType: FormTypeConstants.TYPE_INPUT,
-    // autoFocus: true,
+    autoFocus: true,
     propName: 'email',
     label: 'Email',
     placeholder: 'Enter User Email',

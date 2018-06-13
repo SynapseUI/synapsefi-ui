@@ -7,6 +7,7 @@ export default [
     propName: 'email',
     label: 'Email',
     placeholder: 'Enter User Email',
+    className: 'test-input-row'
     // validation: yup.string()
     //   .min(5, "C'mon, your email is longer than that")
     //   .required('Email is required')

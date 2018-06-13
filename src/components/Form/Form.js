@@ -117,7 +117,6 @@ class Form extends Component {
 
       const propValues = {
         ...item,
-        className: item.className || this.props.rowClassName,
         value: this.props.formValues[item.propName],
         onChange: onChangeCollection[item.propName]
           || onChangeCollection[item.type]
@@ -129,8 +128,6 @@ class Form extends Component {
           if(this.props.onBlur) this.props.onBlur()
         },
 
-        disabled: item.disabled,
-        options: item.options,
         error: this.state.afterSubmission
           && this.state.touch.has(item.propName)
           && this.state.errors[item.propName],

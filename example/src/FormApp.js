@@ -27,6 +27,12 @@ const Main = styled.div`
       border-bottom: 1px solid ${Colors.SILK_WHITE}
     }
   }
+
+  .test-input-row {
+    padding: 2rem 0rem;
+
+    color: blue;
+  }
 `;
 
 class FormApp extends React.Component {
@@ -85,7 +91,7 @@ class FormApp extends React.Component {
       <Main>
         <Form
           data={dataForForm}
-          // formClassName='main-form'
+          formClassName='main-form'
           formValues={this.state}
           handleSubmit={this.handleSubmit}
           submitButtonText="Custom Submit"

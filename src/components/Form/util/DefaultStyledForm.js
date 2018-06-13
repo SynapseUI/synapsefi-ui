@@ -9,7 +9,7 @@ const defaultFormCSS = `
   font-family: Roboto;
 
   & > * {
-    padding: 32px 16px;
+    padding: 32px 0px;
     border-bottom: 1px solid ${Colors.SILK_WHITE};
 
     &:last-child {

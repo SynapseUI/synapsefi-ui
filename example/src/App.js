@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Dropdown, Accordion } from 'package';
+import { SvgIcons } from 'package';
 
 import DisplayItem from './components/DisplayItem';
 
@@ -30,7 +31,7 @@ class App extends React.Component {
       pets: '',
       airport: '',
       hide: true,
-      from_node: ''
+      from_node: '',
     };
 
     this.updateField = this.updateField.bind(this);
@@ -39,20 +40,20 @@ class App extends React.Component {
 
   updateField(e, value, field) {
     console.log('value: ', value);
-    
-    if ((value || value === '') && field){
-      this.setState({ [field]: value})
+
+    if ((value || value === '') && field) {
+      this.setState({ [field]: value });
     }
   }
 
-  displayItemInDropdown(item){
-    return(
+  displayItemInDropdown(item) {
+    return (
       <DropdownItem>
         <p>{item.text}</p>
         <p>{item.key}</p>
         <p>Some Role i guess</p>
       </DropdownItem>
-    )
+    );
   }
 
   someLabel(){
@@ -65,7 +66,7 @@ class App extends React.Component {
     return (
       <Main>
         <Dropdown
-          styles={{ width: '100%'}}
+          styles={{ width: '100%' }}
           // width="100%"
           key="test-dropdown"
           // multiselect
@@ -77,10 +78,9 @@ class App extends React.Component {
             { key: 'SUBNET', text: 'Subnet' },
             { key: 'CARD-US', text: 'card' },
           ]}
-          propName='from_node'
-          placeholder='Node'
-          label='From Node'
-
+          propName="from_node"
+          placeholder="Node"
+          label="From Node"
           displayComponent={DisplayItem}
         />
 
@@ -89,6 +89,7 @@ class App extends React.Component {
           <p>Cool Content</p>
           <p>Cool Content</p>
         </Accordion>
+        <SvgIcons.check_filled_circle fillColor="green" borderColor="green" />
       </Main>
     );
   }

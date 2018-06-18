@@ -184,13 +184,15 @@ class Form extends Component {
       handleSubmit,
       additionalButtons,
       formValues,
-      customFooter
+      customFooter,
+      isLoading
     } = this.props;
 
     if (customFooter) return React.cloneElement(customFooter, {
       handleSubmit: this.props.handleSubmit.bind(this),
       error: !_.isEmpty(this.props.errors),
-      errorMessage: 'Missing required fields'
+      errorMessage: 'Missing required fields',
+      isLoading
     });
 
     const submitText = this.props.submitButtonText || 'Submit';
@@ -198,7 +200,7 @@ class Form extends Component {
     return (
       <FlexEnd>
         { renderButtons(additionalButtons) }
-        <Button type="submit">{submitText}</Button>
+        <Button type="submit" isLoading={isLoading}>{submitText}</Button>
       </FlexEnd>
     )
   }

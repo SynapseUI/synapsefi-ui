@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Dropdown, Accordion } from 'package';
+import { Dropdown, Accordion, AlertMessage } from 'package';
 
 import DisplayItem from './components/DisplayItem';
 

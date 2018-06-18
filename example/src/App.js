@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Dropdown } from 'package';
+import { Dropdown, Accordion } from 'package';
 
 import DisplayItem from './components/DisplayItem';
 
@@ -55,6 +55,12 @@ class App extends React.Component {
     )
   }
 
+  someLabel(){
+    return (
+      <p>Some Label</p>
+    )
+  }
+
   render() {
     return (
       <Main>
@@ -77,6 +83,10 @@ class App extends React.Component {
 
           displayComponent={DisplayItem}
         />
+
+        <Accordion header={this.someLabel()}>
+          <p>Cool Content</p>
+        </Accordion>
       </Main>
     );
   }

@@ -19,6 +19,7 @@ import FormDropdown from './components/Dropdown/Dropdown';
 
 import FormDropdownContent from './components/Dropdown/components/DropdownContent';
 import FormDropdownHead from './components/Dropdown/components/DropdownHead';
+import FormAccordion from './components/Accordion/Accordion';
 
 import MainForm from './components/Form/Form';
 import MainFormTypeConstants from './components/Form/util/FormTypeConstants';
@@ -49,6 +50,7 @@ export const Dropdown = FormDropdown;
 
 export const DropdownContent = FormDropdownContent;
 export const DropdownHead = FormDropdownHead;
+export const Accordion = FormAccordion;
 
 export const Form = MainForm;
 export const FormTypeConstants = MainFormTypeConstants();

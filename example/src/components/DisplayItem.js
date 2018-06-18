@@ -16,8 +16,6 @@ const DropdownItem = styled.div`
 const DisplayItem = (props) => {
   const { item } = props;
 
-  console.log('props: ', props);
-
   return(
     <DropdownItem>
       <p>{item.text}</p>

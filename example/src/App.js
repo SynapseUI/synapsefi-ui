@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Dropdown, Accordion } from 'package';
-import { SvgIcons } from 'package';
+import { Dropdown, Accordion, SvgIcons } from 'package';
 
 import DisplayItem from './components/DisplayItem';
 

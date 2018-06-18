@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import styled from 'styled-components';
 
 import {
@@ -51,6 +52,8 @@ class FormApp extends React.Component {
       api_version: '',
       from_node: [],
 
+      isLoading: false
+
       // showExampleDropdown: false
 
     };
@@ -75,7 +78,7 @@ class FormApp extends React.Component {
       errors['email'] = "Input a real email address -_-"
     }
 
-    Object.keys(this.state).forEach((item) => {
+    Object.keys(_.omit(this.state, ['isLoading'])).forEach((item) => {
       if(_.isEmpty(this.state[item])) errors[item] = "Field is required";
     })
     
@@ -84,10 +87,16 @@ class FormApp extends React.Component {
 
   handleSubmit(e){
     if (e) e.preventDefault();
-    console.log('Submiting this.state in FormApp', this.state);
+
+    this.setState({ isLoading: true });
+
+    setTimeout(() => {
+      console.log('Submiting this.state in FormApp', this.state);
+      this.setState({ isLoading: false });
+    }, 2000);
   }
 
-  render(){
+  render(){    
     return (
       <Main>
         <Form
@@ -112,6 +121,7 @@ class FormApp extends React.Component {
           // }}
 
           // customFooter={<CustomFooter/>}
+          isLoading={this.state.isLoading}
         >
 
           <Dropdown

@@ -116,6 +116,8 @@ const renderAlert = props => {
 
   const StyledAlertText = styled.div`
     color: ${pageLevel && warning ? Colors.DARK_NIGHT : textColor};
+    padding-right: 16px;
+    max-width: 95%;
   `;
 
   const CloseIcon = styled(closeIcon)`
@@ -125,7 +127,6 @@ const renderAlert = props => {
     cursor: pointer;
     display: ${pageLevel ? '' : 'none'};
     margin-left: auto;
-    padding-left: 16px;
 
     path:first-of-type {
       ${css`

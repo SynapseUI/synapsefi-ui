@@ -86,6 +86,8 @@ class App extends React.Component {
 
         <Accordion header={this.someLabel()}>
           <p>Cool Content</p>
+          <p>Cool Content</p>
+          <p>Cool Content</p>
         </Accordion>
       </Main>
     );

@@ -125,7 +125,7 @@ class Form extends Component {
 
         onBlur: () => {
           this.handleTouchUpdate(item.propName);
-          if(this.props.onBlur) this.props.onBlur()
+          if(item.onBlur) item.onBlur()
         },
 
         error: this.state.afterSubmission
@@ -184,7 +184,6 @@ class Form extends Component {
       handleSubmit,
       additionalButtons,
       formValues,
-      withInModal,
       customFooter
     } = this.props;
 

@@ -95,6 +95,7 @@ const renderAlert = props => {
         height: 48px;
         animation: ${slideInDown} 0.2s linear;
         background-color: ${backgroundColor};
+        z-index: 1;
       `};
   `;
 

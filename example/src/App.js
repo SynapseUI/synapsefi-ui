@@ -30,7 +30,7 @@ class App extends React.Component {
       pets: '',
       airport: '',
       hide: true,
-      from_node: '',
+      from_node: [],
     };
 
     this.updateField = this.updateField.bind(this);
@@ -68,7 +68,7 @@ class App extends React.Component {
           styles={{ width: '100%' }}
           // width="100%"
           key="test-dropdown"
-          // multiselect
+          multiselect
           // searchable
           value={this.state.from_node}
           onChange={this.updateField}
@@ -80,12 +80,10 @@ class App extends React.Component {
           propName="from_node"
           placeholder="Node"
           label="From Node"
-          displayComponent={DisplayItem}
+          renderOptionItem={DisplayItem}
         />
 
-        <Accordion header={this.someLabel()}>
-          <p>Cool Content</p>
-          <p>Cool Content</p>
+        <Accordion header="some header">
           <p>Cool Content</p>
         </Accordion>
         <SvgIcons.check_filled_circle fillColor="green" borderColor="green" />

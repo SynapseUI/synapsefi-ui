@@ -195,13 +195,13 @@ class Dropdown extends Component {
     const {
       propName,
       multiselect,
-      displayComponent,
+      renderOptionItem,
       options
     } = this.props.propValues || this.props;
 
     
     let tabs = filteredOptions.map((item, idx) => {
-      const display = !!displayComponent ? displayComponent({item}) : item.text;
+      const display = !!renderOptionItem ? renderOptionItem(item) : item.text;
       return (
         <Styles.TabItem
           key={idx}

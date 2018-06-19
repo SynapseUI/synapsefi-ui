@@ -13,8 +13,7 @@ const DropdownItem = styled.div`
   }
 `;
 
-const DisplayItem = (props) => {
-  const { item } = props;
+const DisplayItem = (item) => {
 
   return(
     <DropdownItem>

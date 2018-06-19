@@ -26,7 +26,7 @@ const renderButtons = (buttonData) => {
         type="button"
         tertiary={button.style === 'tertiary'}
         secondary={button.style === 'secondary'}
-        onClick={button.action}
+        onClick={button.action || button.onClick}
       >
       {button.text}
     </Button>

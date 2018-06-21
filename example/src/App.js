@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Dropdown, Accordion, SvgIcons } from 'package';
+import { Dropdown, Accordion, SvgIcons, DropdownHead, DropdownContent } from 'package';
 
 import DisplayItem from './components/DisplayItem';
 
@@ -29,7 +29,7 @@ class App extends React.Component {
       switch: 'ON',
       pets: '',
       airport: '',
-      hide: true,
+      hide: false,
       from_node: [],
     };
 
@@ -64,7 +64,7 @@ class App extends React.Component {
   render() {
     return (
       <Main>
-        <Dropdown
+        {/* <Dropdown
           styles={{ width: '100%' }}
           // width="100%"
           key="test-dropdown"
@@ -81,7 +81,20 @@ class App extends React.Component {
           placeholder="Node"
           label="From Node"
           renderOptionItem={DisplayItem}
-        />
+        /> */}
+
+        <DropdownHead
+          style={{ width: '200px'}}
+          onClick={() => this.setState({ hide: !this.state.hide })}>
+          <p>Header</p>
+        </DropdownHead>
+
+        <DropdownContent
+          showContent={this.state.hide}
+          verticalOffset='16px'
+          style={{ width: '250px'}}>
+          <p>Content</p>
+        </DropdownContent>
 
         <Accordion header="some header">
           <p>Cool Content</p>

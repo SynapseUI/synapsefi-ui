@@ -23,7 +23,6 @@ const StyledDropdownHead = styled.div`
 
 const DropdownHead = (props) => {
   const {
-    showMenu,
     style,
     onClick,
     children

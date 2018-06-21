@@ -23,6 +23,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 
   border-top: 1px solid ${Colors.WARM_LIGHT};
   border-bottom:  1px solid ${Colors.WARM_LIGHT};

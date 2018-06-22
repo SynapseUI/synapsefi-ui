@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import onClickOutside from 'react-onclickoutside';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
@@ -35,26 +36,8 @@ class Dropdown extends Component {
   constructor(props) {
     super(props);
 
-    const {
-      propValues,
-      value,
-      multiselect,
-      searchable,
-      placeholder,
-      options
-    } = this.props.propValues || this.props;
-
-    const currentValue = propValues ? propValues.value : value;
-
     this.state = {
-      showMenu: false,
-
-      selection: multiselect ? 
-        Util.getSelectedItems(currentValue, options)
-        : Util.getSelectedItem(currentValue, placeholder, options),
-      
-      firstLine: Util.getTextOfSelection(currentValue, options, placeholder, multiselect),
-      inputValue: '',
+      ...Util.getStateFromProps(this.props)
     };
   
     this.toggleMenu = this.toggleMenu.bind(this);
@@ -64,6 +47,22 @@ class Dropdown extends Component {
     this.getPlaceHolderText = this.getPlaceHolderText.bind(this);
     this.getFirstLine = this.getFirstLine.bind(this);
     this.renderTabItems = this.renderTabItems.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (this.props.value !== nextProps.value ||
+      (this.props.propValues && 
+        this.props.propValues.value !== nextProps.propValues.value)
+    ){
+      const omitedValues = (nextProps.propValues 
+          && nextProps.propValues.multiselect)
+          || nextProps.multiselect ?
+          ['showMenu', 'inputValue'] : [];
+
+      this.setState({
+        ..._.omit(Util.getStateFromProps(nextProps), omitedValues),
+      });
+    }
   }
 
   // -------------------------------------------------------------------------------------
@@ -99,22 +98,15 @@ class Dropdown extends Component {
     let singleSelection;
     let newSelection = item;
     let firstLine = item.text;
+
     if (multiselect){
       newSelection = DataUtil.addOrRemove(item.key, this.state.selection);
-      firstLine = Util.getTextOfSelection(newSelection, options, placeholder, multiselect);
     } else {
-      singleSelection = item.key;
+      newSelection = this.state.selection.key !== item.key ? item : '';
     }
-    
-    this.setState({
-      selection: newSelection,
-      showMenu: multiselect ? true : false,
-      inputValue: multiselect ? this.state.inputValue : '',
-      firstLine
-    }, () => {
-      if(!multiselect) onChange(e, newSelection.key, propName)
-      else onChange(e, newSelection, propName)
-    });
+
+    if(!multiselect) onChange(e, newSelection.key || '', propName)
+    else onChange(e, newSelection, propName)
   }
 
   selectAllOptions(e){
@@ -126,17 +118,12 @@ class Dropdown extends Component {
     } = this.props.propValues || this.props;
 
     let newSelection = [];
-    let firstLine = placeholder;
 
     if (this.state.selection.length !== options.length){
       newSelection = options.map((o) => o.key);
-      firstLine = 'ALL';
     }
     
-    this.setState({
-      selection: newSelection,
-      firstLine
-    }, () => onChange(e, newSelection, propName));
+    onChange(e, newSelection, propName);
   }
 
   // -------------------------------------------------------------------------------------
@@ -144,13 +131,21 @@ class Dropdown extends Component {
   // -------------------------------------------------------------------------------------
 
   getPlaceHolderText(searchable, placeholder) {
+    const isSelectionEmpty = this.checkIfSelectionEmpty()
+
     return (
       <Styles.FlexStartAlign 
-        empty={this.checkIfSelectionEmpty()} 
         searchable={searchable}>
+
         <Styles.FirstListWrapper>
           {searchable && <Styles.StyledSearchIcon />}
-          <Styles.PlaceHolder searchable={searchable}>{this.state.firstLine}</Styles.PlaceHolder>
+
+          <Styles.PlaceHolder
+            empty={isSelectionEmpty}
+            searchable={searchable}>
+            {this.state.firstLine}
+          </Styles.PlaceHolder>
+
         </Styles.FirstListWrapper>
       </Styles.FlexStartAlign>
     );
@@ -176,7 +171,7 @@ class Dropdown extends Component {
           <Styles.DownArrow onClick={this.toggleMenu} />
         </Styles.MenuItem>
       );
-    }
+    }    
 
     return (
       <Styles.MenuItem firstMenuItem onClick={this.toggleMenu}>
@@ -202,10 +197,11 @@ class Dropdown extends Component {
     
     let tabs = filteredOptions.map((item, idx) => {
       const display = !!renderOptionItem ? renderOptionItem(item) : item.text;
+      
       return (
         <Styles.TabItem
           key={idx}
-          selected={item.key === this.state.selection}
+          selected={item.key === this.state.selection.key}
           index={idx}
           value={item.key}
           onClick={(e) => this.updateSelection(e, item, propName)}
@@ -230,7 +226,7 @@ class Dropdown extends Component {
       >
         <Styles.StyledCheckedSquare
             selected={this.state.selection.length === options.length}/>
-        ALL
+        All
       </Styles.TabItem>
     )
 
@@ -263,10 +259,6 @@ class Dropdown extends Component {
     } = this.props.propValues || this.props;
 
     const filteredOptions = Util.getOptionsList(options, searchable, this.state.inputValue);
-
-    let firstLineText = multiselect ? 
-      Util.toStringList(this.state.selectedItems, placeholder)
-      : this.getPlaceHolderText(searchable, placeholder);
 
     return (
       <Styles.MainContainer className={className}>

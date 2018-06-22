@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Dropdown, Accordion, SvgIcons, DropdownHead, DropdownContent } from 'package';
+import { Dropdown, Accordion, SvgIcons, DropdownHead, DropdownContent, Button } from 'package';
 
 import DisplayItem from './components/DisplayItem';
 
 const Main = styled.div`
   font-family: "Roboto";
-  & > * {
-    padding: 32px 16px;
-  }
+  // & > * {
+  //   padding: 32px 16px;
+  // }
 `;
 
 const DropdownItem = styled.div`
@@ -30,7 +30,7 @@ class App extends React.Component {
       pets: '',
       airport: '',
       hide: false,
-      from_node: [],
+      from_node: '',
     };
 
     this.updateField = this.updateField.bind(this);
@@ -64,12 +64,12 @@ class App extends React.Component {
   render() {
     return (
       <Main>
-        {/* <Dropdown
+        <Dropdown
           styles={{ width: '100%' }}
           // width="100%"
           key="test-dropdown"
-          multiselect
-          // searchable
+          // multiselect
+          searchable
           value={this.state.from_node}
           onChange={this.updateField}
           options={[
@@ -81,9 +81,13 @@ class App extends React.Component {
           placeholder="Node"
           label="From Node"
           renderOptionItem={DisplayItem}
-        /> */}
+        />
 
-        <DropdownHead
+        <Button remove onClick={() => this.setState({ from_node: '' })}>
+          clear
+        </Button>
+
+        {/* <DropdownHead
           style={{ width: '200px'}}
           onClick={() => this.setState({ hide: !this.state.hide })}>
           <p>Header</p>
@@ -98,7 +102,7 @@ class App extends React.Component {
 
         <Accordion header="some header">
           <p>Cool Content</p>
-        </Accordion>
+        </Accordion> */}
         <SvgIcons.check_filled_circle fillColor="green" borderColor="green" />
       </Main>
     );

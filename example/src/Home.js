@@ -14,6 +14,8 @@ import App from './App';
 import FormApp from './FormApp';
 import ExAnchorButtons from './components/ExAnchorButtons';
 import ExButtonGroup from './components/ExButtonGroup';
+import ExampleModalBasic from './components/ExampleModalBasic';
+import SubModalContainer from './components/SubModalContainer';
 
 import { Button } from '../../src/index';
 
@@ -33,6 +35,14 @@ const pages = {
   buttonGroups: {
     name: 'Button Groups',
     component: <ExButtonGroup />,
+  },
+  Modal: {
+    name: 'Modal',
+    component: <ExampleModalBasic />,
+  },
+  Modal: {
+    name: 'Modal w submodal',
+    component: <SubModalContainer />,
   },
 };
 

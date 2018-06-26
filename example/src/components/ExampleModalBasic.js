@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { range } from 'lodash';
 import { Modal, Button } from 'package';
+import { rejects } from 'assert';
 
 const font = { fontSize: '20px' };
 const bold = { ...font, fontWeight: 'bold' };
 const content = { ...bold, marginLeft: '20px' };
 const emptySpace = { height: '32px' };
+
+
 
 class ExampleModalBasic extends Component {
   constructor(props) {
@@ -26,17 +29,39 @@ class ExampleModalBasic extends Component {
   }
 
   renderModal() {
+    const btnObjs = [
+      {
+        text: 'Remove',
+        size: 'large',
+        style: 'remove',
+        onClick: () => {
+          const promise = new Promise((resolve, rejects) => {
+            setTimeout(() => {
+              resolve('yeah aaa ');
+            }, 3000);
+          });
+
+          promise.then(data => {
+            console.log('data: ', data);
+            this.closeModal();
+          });
+        },
+      },
+      {
+        text: 'Secondary',
+        style: 'secondary',
+        onClick: () => window.alert('secondary btn clicked'),
+      },
+      {
+        text: 'primary btn',
+      },
+    ];
     return (
       <Modal
         isOpen={this.state.isOpen}
         closeModal={this.closeModal}
         headerText={'I am a Header'}
-        height={'500px'}
-        width={'700px'}
-        innerBgColor={'pink'}
-        outerBgColor={'blue'}
-        top={'70%'}
-        left={'30%'}
+        btnObjs={btnObjs}
       >
         {[...Array(10).keys()].map((item, idx) => {
           return (

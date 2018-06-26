@@ -16,6 +16,7 @@
     "push": "npm run clean && npm run build && npm publish"
   },
   "devDependencies": {
+    "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",

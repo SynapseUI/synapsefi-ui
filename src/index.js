@@ -3,7 +3,7 @@ import btnGroup from './components/buttonRelated/ButtonGroup';
 import button from './components/buttonRelated/Button';
 import closeBtn from './components/buttonRelated/CloseButton';
 
-import modal from './components/Modal';
+import modal from './components/modalRelated/Modal';
 import * as svgIcons from './components/SvgIcons';
 import table from './components/Table';
 

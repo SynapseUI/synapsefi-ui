@@ -63,23 +63,8 @@ box-shadow: 5em 5em .3em .1em #DBDBDB;
 }`
 
 
-// .cube {
-//   @for $i from 1 through 4 {
-//     &:nth-of-type(#{$i}) {
-//       animation-delay: 3s * ($i / 4 - 4);
-//     }
-//   }
-//
-//
-// .box {
-//   @include fill;
-
-// }
-
-
 const LoadingCube = (props) => {
   const color = Color(props.color);
-  console.log(color.lighten(0.5).hsl().string());
   const light = color.lighten(0.3).hsl().string();
   const dark = color.darken(0.4).hsl().string();
   return (<Box className="box center">

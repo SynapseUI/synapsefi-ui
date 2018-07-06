@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+
 import styled from 'styled-components';
 
 const FlexAlignButtons = styled.div`
@@ -17,7 +18,6 @@ import ExButtonGroup from './components/ExButtonGroup';
 import LoadingCube from '../../src/components/LoadingCube/LoadingCube';
 import ExampleModalBasic from './components/ExampleModalBasic';
 import SubModalContainer from './components/SubModalContainer';
-
 
 import { Button } from '../../src/index';
 
@@ -50,7 +50,7 @@ const pages = {
   loadingGroup: {
     name: 'Loading Groups',
     component: <LoadingCube color={getRandomColor()} />,
-
+  },
   Modal: {
     name: 'Modal',
     component: <ExampleModalBasic />,
@@ -61,7 +61,7 @@ const pages = {
   },
 };
 
-class Home extends React.Component {
+class Home extends Component {
   constructor(props) {
     super(props);
 
@@ -69,7 +69,6 @@ class Home extends React.Component {
       currentPage: 'app',
     };
   }
-
   render() {
     return (
       <div>

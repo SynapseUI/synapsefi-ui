@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import { baseLoadingCubeStyling } from '../styles/loadingCube.styles';
+// import { baseLoadingCubeStyling } from '../styles/loadingCube.styles';
 import Color from 'color';
 
 const fill = props => `

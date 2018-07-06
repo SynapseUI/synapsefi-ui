@@ -24,6 +24,8 @@ import FormAccordion from './components/Accordion/Accordion';
 import MainForm from './components/Form/Form';
 import MainFormTypeConstants from './components/Form/util/FormTypeConstants';
 
+import LoadCube from './components/LoadingCube/LoadingCube';
+
 import Colors from './colors';
 
 export const colors = Colors;
@@ -41,7 +43,7 @@ export const Table = table;
 export const Label = FormLabel;
 export const ErrorMessage = FormErrorMessage;
 export const AlertMessage = FormAlertMessage;
- 
+
 export const Input = FormInput;
 export const Textarea = FormTextarea;
 export const CheckboxGroup = FormCheckboxGroup;
@@ -55,3 +57,5 @@ export const Accordion = FormAccordion;
 export const Form = MainForm;
 export const FormTypeConstants = MainFormTypeConstants();
 
+
+export const LoadingCube = LoadCube;

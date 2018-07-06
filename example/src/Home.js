@@ -14,10 +14,21 @@ import App from './App';
 import FormApp from './FormApp';
 import ExAnchorButtons from './components/ExAnchorButtons';
 import ExButtonGroup from './components/ExButtonGroup';
+import LoadingCube from '../../src/components/LoadingCube/LoadingCube';
 import ExampleModalBasic from './components/ExampleModalBasic';
 import SubModalContainer from './components/SubModalContainer';
 
+
 import { Button } from '../../src/index';
+
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
 const pages = {
   app: {
@@ -36,6 +47,10 @@ const pages = {
     name: 'Button Groups',
     component: <ExButtonGroup />,
   },
+  loadingGroup: {
+    name: 'Loading Groups',
+    component: <LoadingCube color={getRandomColor()} />,
+
   Modal: {
     name: 'Modal',
     component: <ExampleModalBasic />,

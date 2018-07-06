@@ -63,7 +63,6 @@ const renderRegularBtn = ({ style, size, text, onClick }) => (
 
 const ButtonGroup = props => {
   const { fullWidthBtn, bottom, btnObjs, isAnchorButton, gap } = props;
-  console.log('isAnchorButton: ', isAnchorButton);
 
   return (
     <BtnWrapper fullWidthBtn={fullWidthBtn} bottom={bottom} gap={gap}>

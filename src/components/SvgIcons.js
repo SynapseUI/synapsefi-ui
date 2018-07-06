@@ -77,6 +77,9 @@ const StyledSvg = styled.svg`
     props.rotate_ccw_normal && css`animation: ${rotateCounterClockwise} 2.5s linear infinite;`};
   ${props =>
     props.rotate_ccw_fast && css`animation: ${rotateCounterClockwise} 1s linear infinite;`};
+  ${props => props.right && css`transform: rotate(90deg);`};
+  ${props => props.down && css`transform: rotate(180deg);`};
+  ${props => props.left && css`transform: rotate(270deg);`};
 `;
 
 export const add_circle = props => {

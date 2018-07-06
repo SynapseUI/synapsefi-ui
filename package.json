@@ -1,7 +1,7 @@
 {
   "name": "synapsefi-ui",
   "description": "synapsefi-ui",
-  "version": "1.2.8",
+  "version": "1.3.3",
   "main": "index.js",
   "license": "MIT",
   "files": [
@@ -16,6 +16,7 @@
     "push": "npm run clean && npm run build && npm publish"
   },
   "devDependencies": {
+    "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",

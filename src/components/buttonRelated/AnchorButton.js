@@ -28,6 +28,7 @@ const Button = styled.button`
   cursor: pointer;
   outline: none;
 
+  background-color: ${props => (props.backgroundColor ? props.backgroundColor : 'transparent')};
   font-size: ${props => (props.fontSize ? props.fontSize : '14px')};
 
   ${primaryColor};

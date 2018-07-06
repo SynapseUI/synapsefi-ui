@@ -147,7 +147,7 @@ class Modal extends Component {
   }
 
   removeModalFromBodyTag() {
-    if (document.getElementById(uniqId)) {
+    if (document.getElementById(uniqId) && this.modal) {
       document.body.removeChild(this.modal);
       document.body.style.overflow = 'auto';
     }

@@ -103,7 +103,7 @@ class App extends React.Component {
         <Accordion header="some header">
           <p>Cool Content</p>
         </Accordion> */}
-        <SvgIcons.check_filled_circle fillColor="green" borderColor="green" />
+        <SvgIcons.check_filled_circle fillColor="green" borderColor="green" right/>
       </Main>
     );
   }

@@ -34,6 +34,7 @@ const btnObjs2 = [
   {
     text: 'btn3',
     style: 'remove',
+    fontSize: '50px',
   },
 ];
 
@@ -41,7 +42,8 @@ const ExButtonGroup = () => {
   return (
     <Wrapper>
       <ButtonGroup btnObjs={btnObjs1} fullWidthBtn />
-      <ButtonGroup btnObjs={btnObjs2} />
+      <ButtonGroup gap="400px" btnObjs={btnObjs2} />
+      <ButtonGroup gap="400px" isAnchorButton btnObjs={btnObjs2} />
     </Wrapper>
   );
 };

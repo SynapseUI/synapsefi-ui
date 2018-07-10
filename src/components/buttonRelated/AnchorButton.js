@@ -4,20 +4,41 @@ import colors from '../../colors';
 
 const primaryColor = `
   color:  ${colors.TEAL}
-  &:hover { color: ${colors.DARK_TEAL};}
-  &:active { color: ${colors.DEEP_TEAL};}
+  fill:  ${colors.TEAL}
+  &:hover {
+    color: ${colors.DARK_TEAL};
+    fill: ${colors.DARK_TEAL};
+  }
+  &:active {
+    color: ${colors.DEEP_TEAL};
+    fill: ${colors.DEEP_TEAL};
+  }
 `;
 
 const tertiaryColor = `
   color:  ${colors.EVENING}
-  &:hover { color: ${colors.NIGHT};}
-  &:active { color: ${colors.DARK_NIGHT};}
+  fill:  ${colors.EVENING}
+  &:hover {
+    color: ${colors.NIGHT};
+    fill: ${colors.NIGHT};
+  }
+  &:active {
+    color: ${colors.DARK_NIGHT};
+    fill: ${colors.DARK_NIGHT};
+  }
 `;
 
 const removeColor = `
   color:  ${colors.ENERGY}
-  &:hover { color: ${colors.DARK_ENERGY};}
-  &:active { color: ${colors.DEEP_ENERGY};}
+  fill:  ${colors.ENERGY}
+  &:hover {
+    color: ${colors.DARK_ENERGY};
+    fill: ${colors.DARK_ENERGY};
+  }
+  &:active {
+    color: ${colors.DEEP_ENERGY};
+    fill: ${colors.DEEP_ENERGY};
+  }
 `;
 
 // -----------------------------------------------------------------------------------------

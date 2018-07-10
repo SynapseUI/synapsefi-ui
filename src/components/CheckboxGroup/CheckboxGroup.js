@@ -163,6 +163,7 @@ class CheckBoxGroup extends Component {
       error,
       errorStyle,
       checkboxClassName,
+      checkboxStyle
     } = this.props.propValues || this.props;
 
     return (
@@ -187,6 +188,7 @@ class CheckBoxGroup extends Component {
                   className={checkboxClassName}
                   disabled={disabled}
                   selectionColor={selectionColor}
+                  style={checkboxStyle}
                   checked={checked}
                   value={value}
                 >

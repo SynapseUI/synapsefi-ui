@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Dropdown, Accordion, SvgIcons, DropdownHead, DropdownContent, Button } from 'package';
 
 import DisplayItem from './components/DisplayItem';
+import RadioGroup from '../../src/components/RadioGroup/RadioGroup';
+import CheckBoxGroup from '../../src/components/CheckboxGroup/CheckboxGroup';
 
 const Main = styled.div`
   font-family: "Roboto";

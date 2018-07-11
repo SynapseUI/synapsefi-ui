@@ -164,7 +164,8 @@ class Form extends Component {
     return result.concat(formChildren.map(this.getCloneOfChild));
   }
 
-  getCloneOfChild(child, item){    
+  getCloneOfChild(child, item){
+    if (_.isEmpty(item)) return child;
     const propName = item.propName || child.props.propName;
 
     return React.cloneElement(child, {

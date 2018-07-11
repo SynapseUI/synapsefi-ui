@@ -52,7 +52,8 @@ class FormApp extends React.Component {
       api_version: '',
       from_node: [],
 
-      isLoading: false
+      isLoading: false,
+      test: ''
 
       // showExampleDropdown: false
 

@@ -52,7 +52,8 @@ class FormApp extends React.Component {
       api_version: '',
       from_node: [],
 
-      isLoading: false
+      isLoading: false,
+      test: ''
 
       // showExampleDropdown: false
 
@@ -139,7 +140,6 @@ class FormApp extends React.Component {
             placeholder='Node'
             label='From Node'
           />
-          
         </Form>
       </Main>
     )

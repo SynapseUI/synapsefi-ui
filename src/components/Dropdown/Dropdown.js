@@ -39,7 +39,7 @@ class Dropdown extends Component {
     this.state = {
       ...Util.getStateFromProps(this.props)
     };
-  
+
     this.toggleMenu = this.toggleMenu.bind(this);
     this.updateSelection = this.updateSelection.bind(this);
     this.selectAllOptions = this.selectAllOptions.bind(this);
@@ -193,7 +193,6 @@ class Dropdown extends Component {
       renderOptionItem,
       options
     } = this.props.propValues || this.props;
-
     
     let tabs = filteredOptions.map((item, idx) => {
       const display = !!renderOptionItem ? renderOptionItem(item) : item.text;
@@ -258,7 +257,9 @@ class Dropdown extends Component {
       multiselect
     } = this.props.propValues || this.props;
 
-    const filteredOptions = Util.getOptionsList(options, searchable, this.state.inputValue);
+    const filteredOptions = this.state.showMenu ?
+      Util.getOptionsList(options, searchable, this.state.inputValue)
+      : [];    
 
     return (
       <Styles.MainContainer className={className}>

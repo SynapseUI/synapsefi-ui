@@ -74,6 +74,6 @@ export const getStateFromProps = props => {
       : getSelectedItem(value, placeholder, options),
     
     firstLine: getTextOfSelection(value, options, placeholder, multiselect),
-    inputValue: ''
+    inputValue: '',
   }
 }

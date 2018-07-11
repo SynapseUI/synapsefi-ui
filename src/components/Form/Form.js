@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import {
   Button,
   Input,
-  TextArea,
+  Textarea,
   CheckboxGroup,
   RadioGroup,
   Dropdown,

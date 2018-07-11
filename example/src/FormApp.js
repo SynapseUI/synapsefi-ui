@@ -17,6 +17,7 @@ import CustomFooter from './components/CustomFooter';
 import Colors from '../../src/colors';
 
 import dataForForm from './data/FormApp.data';
+import countriesOptions from './data/countriesOptions'
 
 const Main = styled.div`
   .main-form {
@@ -50,7 +51,7 @@ class FormApp extends React.Component {
       user_permission: '',
       card_preferences: [],
       api_version: '',
-      from_node: [],
+      from_node: '',
 
       isLoading: false,
       test: ''
@@ -127,15 +128,16 @@ class FormApp extends React.Component {
 
           <Dropdown
             key="test-dropdown"
-            multiselect
-            // searchable
+            // multiselect
+            searchable
             value={this.state.from_node}
             onChange={this.updateField}
-            options={[
-              { key: 'DEPOSIT-US', text: 'Deposit' },
-              { key: 'SUBNET', text: 'Subnet' },
-              { key: 'CARD-US', text: 'card' },
-            ]}
+            // options={[
+            //   { key: 'DEPOSIT-US', text: 'Deposit' },
+            //   { key: 'SUBNET', text: 'Subnet' },
+            //   { key: 'CARD-US', text: 'card' },
+            // ]}
+            options={countriesOptions}
             propName='from_node'
             placeholder='Node'
             label='From Node'

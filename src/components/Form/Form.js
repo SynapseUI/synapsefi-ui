@@ -134,7 +134,7 @@ class Form extends Component {
 
         autoFocus: !this.state.touch.has(item.propName) && item.autoFocus
       };
-
+      
       switch (item.formType) {
         case FormTypeConstants.TYPE_INPUT:
           return <Input key={idx} propValues={propValues} />;
@@ -168,6 +168,7 @@ class Form extends Component {
     const propName = item.propName || child.props.propName;
 
     return React.cloneElement(child, {
+      item,
       error: this.state.afterSubmission
         && this.state.touch.has(propName)
         && this.state.errors[propName],

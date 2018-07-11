@@ -139,7 +139,6 @@ class FormApp extends React.Component {
             placeholder='Node'
             label='From Node'
           />
-          
         </Form>
       </Main>
     )

@@ -70,7 +70,7 @@ const FlexColumn__ErrorMessage = styled.span`
   position: absolute;
 `;
 
-export default class TextArea extends Component {
+export default class Textarea extends Component {
   constructor(props) {
     super(props);
   }

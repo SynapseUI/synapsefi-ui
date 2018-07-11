@@ -52,6 +52,7 @@ class FormApp extends React.Component {
       card_preferences: [],
       api_version: '',
       from_node: '',
+      description: '',
 
       isLoading: false,
       test: ''

@@ -140,7 +140,7 @@ class Form extends Component {
           return <Input key={idx} propValues={propValues} />;
 
         case FormTypeConstants.TYPE_TEXTAREA:
-          return <TextArea key={idx} propValues={propValues} />;
+          return <Textarea key={idx} propValues={propValues} />;
 
         case FormTypeConstants.TYPE_RADIOGROUP:
           return <RadioGroup key={idx} propValues={propValues} />;

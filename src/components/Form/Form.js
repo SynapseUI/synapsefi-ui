@@ -11,7 +11,8 @@ import {
   CheckboxGroup,
   RadioGroup,
   Dropdown,
-  FormTypeConstants
+  FormTypeConstants,
+  ErrorMessage
 } from '../../index';
 
 import DefaultStyledForm from './util/DefaultStyledForm';
@@ -192,10 +193,11 @@ class Form extends Component {
       isLoading
     } = this.props;
 
+    const displayError = !_.isEmpty(this.state.errors) && this.state.afterSubmission;
+
     if (customFooter) return React.cloneElement(customFooter, {
-      handleSubmit: this.props.handleSubmit.bind(this),
-      error: !_.isEmpty(this.props.errors),
-      errorMessage: 'Missing required fields',
+      handleSubmit: this.handleFormSubmit,
+      error: displayError && 'Missing required fields',
       isLoading
     });
 
@@ -203,6 +205,12 @@ class Form extends Component {
 
     return (
       <FlexEnd>
+        { displayError &&
+          <ErrorMessage
+            error="Missing required fields"
+            errorStyle={{ marginTop: '-32px'}}
+          />
+        }
         { renderButtons(additionalButtons) }
         <Button type="submit" isLoading={isLoading}>{submitText}</Button>
       </FlexEnd>

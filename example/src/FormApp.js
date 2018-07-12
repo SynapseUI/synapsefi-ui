@@ -51,11 +51,11 @@ class FormApp extends React.Component {
       user_permission: '',
       card_preferences: [],
       api_version: '',
-      from_node: '',
+      from_node: 'CARD-US',
       description: '',
 
       isLoading: false,
-      test: ''
+      // test: ''
 
       // showExampleDropdown: false
 
@@ -128,7 +128,7 @@ class FormApp extends React.Component {
           formClassName='main-form'
           formValues={this.state}
           handleSubmit={this.handleSubmit}
-          submitButtonText="Custom Submit"
+          // submitButtonText="Custom Submit"
           additionalButtons={
             [
               {
@@ -150,7 +150,7 @@ class FormApp extends React.Component {
           isLoading={this.state.isLoading}
         >
 
-          <Dropdown
+          {/* <Dropdown
             key="test-dropdown"
             // multiselect
             searchable
@@ -165,7 +165,7 @@ class FormApp extends React.Component {
             propName='from_node'
             placeholder='Node'
             label='From Node'
-          />
+          /> */}
         </Form>
       </Main>
     )

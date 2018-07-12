@@ -114,7 +114,7 @@ class Form extends Component {
         this.props.hiddenCollection[item.propName]
       ) {
         return null;
-      }      
+      }
 
       const propValues = {
         ...item,

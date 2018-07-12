@@ -64,6 +64,27 @@ class FormApp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleErrorCheck = this.handleErrorCheck.bind(this);
     this.updateField = this.updateField.bind(this);
+    this.getDisabledCollection = this.getDisabledCollection.bind(this);
+  }
+
+  getDisabledCollection(){
+    let result = {};
+
+    if (this.state.username === 'asdf'){
+      result['email'] = true;
+    }
+
+    return result;
+  }
+
+  getHiddenCollection(){
+    let result = {};
+
+    if (this.state.email === 'test2@email.com'){
+      result['website'] = true;
+    }
+
+    return result;
   }
 
   updateField(e, value, field) {
@@ -119,6 +140,8 @@ class FormApp extends React.Component {
           }
           validation={this.handleErrorCheck}
           onChange={this.updateField}
+          disabledCollection={this.getDisabledCollection()}
+          hiddenCollection={this.getHiddenCollection()}
           // onChangeCollection={{
           //   default: this.updateField
           // }}

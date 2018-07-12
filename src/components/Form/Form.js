@@ -55,8 +55,6 @@ class Form extends Component {
       touch: new Set()
     };
 
-    // this.StyledForm = getDefaultStyledForm(this.props.formClassName);
-
     this.renderEntireForm = this.renderEntireForm.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -111,9 +109,11 @@ class Form extends Component {
       const onChangeCollection = this.props.onChangeCollection || {};
     
     let result = this.props.data.map((item, idx) => {
-      if (typeof this.props.formValues[item.propName] === 'undefined') {
+      if (typeof this.props.formValues[item.propName] === 'undefined' ||
+        this.props.hiddenCollection[item.propName]
+      ) {
         return null;
-      }
+      }      
 
       const propValues = {
         ...item,
@@ -131,6 +131,8 @@ class Form extends Component {
         error: this.state.afterSubmission
           && this.state.touch.has(item.propName)
           && this.state.errors[item.propName],
+        
+        disabled: this.props.disabledCollection[item.propName],
 
         autoFocus: !this.state.touch.has(item.propName) && item.autoFocus
       };

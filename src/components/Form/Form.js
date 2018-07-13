@@ -111,7 +111,7 @@ class Form extends Component {
     
     let result = this.props.data.map((item, idx) => {
       if (typeof this.props.formValues[item.propName] === 'undefined' ||
-        this.props.hiddenCollection[item.propName]
+        (this.props.hiddenCollection && this.props.hiddenCollection[item.propName])
       ) {
         return null;
       }

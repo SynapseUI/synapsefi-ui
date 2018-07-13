@@ -99,7 +99,7 @@ export default [
     label: 'From Node: ',
     placeholder: 'From Node',
     propName: 'from_node',
-    multiselect: true,
+    // multiselect: true,
     searchable: true,
     options: [
       { key: 'DEPOSIT-US', text: 'Deposit' },

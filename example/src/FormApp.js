@@ -51,11 +51,11 @@ class FormApp extends React.Component {
       user_permission: '',
       card_preferences: [],
       api_version: '',
-      from_node: '',
+      from_node: 'CARD-US',
       description: '',
 
       isLoading: false,
-      test: ''
+      // test: ''
 
       // showExampleDropdown: false
 
@@ -64,6 +64,27 @@ class FormApp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleErrorCheck = this.handleErrorCheck.bind(this);
     this.updateField = this.updateField.bind(this);
+    this.getDisabledCollection = this.getDisabledCollection.bind(this);
+  }
+
+  getDisabledCollection(){
+    let result = {};
+
+    if (this.state.username === 'asdf'){
+      result['email'] = true;
+    }
+
+    return result;
+  }
+
+  getHiddenCollection(){
+    let result = {};
+
+    if (this.state.email === 'test2@email.com'){
+      result['website'] = true;
+    }
+
+    return result;
   }
 
   updateField(e, value, field) {
@@ -107,7 +128,7 @@ class FormApp extends React.Component {
           formClassName='main-form'
           formValues={this.state}
           handleSubmit={this.handleSubmit}
-          submitButtonText="Custom Submit"
+          // submitButtonText="Custom Submit"
           additionalButtons={
             [
               {
@@ -119,6 +140,8 @@ class FormApp extends React.Component {
           }
           validation={this.handleErrorCheck}
           onChange={this.updateField}
+          disabledCollection={this.getDisabledCollection()}
+          hiddenCollection={this.getHiddenCollection()}
           // onChangeCollection={{
           //   default: this.updateField
           // }}
@@ -127,7 +150,7 @@ class FormApp extends React.Component {
           isLoading={this.state.isLoading}
         >
 
-          <Dropdown
+          {/* <Dropdown
             key="test-dropdown"
             // multiselect
             searchable
@@ -142,7 +165,7 @@ class FormApp extends React.Component {
             propName='from_node'
             placeholder='Node'
             label='From Node'
-          />
+          /> */}
         </Form>
       </Main>
     )

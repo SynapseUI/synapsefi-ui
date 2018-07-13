@@ -11,7 +11,8 @@ import {
   CheckboxGroup,
   RadioGroup,
   Dropdown,
-  FormTypeConstants
+  FormTypeConstants,
+  ErrorMessage
 } from '../../index';
 
 import DefaultStyledForm from './util/DefaultStyledForm';
@@ -54,8 +55,6 @@ class Form extends Component {
       afterSubmission: false,
       touch: new Set()
     };
-
-    // this.StyledForm = getDefaultStyledForm(this.props.formClassName);
 
     this.renderEntireForm = this.renderEntireForm.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
@@ -111,7 +110,9 @@ class Form extends Component {
       const onChangeCollection = this.props.onChangeCollection || {};
     
     let result = this.props.data.map((item, idx) => {
-      if (typeof this.props.formValues[item.propName] === 'undefined') {
+      if (typeof this.props.formValues[item.propName] === 'undefined' ||
+        this.props.hiddenCollection[item.propName]
+      ) {
         return null;
       }
 
@@ -131,6 +132,8 @@ class Form extends Component {
         error: this.state.afterSubmission
           && this.state.touch.has(item.propName)
           && this.state.errors[item.propName],
+        
+        disabled: this.props.disabledCollection[item.propName],
 
         autoFocus: !this.state.touch.has(item.propName) && item.autoFocus
       };
@@ -190,10 +193,11 @@ class Form extends Component {
       isLoading
     } = this.props;
 
+    const displayError = !_.isEmpty(this.state.errors) && this.state.afterSubmission;
+
     if (customFooter) return React.cloneElement(customFooter, {
-      handleSubmit: this.props.handleSubmit.bind(this),
-      error: !_.isEmpty(this.props.errors),
-      errorMessage: 'Missing required fields',
+      handleSubmit: this.handleFormSubmit,
+      error: displayError && 'Missing required fields',
       isLoading
     });
 
@@ -201,6 +205,12 @@ class Form extends Component {
 
     return (
       <FlexEnd>
+        { displayError &&
+          <ErrorMessage
+            error="Missing required fields"
+            errorStyle={{ marginTop: '-32px'}}
+          />
+        }
         { renderButtons(additionalButtons) }
         <Button type="submit" isLoading={isLoading}>{submitText}</Button>
       </FlexEnd>

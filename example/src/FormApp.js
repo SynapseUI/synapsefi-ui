@@ -141,7 +141,7 @@ class FormApp extends React.Component {
           validation={this.handleErrorCheck}
           onChange={this.updateField}
           disabledCollection={this.getDisabledCollection()}
-          hiddenCollection={this.getHiddenCollection()}
+          // hiddenCollection={this.getHiddenCollection()}
           // onChangeCollection={{
           //   default: this.updateField
           // }}

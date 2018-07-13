@@ -113,6 +113,11 @@ class Form extends Component {
       if (typeof this.props.formValues[item.propName] === 'undefined') return null;
       if (this.props.hiddenCollection && this.props.hiddenCollection[item.propName]) return null;
 
+      let isDisabled = item.disabled;
+      if (this.props.disabledCollection && this.props.disabledCollection[item.propName]){
+        isDisabled = this.props.disabledCollection[item.propName];
+      }
+
       const propValues = {
         ...item,
         value: this.props.formValues[item.propName],
@@ -130,7 +135,7 @@ class Form extends Component {
           && this.state.touch.has(item.propName)
           && this.state.errors[item.propName],
         
-        disabled: this.props.disabledCollection[item.propName],
+        disabled: isDisabled,
 
         autoFocus: !this.state.touch.has(item.propName) && item.autoFocus
       };

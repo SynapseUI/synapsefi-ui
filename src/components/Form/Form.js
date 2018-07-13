@@ -110,11 +110,8 @@ class Form extends Component {
       const onChangeCollection = this.props.onChangeCollection || {};
     
     let result = this.props.data.map((item, idx) => {
-      if (typeof this.props.formValues[item.propName] === 'undefined' ||
-        (this.props.hiddenCollection && this.props.hiddenCollection[item.propName])
-      ) {
-        return null;
-      }
+      if (typeof this.props.formValues[item.propName] === 'undefined') return null;
+      if (this.props.hiddenCollection && this.props.hiddenCollection[item.propName]) return null;
 
       const propValues = {
         ...item,

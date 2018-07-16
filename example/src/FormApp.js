@@ -38,6 +38,10 @@ const Main = styled.div`
   }
 `;
 
+const TestComponent = (props) => {  
+  return <h2>Header</h2>
+}
+
 class FormApp extends React.Component {
   constructor(props){
     super(props);
@@ -149,7 +153,8 @@ class FormApp extends React.Component {
           // customFooter={<CustomFooter/>}
           isLoading={this.state.isLoading}
         >
-
+          <TestComponent />
+          {/* <h2>Header</h2> */}
           {/* <Dropdown
             key="test-dropdown"
             // multiselect

@@ -132,9 +132,9 @@ class Form extends Component {
           if(item.onBlur) item.onBlur()
         },
 
-        error: this.state.afterSubmission
-          && this.state.touch.has(item.propName)
-          && this.state.errors[item.propName],
+        error: (this.state.afterSubmission
+          && this.state.touch.has(item.propName)) ?
+          this.state.errors[item.propName] : false,
         
         disabled: isDisabled,
 
@@ -176,9 +176,9 @@ class Form extends Component {
 
     return React.cloneElement(child, {
       item: item,
-      error: this.state.afterSubmission
-        && this.state.touch.has(propName)
-        && this.state.errors[propName],
+      error: (this.state.afterSubmission
+        && this.state.touch.has(propName)) ?
+        this.state.errors[propName] : false,
 
       onFocus: (e) => {
         if (child.props.onFocus) child.props.onFocus(e);

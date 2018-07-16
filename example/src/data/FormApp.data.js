@@ -96,7 +96,7 @@ export default [
 
   {
     // formType: 'OTHER',
-    // isChild: true,
+    isChild: true,
     propName: 'other_preference',
     // label: 'Other Preferences',
     // options: [

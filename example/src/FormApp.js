@@ -33,7 +33,7 @@ const Main = styled.div`
 
   .test-input-row {
     padding: 2rem 0rem;
-
+    border-bottom: none;
     color: blue;
   }
 `;
@@ -164,7 +164,7 @@ class FormApp extends React.Component {
             options={countriesOptions}
             propName='from_node'
             placeholder='Node'
-            label='From Node'
+            label='From Node custom'
           /> */}
         </Form>
       </Main>

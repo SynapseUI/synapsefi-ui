@@ -110,7 +110,8 @@ class Form extends Component {
       const onChangeCollection = this.props.onChangeCollection || {};
     
     let result = this.props.data.map((item, idx) => {
-      if (typeof this.props.formValues[item.propName] === 'undefined') return null;
+      if (typeof this.props.formValues[item.propName] === 'undefined'
+          && !item.isChild) return null;
       if (this.props.hiddenCollection && this.props.hiddenCollection[item.propName]) return null;
 
       let isDisabled = item.disabled;
@@ -174,7 +175,7 @@ class Form extends Component {
     const propName = item.propName || child.props.propName;
 
     return React.cloneElement(child, {
-      item,
+      item: item,
       error: this.state.afterSubmission
         && this.state.touch.has(propName)
         && this.state.errors[propName],

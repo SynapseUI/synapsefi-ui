@@ -95,6 +95,20 @@ export default [
   },
 
   {
+    // formType: 'OTHER',
+    // isChild: true,
+    propName: 'other_preference',
+    // label: 'Other Preferences',
+    // options: [
+    //   { key: 'DEPOSIT-US', text: 'Deposit' },
+    //   { key: 'SUBNET', text: 'Subnet' },
+    //   { key: 'CARD-US', text: 'card' },
+    // ],
+    // validation: yup.string()
+    //   .required('Other Preferences are required')
+  },
+
+  {
     formType: FormTypeConstants.TYPE_DROPDOWN,
     label: 'From Node: ',
     placeholder: 'From Node',
@@ -108,15 +122,9 @@ export default [
     ],
     // validation: yup.string()
     //   .required('User Permission is required')
-  }
+  },
 
-  // {
-  //   formType: 'OTHER',
-  //   propName: 'other_preference',
-  //   label: 'Other Preferences',
-  //   // validation: yup.string()
-  //   //   .required('Other Preferences are required')
-  // },
+  
   // {
   //   formType: 'OTHER',
   //   label: 'From Nodes',

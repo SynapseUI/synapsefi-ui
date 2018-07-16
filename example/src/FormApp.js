@@ -33,10 +33,14 @@ const Main = styled.div`
 
   .test-input-row {
     padding: 2rem 0rem;
-
+    border-bottom: none;
     color: blue;
   }
 `;
+
+const TestComponent = (props) => {  
+  return <h2>Header</h2>
+}
 
 class FormApp extends React.Component {
   constructor(props){
@@ -149,7 +153,8 @@ class FormApp extends React.Component {
           // customFooter={<CustomFooter/>}
           isLoading={this.state.isLoading}
         >
-
+          <TestComponent />
+          {/* <h2>Header</h2> */}
           {/* <Dropdown
             key="test-dropdown"
             // multiselect
@@ -164,7 +169,7 @@ class FormApp extends React.Component {
             options={countriesOptions}
             propName='from_node'
             placeholder='Node'
-            label='From Node'
+            label='From Node custom'
           /> */}
         </Form>
       </Main>

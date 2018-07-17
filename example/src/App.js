@@ -88,23 +88,6 @@ class App extends React.Component {
         <Button remove onClick={() => this.setState({ from_node: '' })}>
           clear
         </Button>
-
-        {/* <DropdownHead
-          style={{ width: '200px'}}
-          onClick={() => this.setState({ hide: !this.state.hide })}>
-          <p>Header</p>
-        </DropdownHead>
-
-        <DropdownContent
-          showContent={this.state.hide}
-          verticalOffset='16px'
-          style={{ width: '250px'}}>
-          <p>Content</p>
-        </DropdownContent>
-
-        <Accordion header="some header">
-          <p>Cool Content</p>
-        </Accordion> */}
         <SvgIcons.check_filled_circle fillColor="green" borderColor="green" right/>
       </Main>
     );

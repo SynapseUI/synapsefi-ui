@@ -5,7 +5,6 @@ import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { baseInputStyling } from '../styles/Input.styles';
 import Colors from '../../colors';
-// import { NumberInput } from './NumberInput';
 
 export const MainInput = styled.div`
   display: flex;
@@ -87,7 +86,6 @@ export default class Input extends Component {
     this.renderInputField = this.renderInputField.bind(this);
 
     this.renderBaseInput = this.renderBaseInput.bind(this);
-    // this.renderNumberInput = this.renderNumberInput.bind(this);
   }
 
   /*
@@ -164,32 +162,6 @@ export default class Input extends Component {
     );
   }
 
-  // renderNumberInput() {
-  //   const {
-  //     autoFocus,
-  //     onChange,
-  //     onFocus,
-  //     propName,
-  //     placeholder,
-  //     value,
-  //     disabled,
-  //     currency
-  //   } = this.props.propValues || this.props;
-
-  //   return (
-  //     <NumberInput
-  //       autoFocus={autoFocus}
-  //       value={value}
-  //       field={propName}
-  //       onChange={onChange}
-  //       onFocus={onFocus}
-  //       placeholder={placeholder}
-  //       disabled={disabled}
-  //       currency={currency}
-  //     />
-  //   );
-  // }
-
   renderInputField() {
     const {
       error,
@@ -199,15 +171,12 @@ export default class Input extends Component {
       currency,
       disabled,
     } = this.props.propValues || this.props;
-    // const mainInput = inputType === 'number' ?
-    //   this.renderNumberInput() : this.renderBaseInput();
-    const mainInput = this.renderBaseInput();
 
     return (
       <FlexColumn>
         <FlexRowRev>
           {this.renderSymbol(type, disabled)}
-          {mainInput}
+          {this.renderBaseInput()}
           <FlexRowRev__Divider error={error} />
         </FlexRowRev>
 
@@ -229,7 +198,6 @@ export default class Input extends Component {
           description={description}
           disabled={disabled}
         />
-        {/* {this.renderLabel(label, description, labelWidth, disabled)} */}
         {this.renderInputField()}
       </MainInput>
     );

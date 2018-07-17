@@ -107,6 +107,19 @@ export default [
     // validation: yup.string()
     //   .required('Other Preferences are required')
   },
+  {
+    // formType: 'OTHER',
+    isChild: true,
+    propName: 'other_preference',
+    // label: 'Other Preferences',
+    // options: [
+    //   { key: 'DEPOSIT-US', text: 'Deposit' },
+    //   { key: 'SUBNET', text: 'Subnet' },
+    //   { key: 'CARD-US', text: 'card' },
+    // ],
+    // validation: yup.string()
+    //   .required('Other Preferences are required')
+  },
 
   {
     formType: FormTypeConstants.TYPE_DROPDOWN,

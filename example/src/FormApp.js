@@ -59,8 +59,7 @@ class FormApp extends React.Component {
       description: '',
 
       isLoading: false,
-      // test: ''
-
+      
       // showExampleDropdown: false
 
     };
@@ -153,8 +152,8 @@ class FormApp extends React.Component {
           // customFooter={<CustomFooter/>}
           isLoading={this.state.isLoading}
         >
-          <TestComponent />
-          {/* <h2>Header</h2> */}
+          {/* <TestComponent /> */}
+          <h2>Header</h2>
           {/* <Dropdown
             key="test-dropdown"
             // multiselect

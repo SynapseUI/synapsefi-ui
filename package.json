@@ -1,11 +1,7 @@
 {
   "name": "synapsefi-ui",
   "description": "synapsefi-ui",
-<<<<<<< HEAD
-  "version": "1.4.3",
-=======
   "version": "1.4.5",
->>>>>>> 9df0a958752e5b7f0e6ef28385ada4762a73ecd9
   "main": "index.js",
   "license": "MIT",
   "files": [

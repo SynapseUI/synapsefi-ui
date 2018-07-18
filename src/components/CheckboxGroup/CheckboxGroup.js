@@ -193,7 +193,7 @@ class CheckBoxGroup extends Component {
                   value={value}
                 >
                   <Group__CheckboxButton
-                    id={propName}
+                    id={`${propName}+${idx}`}
                     disabled={disabled}
                     defaultChecked={checked}
                     value={value}

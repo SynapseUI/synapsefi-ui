@@ -138,7 +138,7 @@ const RadioGroup = (props) => {
               disabled={disabled}
             >
               <Group__RadioButton
-                id={propName}
+                id={`${propName}+${idx}`}
                 defaultValue={item.key}
                 disabled={disabled}
                 checked={item.key === value}

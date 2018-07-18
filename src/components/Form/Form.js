@@ -12,7 +12,8 @@ import {
   RadioGroup,
   Dropdown,
   FormTypeConstants,
-  ErrorMessage
+  ErrorMessage,
+  NumberInput
 } from '../../index';
 
 import DefaultStyledForm from './util/DefaultStyledForm';
@@ -144,6 +145,9 @@ class Form extends Component {
       switch (item.formType) {
         case FormTypeConstants.TYPE_INPUT:
           return <Input key={idx} propValues={propValues} />;
+
+        case FormTypeConstants.TYPE_NUMBERINPUT:
+          return <NumberInput key={idx} propValues={propValues} />;
 
         case FormTypeConstants.TYPE_TEXTAREA:
           return <Textarea key={idx} propValues={propValues} />;

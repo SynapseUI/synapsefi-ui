@@ -12,6 +12,7 @@ import FormErrorMessage from './components/ErrorMessage/ErrorMessage';
 import FormAlertMessage from './components/AlertMessage/AlertMessage';
 
 import FormInput from './components/Input/Input';
+import FormNumberInput from './components/Input/NumberInput';
 import FormTextarea from './components/Textarea/Textarea';
 import FormCheckboxGroup from './components/CheckboxGroup/CheckboxGroup';
 import FormRadioGroup from './components/RadioGroup/RadioGroup';
@@ -45,6 +46,7 @@ export const ErrorMessage = FormErrorMessage;
 export const AlertMessage = FormAlertMessage;
 
 export const Input = FormInput;
+export const NumberInput = FormNumberInput;
 export const Textarea = FormTextarea;
 export const CheckboxGroup = FormCheckboxGroup;
 export const RadioGroup = FormRadioGroup;

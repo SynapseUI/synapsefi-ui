@@ -27,7 +27,8 @@ const Main = styled.div`
   
     & > * {
       padding: 32px 16px;
-      border-bottom: 1px solid ${Colors.SILK_WHITE}
+      // border-bottom: 1px solid ${Colors.SILK_WHITE}
+      border: none;
     }
   }
 
@@ -52,6 +53,8 @@ class FormApp extends React.Component {
       website: 'http://www.localhost:8080/',
       // description: '',
       amount: '',
+      date: '',
+      phone_number: '',
       user_permission: '',
       card_preferences: [],
       api_version: '',
@@ -59,10 +62,6 @@ class FormApp extends React.Component {
       description: '',
 
       isLoading: false,
-      // test: ''
-
-      // showExampleDropdown: false
-
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -153,8 +152,8 @@ class FormApp extends React.Component {
           // customFooter={<CustomFooter/>}
           isLoading={this.state.isLoading}
         >
-          <TestComponent />
-          {/* <h2>Header</h2> */}
+          {/* <TestComponent /> */}
+          <h2>Header</h2>
           {/* <Dropdown
             key="test-dropdown"
             // multiselect

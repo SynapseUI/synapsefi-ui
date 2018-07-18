@@ -12,7 +12,8 @@ import {
   RadioGroup,
   Dropdown,
   FormTypeConstants,
-  ErrorMessage
+  ErrorMessage,
+  NumberInput
 } from '../../index';
 
 import DefaultStyledForm from './util/DefaultStyledForm';
@@ -110,8 +111,14 @@ class Form extends Component {
       const onChangeCollection = this.props.onChangeCollection || {};
     
     let result = this.props.data.map((item, idx) => {
-      if (typeof this.props.formValues[item.propName] === 'undefined') return null;
+      if (typeof this.props.formValues[item.propName] === 'undefined'
+          && !item.isChild) return null;
       if (this.props.hiddenCollection && this.props.hiddenCollection[item.propName]) return null;
+
+      let isDisabled = item.disabled;
+      if (this.props.disabledCollection && this.props.disabledCollection[item.propName]){
+        isDisabled = this.props.disabledCollection[item.propName];
+      }
 
       const propValues = {
         ...item,
@@ -126,11 +133,11 @@ class Form extends Component {
           if(item.onBlur) item.onBlur()
         },
 
-        error: this.state.afterSubmission
-          && this.state.touch.has(item.propName)
-          && this.state.errors[item.propName],
+        error: (this.state.afterSubmission
+          && this.state.touch.has(item.propName)) ?
+          this.state.errors[item.propName] : false,
         
-        disabled: this.props.disabledCollection[item.propName],
+        disabled: isDisabled,
 
         autoFocus: !this.state.touch.has(item.propName) && item.autoFocus
       };
@@ -138,6 +145,9 @@ class Form extends Component {
       switch (item.formType) {
         case FormTypeConstants.TYPE_INPUT:
           return <Input key={idx} propValues={propValues} />;
+
+        case FormTypeConstants.TYPE_NUMBERINPUT:
+          return <NumberInput key={idx} propValues={propValues} />;
 
         case FormTypeConstants.TYPE_TEXTAREA:
           return <Textarea key={idx} propValues={propValues} />;
@@ -169,10 +179,10 @@ class Form extends Component {
     const propName = item.propName || child.props.propName;
 
     return React.cloneElement(child, {
-      item,
-      error: this.state.afterSubmission
-        && this.state.touch.has(propName)
-        && this.state.errors[propName],
+      item: item,
+      error: (this.state.afterSubmission
+        && this.state.touch.has(propName)) ?
+        this.state.errors[propName] : false,
 
       onFocus: (e) => {
         if (child.props.onFocus) child.props.onFocus(e);

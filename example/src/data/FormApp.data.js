@@ -7,7 +7,7 @@ export default [
     propName: 'email',
     label: 'Email',
     placeholder: 'Enter User Email',
-    className: 'test-input-row'
+    className: 'test-input-row',
   },
 
   {

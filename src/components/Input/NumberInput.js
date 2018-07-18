@@ -19,10 +19,10 @@ const NumberInput = (props) => {
     currency,
     label,
     type,
-    customFormat
+    format
   } = props.propValues || props;
 
-  const formatSettings = getFormat(type);    
+  const formatSettings = getFormat(type, format);  
 
   return (
       <NumberFormat

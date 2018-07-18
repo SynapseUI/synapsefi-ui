@@ -36,7 +36,7 @@ const getFormatedDate = (val) => {
   return month + (day.length ? '/' + day : '') + (year.length ? '/' + year : '');
 }
 
-export const getFormat = (type, customFormat = "") => {
+export const getFormat = (type = '', customFormat = "") => {
   switch (type) {
     case "currency":
       return {
@@ -58,6 +58,8 @@ export const getFormat = (type, customFormat = "") => {
       }
     }
     default:
-      return customFormat;
+      return {
+        format: customFormat
+      };
   }
 }

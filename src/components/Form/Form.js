@@ -49,12 +49,15 @@ class Form extends Component {
   constructor(props) {
     super(props);
 
+    const baseErrors = this.props.errors || {};
+
     this.state = {
       errors: this.props.validation ?
         this.getErrorsCollection(this.props.validation(), this.props.formValues)
-        : {},
-      afterSubmission: false,
-      touch: new Set()
+        : baseErrors,
+      afterSubmission: this.props.displayErrorsInstantly ? true : false,
+      touch: this.props.displayErrorsInstantly ?
+        new Set(Object.keys(this.props.formValues)) : new Set()
     };
 
     this.renderEntireForm = this.renderEntireForm.bind(this);
@@ -69,6 +72,8 @@ class Form extends Component {
     if (nextProps.validation && this.state.afterSubmission) {
       const newErrors = this.getErrorsCollection(nextProps.validation(), nextProps.formValues) || {};
       this.setState({ errors: newErrors });
+    } else if (nextProps.errors){
+      this.setState({ errors: nextProps.errors, afterSubmission: true });
     }
   }
 
@@ -84,9 +89,11 @@ class Form extends Component {
 
   handleFormSubmit(e) {
     if (e) e.preventDefault();
-    const validationResult = this.props.validation ? this.props.validation() : {};
+    const baseErrors = this.props.errors || {};
+
+    const validationResult = this.props.validation ? this.props.validation() : baseErrors;
     const errors = this.getErrorsCollection(validationResult, this.props.formValues);
-    
+
     _.isEmpty(errors) ?
       this.props.handleSubmit(e)
       : this.setState({

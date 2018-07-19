@@ -62,6 +62,7 @@ class FormApp extends React.Component {
       description: '',
 
       isLoading: false,
+      // formErrors: this.props.formAppErrors
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -69,6 +70,12 @@ class FormApp extends React.Component {
     this.updateField = this.updateField.bind(this);
     this.getDisabledCollection = this.getDisabledCollection.bind(this);
   }
+
+  // componentWillReceiveProps(nextProps){
+  //   if (nextProps.formAppErrors !== this.props.formAppErrors){
+  //     this.setState({ formErrors: nextProps.formAppErrors });
+  //   }
+  // }
 
   getDisabledCollection(){
     let result = {};
@@ -123,7 +130,10 @@ class FormApp extends React.Component {
     }, 2000);
   }
 
+  
   render(){    
+    // const formErrors = this.state.formErrors;
+    
     return (
       <Main>
         <Form
@@ -132,6 +142,9 @@ class FormApp extends React.Component {
           formValues={this.state}
           handleSubmit={this.handleSubmit}
           // submitButtonText="Custom Submit"
+          // errors={formErrors}
+          // errors={{email: 'testing email validation'}}
+          // displayErrorsInstantly={true}
           additionalButtons={
             [
               {
@@ -142,6 +155,9 @@ class FormApp extends React.Component {
             ]
           }
           validation={this.handleErrorCheck}
+          // validation={() => {
+          //   return {email: 'not real email'}
+          // }}
           onChange={this.updateField}
           disabledCollection={this.getDisabledCollection()}
           // hiddenCollection={this.getHiddenCollection()}

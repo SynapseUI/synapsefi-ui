@@ -15,6 +15,12 @@ const MainLayout = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  .custom-number-input {
+    svg {
+      display: none;
+    }
+  }
 `;
 
 class ExampleNumberInputs extends React.Component {
@@ -40,6 +46,7 @@ class ExampleNumberInputs extends React.Component {
     return (
       <MainLayout>
         <NumberInput
+          className="custom-number-input"
           propName="phoneNumber"
           value={this.state.phoneNumber}
           onChange={this.updateField}

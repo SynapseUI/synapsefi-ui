@@ -9,17 +9,11 @@ import { getFormat } from './util/number.util';
 
 const NumberInput = (props) => {
   const {
-    autofocus,
-    value,
-    onChange,
-    propName,
-    placeholder,
-    disabled,
-    error,
-    currency,
-    label,
     type,
-    format
+    onChange,
+    format,
+    placeholder,
+    ...inputProps
   } = props.propValues || props;
 
   const formatSettings = getFormat(type, format);  
@@ -27,13 +21,9 @@ const NumberInput = (props) => {
   return (
       <NumberFormat
         {...formatSettings}
+        {...inputProps}
         customInput={Input}
-        label={label}
-        autoFocus={autofocus}
         placeholder={placeholder || formatSettings.placeholder}
-        disabled={disabled}
-        error={error}
-        value={value}
         onValueChange={(values, e) => onChange(e, values.value, propName)}
       />
   );

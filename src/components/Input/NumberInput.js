@@ -13,6 +13,7 @@ const NumberInput = (props) => {
     onChange,
     format,
     placeholder,
+    propName,
     ...inputProps
   } = props.propValues || props;
 

@@ -40,6 +40,12 @@ class Accordion extends React.Component {
     this.toggleShowContent = this.toggleShowContent.bind(this);
   }
 
+  componentWillReceiveProps(nextProps){
+    if (nextProps.showContent !== this.props.showContent) {
+      this.setState({ showContent: nextProps.showContent });
+    }
+  }
+
   toggleShowContent() {
     this.setState({ showContent: !this.state.showContent });
   }
@@ -47,6 +53,7 @@ class Accordion extends React.Component {
   render(){
     const {
       header,
+      headerStyle,
       menuSpeed,
       children
     } = this.props;
@@ -55,7 +62,7 @@ class Accordion extends React.Component {
 
     return(
       <div>
-        <Header onClick={ this.toggleShowContent }>
+        <Header onClick={ this.toggleShowContent } style={headerStyle}>
           { header }
           <StyledCheveron
             showContent={ showContent }

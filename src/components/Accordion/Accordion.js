@@ -54,7 +54,7 @@ class Accordion extends React.Component {
     const {
       header,
       headerStyle,
-      headerClassName,
+      className,
       menuSpeed,
       children
     } = this.props;
@@ -63,7 +63,7 @@ class Accordion extends React.Component {
 
     return(
       <div>
-        <Header onClick={ this.toggleShowContent } style={headerStyle} headerClassName={headerClassName}>
+        <Header onClick={ this.toggleShowContent } style={headerStyle} className={className}>
           { header }
           <StyledCheveron
             showContent={ showContent }

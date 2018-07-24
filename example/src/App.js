@@ -21,6 +21,10 @@ const DropdownItem = styled.div`
   width: 100%;
 `;
 
+const StyledAccordion = styled(Accordion)`
+  padding-left: 0;
+`;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -90,9 +94,9 @@ class App extends React.Component {
         </Button>
         <SvgIcons.check_filled_circle fillColor="green" borderColor="green" right/>
 
-        <Accordion header="HI" showContent={this.state.hide} headerStyle={{ paddingLeft: '0' }}>
+        <StyledAccordion header="HI" showContent={this.state.hide}>
           Content
-        </Accordion>
+        </StyledAccordion>
       </Main>
     );
   }

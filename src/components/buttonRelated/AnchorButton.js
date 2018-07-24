@@ -16,15 +16,15 @@ const primaryColor = `
 `;
 
 const tertiaryColor = `
-  color:  ${colors.EVENING}
-  fill:  ${colors.EVENING}
+  color:  ${colors.MEDIUM_GRAY}
+  fill:  ${colors.MEDIUM_GRAY}
   &:hover {
-    color: ${colors.NIGHT};
-    fill: ${colors.NIGHT};
+    color: ${colors.EVENING};
+    fill: ${colors.EVENING};
   }
   &:active {
-    color: ${colors.DARK_NIGHT};
-    fill: ${colors.DARK_NIGHT};
+    color: ${colors.NIGHT};
+    fill: ${colors.NIGHT};
   }
 `;
 

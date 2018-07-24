@@ -41,7 +41,7 @@ class Accordion extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if (nextProps.showContent !== this.props.showContent) {
+    if (nextProps.showContent !== this.state.showContent) {
       this.setState({ showContent: nextProps.showContent });
     }
   }
@@ -54,6 +54,7 @@ class Accordion extends React.Component {
     const {
       header,
       headerStyle,
+      headerClassName,
       menuSpeed,
       children
     } = this.props;
@@ -62,7 +63,7 @@ class Accordion extends React.Component {
 
     return(
       <div>
-        <Header onClick={ this.toggleShowContent } style={headerStyle}>
+        <Header onClick={ this.toggleShowContent } style={headerStyle} headerClassName={headerClassName}>
           { header }
           <StyledCheveron
             showContent={ showContent }

@@ -31,7 +31,7 @@ class App extends React.Component {
       switch: 'ON',
       pets: '',
       airport: '',
-      hide: false,
+      hide: true,
       from_node: '',
     };
 

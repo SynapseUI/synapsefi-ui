@@ -85,10 +85,14 @@ class App extends React.Component {
           renderOptionItem={DisplayItem}
         />
 
-        <Button remove onClick={() => this.setState({ from_node: '' })}>
+        <Button remove onClick={() => this.setState({ hide: !this.state.hide })}>
           clear
         </Button>
         <SvgIcons.check_filled_circle fillColor="green" borderColor="green" right/>
+
+        <Accordion header="HI" showContent={this.state.hide} headerStyle={{ paddingLeft: '0' }}>
+          Content
+        </Accordion>
       </Main>
     );
   }

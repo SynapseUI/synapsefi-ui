@@ -190,8 +190,6 @@ class FormApp extends React.Component {
             label='From Node custom'
           /> */}
         </Form>
-
-        <input className="test-input-row" placeholder="Testing"></input>
       </Main>
     )
   }

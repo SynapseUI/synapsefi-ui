@@ -58,8 +58,14 @@ export const getFormat = (type = '', customFormat = "") => {
       }
     }
     default:
+      if (customFormat) {
+        return {
+          format: customFormat
+        };
+      }
+
       return {
-        format: customFormat
-      };
+        removeFormatting: true
+      }
   }
 }

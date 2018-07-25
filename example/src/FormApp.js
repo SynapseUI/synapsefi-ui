@@ -33,9 +33,12 @@ const Main = styled.div`
   }
 
   .test-input-row {
-    padding: 2rem 0rem;
     border-bottom: none;
     color: blue;
+
+    input::placeholder {
+      color: red;
+    }
   }
 `;
 

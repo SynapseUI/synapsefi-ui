@@ -94,13 +94,15 @@ class Form extends Component {
     const validationResult = this.props.validation ? this.props.validation() : baseErrors;
     const errors = this.getErrorsCollection(validationResult, this.props.formValues);
 
-    _.isEmpty(errors) ?
-      this.props.handleSubmit(e)
-      : this.setState({
-        afterSubmission: true,
-        touch: new Set(Object.keys(this.props.formValues)),
-        errors
-      });
+    if (_.isEmpty(errors)){
+      return this.props.handleSubmit(e);
+    }
+      
+    this.setState({
+      afterSubmission: true,
+      touch: new Set(Object.keys(this.props.formValues)),
+      errors
+    });
   }
 
   handleTouchUpdate(propName) {

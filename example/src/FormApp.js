@@ -33,9 +33,12 @@ const Main = styled.div`
   }
 
   .test-input-row {
-    padding: 2rem 0rem;
     border-bottom: none;
     color: blue;
+
+    input::placeholder {
+      color: red;
+    }
   }
 `;
 
@@ -187,6 +190,8 @@ class FormApp extends React.Component {
             label='From Node custom'
           /> */}
         </Form>
+
+        <input className="test-input-row" placeholder="Testing"></input>
       </Main>
     )
   }

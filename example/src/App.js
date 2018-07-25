@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Dropdown, Accordion, SvgIcons, DropdownHead, DropdownContent, Button } from 'package';
+import { Dropdown, Accordion, SvgIcons, DropdownHead, DropdownContent, Button, NumberInput } from 'package';
 
 import DisplayItem from './components/DisplayItem';
 import RadioGroup from '../../src/components/RadioGroup/RadioGroup';
@@ -37,6 +37,8 @@ class App extends React.Component {
       airport: '',
       hide: true,
       from_node: '',
+
+      number: ''
     };
 
     this.updateField = this.updateField.bind(this);
@@ -97,6 +99,13 @@ class App extends React.Component {
         <StyledAccordion header="HI" showContent={this.state.hide}>
           Content
         </StyledAccordion>
+
+        <NumberInput
+          value={this.state.number}
+          onChange={this.updateField}
+          propName="number"
+          // format='####'
+        />
       </Main>
     );
   }

@@ -53,7 +53,17 @@ const changeColor = color => {
 const changeColorWhenHover = hoverColor => {
   return `
     &:hover {
+      cursor: pointer;
       ${changeColor(hoverColor)};
+    }
+  `;
+};
+
+const changeColorWhenActive = activeColor => {
+  return `
+    &:hover {
+      cursor: pointer;
+      ${changeColor(activeColor)};
     }
   `;
 };
@@ -67,10 +77,11 @@ const widthAndHeightEqualSize = `props.size; height: props.size;`;
 
 const StyledSvg = styled.svg`
   display: block;
+
   ${props => props.size && css`${widthAndHeightEqualSize};`};
   ${props => props.color && css`${changeColor(props.color)};`};
   ${props => props.hoverColor && css`${changeColorWhenHover(props.hoverColor)};`};
-  ${props => props.cursor && css`cursor: pointer;`};
+  ${props => props.activeColor && css`${changeColorWhenActive(props.activeColor)};`};
   ${props =>
     props.rotate_ccw_slow && css`animation: ${rotateCounterClockwise} 10s linear infinite;`};
   ${props =>

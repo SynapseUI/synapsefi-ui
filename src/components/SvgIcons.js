@@ -61,7 +61,7 @@ const changeColorWhenHover = hoverColor => {
 
 const changeColorWhenActive = activeColor => {
   return `
-    &:hover {
+    &:active {
       cursor: pointer;
       ${changeColor(activeColor)};
     }

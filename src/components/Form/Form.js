@@ -16,25 +16,10 @@ import {
   NumberInput
 } from '../../index';
 
+import * as Util from './util/form.util';
+
 import DefaultStyledForm from './util/DefaultStyledForm';
-
-const renderButtons = (buttonData) => {
-  if (!buttonData) return null;
-
-  return buttonData.map((button, idx) => {
-    return (
-      <Button
-        key={idx}
-        type="button"
-        tertiary={button.style === 'tertiary'}
-        secondary={button.style === 'secondary'}
-        onClick={button.action || button.onClick}
-      >
-      {button.text}
-    </Button>
-    )
-  });
-}
+import AdditionalButtons from './util/AdditionalButtons';
 
 const FlexEnd = styled.div`
   display: flex;
@@ -49,12 +34,8 @@ class Form extends Component {
   constructor(props) {
     super(props);
 
-    const baseErrors = this.props.errors || {};
-
     this.state = {
-      errors: this.props.validation ?
-        this.getErrorsCollection(this.props.validation(), this.props.formValues)
-        : baseErrors,
+      errors: this.props.errors || {},
       afterSubmission: this.props.displayErrorsInstantly ? true : false,
       touch: this.props.displayErrorsInstantly ?
         new Set(Object.keys(this.props.formValues)) : new Set()
@@ -64,27 +45,16 @@ class Form extends Component {
     this.renderFooter = this.renderFooter.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleTouchUpdate = this.handleTouchUpdate.bind(this);
-    this.getErrorsCollection = this.getErrorsCollection.bind(this);
     this.getCloneOfChild = this.getCloneOfChild.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.validation && this.state.afterSubmission) {
-      const newErrors = this.getErrorsCollection(nextProps.validation(), nextProps.formValues) || {};
+      const newErrors = Util.getErrorsCollection(nextProps.validation(), nextProps.formValues) || {};
       this.setState({ errors: newErrors });
     } else if (nextProps.errors){
       this.setState({ errors: nextProps.errors, afterSubmission: true });
     }
-  }
-
-  getErrorsCollection(errors, currentFormValues) {
-    return _.reduce(errors, (memo, errmessage, errKey) => {
-      if (typeof currentFormValues[errKey] !== undefined) {
-        memo[errKey] = errmessage
-      }
-
-      return memo;
-    }, {});
   }
 
   handleFormSubmit(e) {
@@ -92,7 +62,7 @@ class Form extends Component {
     const baseErrors = this.props.errors || {};
 
     const validationResult = this.props.validation ? this.props.validation() : baseErrors;
-    const errors = this.getErrorsCollection(validationResult, this.props.formValues);
+    const errors = Util.getErrorsCollection(validationResult, this.props.formValues);
 
     if (_.isEmpty(errors)){
       return this.props.handleSubmit(e);
@@ -142,9 +112,7 @@ class Form extends Component {
           if(item.onBlur) item.onBlur()
         },
 
-        error: (this.state.afterSubmission
-          && this.state.touch.has(item.propName)) ?
-          this.state.errors[item.propName] : false,
+        error: Util.getPropNameErrors(this.state, item.propName),
         
         disabled: isDisabled,
 
@@ -184,14 +152,12 @@ class Form extends Component {
   }
 
   getCloneOfChild(child, item){
-    if (_.isEmpty(item)) return child;
+    if (_.isEmpty(item) || Util.isDOMTypeElement(child)) return child;
     const propName = item.propName || child.props.propName;
 
     return React.cloneElement(child, {
       item: item,
-      error: (this.state.afterSubmission
-        && this.state.touch.has(propName)) ?
-        this.state.errors[propName] : false,
+      error: Util.getPropNameErrors(this.state, propName),
 
       onFocus: (e) => {
         if (child.props.onFocus) child.props.onFocus(e);
@@ -202,20 +168,22 @@ class Form extends Component {
 
   renderFooter() {
     const {
-      handleSubmit,
       additionalButtons,
-      formValues,
       customFooter,
       isLoading
     } = this.props;
 
     const displayError = !_.isEmpty(this.state.errors) && this.state.afterSubmission;
 
-    if (customFooter) return React.cloneElement(customFooter, {
-      handleSubmit: this.handleFormSubmit,
-      error: displayError && 'Missing required fields',
-      isLoading
-    });
+    if (customFooter) {
+      return Util.isDOMTypeElement(customFooter) ?
+      customFooter :
+      React.cloneElement(customFooter, {
+        handleSubmit: this.handleFormSubmit,
+        error: displayError && 'Missing required fields',
+        isLoading
+      });
+    }
 
     const submitText = this.props.submitButtonText || 'Submit';
 
@@ -224,11 +192,11 @@ class Form extends Component {
         { displayError &&
           <ErrorMessage
             error="Missing required fields"
-            errorStyle={{ marginTop: '-32px'}}
+            errorStyle={{ marginTop: '-35px', padding: '4px 0'}}
           />
         }
-        { renderButtons(additionalButtons) }
-        <Button type="submit" isLoading={isLoading}>{submitText}</Button>
+        <AdditionalButtons buttonData={additionalButtons} />
+        <Button type="submit" medium isLoading={isLoading}>{submitText}</Button>
       </FlexEnd>
     )
   }

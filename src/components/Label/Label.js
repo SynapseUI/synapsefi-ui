@@ -12,7 +12,7 @@ export const LabelDescription = styled.div`
 `;
 
 export const LabelDescription__Label = styled.label`
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   color: ${Colors.DARK_NIGHT};
   line-height: normal;

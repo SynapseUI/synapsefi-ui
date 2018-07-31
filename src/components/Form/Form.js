@@ -49,12 +49,8 @@ class Form extends Component {
   constructor(props) {
     super(props);
 
-    const baseErrors = this.props.errors || {};
-
     this.state = {
-      errors: this.props.validation ?
-        this.getErrorsCollection(this.props.validation(), this.props.formValues)
-        : baseErrors,
+      errors: this.props.errors || {},
       afterSubmission: this.props.displayErrorsInstantly ? true : false,
       touch: this.props.displayErrorsInstantly ?
         new Set(Object.keys(this.props.formValues)) : new Set()
@@ -202,9 +198,7 @@ class Form extends Component {
 
   renderFooter() {
     const {
-      handleSubmit,
       additionalButtons,
-      formValues,
       customFooter,
       isLoading
     } = this.props;
@@ -224,11 +218,11 @@ class Form extends Component {
         { displayError &&
           <ErrorMessage
             error="Missing required fields"
-            errorStyle={{ marginTop: '-32px'}}
+            errorStyle={{ marginTop: '-35px', padding: '4px 0'}}
           />
         }
         { renderButtons(additionalButtons) }
-        <Button type="submit" isLoading={isLoading}>{submitText}</Button>
+        <Button type="submit" medium isLoading={isLoading}>{submitText}</Button>
       </FlexEnd>
     )
   }

@@ -16,6 +16,8 @@ import {
   NumberInput
 } from '../../index';
 
+import * as Util from './util/form.util';
+
 import DefaultStyledForm from './util/DefaultStyledForm';
 
 const renderButtons = (buttonData) => {
@@ -180,7 +182,7 @@ class Form extends Component {
   }
 
   getCloneOfChild(child, item){
-    if (_.isEmpty(item)) return child;
+    if (_.isEmpty(item) || Util.isDOMTypeElement(child)) return child;
     const propName = item.propName || child.props.propName;
 
     return React.cloneElement(child, {
@@ -205,11 +207,15 @@ class Form extends Component {
 
     const displayError = !_.isEmpty(this.state.errors) && this.state.afterSubmission;
 
-    if (customFooter) return React.cloneElement(customFooter, {
-      handleSubmit: this.handleFormSubmit,
-      error: displayError && 'Missing required fields',
-      isLoading
-    });
+    if (customFooter) {
+      return Util.isDOMTypeElement(customFooter) ?
+      customFooter :
+      React.cloneElement(customFooter, {
+        handleSubmit: this.handleFormSubmit,
+        error: displayError && 'Missing required fields',
+        isLoading
+      });
+    }
 
     const submitText = this.props.submitButtonText || 'Submit';
 

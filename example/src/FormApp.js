@@ -153,7 +153,7 @@ class FormApp extends React.Component {
               {
                 style: 'tertiary',
                 text: 'Cancel',
-                action: () => console.log('cancel')
+                onClick: () => console.log('cancel')
               }
             ]
           }

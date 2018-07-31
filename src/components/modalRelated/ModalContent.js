@@ -31,6 +31,8 @@ const InnerBoxPositioning = styled.div`
 `;
 
 const InnerBox = styled.div`
+  position: relative;
+
   display: flex;
   flex-direction: column;
 

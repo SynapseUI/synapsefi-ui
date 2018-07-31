@@ -18,7 +18,7 @@ const SubModal = props => {
             resolve('yeah aaa ');
           }, 3000);
         });
-        
+
         promise.then(data => {
           console.log('data: ', data);
           closeModal();
@@ -35,10 +35,30 @@ const SubModal = props => {
         btnObjs={btnObjs}
         width="600px"
         height="200px"
+        headerText="HEADER"
         fullWidthBtn
       >
         <div style={{ paddingRight: '16px' }}>Delete action cannot be undone.</div>
         <div style={{ paddingRight: '16px' }}>
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
+          {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
           {`Pressing 'Delete' button will permanently delete the ${'aaa'} cip.`}
         </div>
       </Modal>

@@ -26,7 +26,7 @@ const BtnWrapper = styled.div`
     `};
 `;
 
-const renderAnchorBtn = ({ style, fontSize, text, onClick, idx, inlineBtnStyle }) => (
+const renderAnchorBtn = ({ style, fontSize, text, onClick, idx, inlineBtnStyle, ...remainingProps }) => (
   <AnchorButton
     key={idx}
     text={text}
@@ -40,10 +40,12 @@ const renderAnchorBtn = ({ style, fontSize, text, onClick, idx, inlineBtnStyle }
     fontSize={fontSize}
     //
     style={inlineBtnStyle ? inlineBtnStyle : {}}
+    //
+    {...remainingProps}
   />
 );
 
-const renderRegularBtn = ({ style, size, text, onClick, inlineBtnStyle }) => (
+const renderRegularBtn = ({ style, size, text, onClick, inlineBtnStyle, ...remainingProps }) => (
   <Button
     key={text}
     onClick={onClick && (() => onClick())}
@@ -60,6 +62,8 @@ const renderRegularBtn = ({ style, size, text, onClick, inlineBtnStyle }) => (
     large={size === 'large'}
     //
     style={inlineBtnStyle ? inlineBtnStyle : {}}
+    //
+    {...remainingProps}
   >
     {text}
   </Button>
@@ -67,12 +71,12 @@ const renderRegularBtn = ({ style, size, text, onClick, inlineBtnStyle }) => (
 
 const ButtonGroup = props => {
   const { fullWidthBtn, className, bottom, btnObjs, isAnchorButton, gap, inlineBtnStyle } = props;
-
+  
   return (
     <BtnWrapper fullWidthBtn={fullWidthBtn} bottom={bottom} gap={gap} className={className}>
-      {btnObjs.map(({ style, size, fontSize, text, onClick }, idx) => {
-        if (isAnchorButton) return renderAnchorBtn({ style, fontSize, text, onClick, idx, inlineBtnStyle });
-        return renderRegularBtn({ style, size, text, onClick, inlineBtnStyle });
+      {btnObjs.map(({ style, size, fontSize, text, onClick, ...remainingProps }, idx) => {
+        if (isAnchorButton) return renderAnchorBtn({ style, fontSize, text, onClick, idx, inlineBtnStyle, ...remainingProps });
+        return renderRegularBtn({ style, size, text, onClick, inlineBtnStyle, ...remainingProps });
       })}
     </BtnWrapper>
   );

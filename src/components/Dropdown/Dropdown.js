@@ -195,6 +195,7 @@ class Dropdown extends Component {
     } = this.props.propValues || this.props;
     
     let tabs = filteredOptions.map((item, idx) => {
+
       const display = !!renderOptionItem ? renderOptionItem(item) : item.text;
       
       return (
@@ -208,7 +209,7 @@ class Dropdown extends Component {
           {multiselect && <Styles.StyledCheckedSquare
             selected={this.state.selection.includes(item.key)}/>
           }
-          {display}
+          <Styles.TabItemText>{display}</Styles.TabItemText>
         </Styles.TabItem>
       );
     });

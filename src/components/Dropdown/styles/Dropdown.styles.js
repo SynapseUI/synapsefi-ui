@@ -68,6 +68,13 @@ export const TabItem = MenuItem.extend.attrs({
   `)}
 `;
 
+export const TabItemText = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  text-overflow: ellipsis;
+`;
+
 export const DownArrow = styled.div`
   width: 0;
   height: 0;

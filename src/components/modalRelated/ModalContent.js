@@ -109,6 +109,7 @@ class Modal extends Component {
       fullWidthBtn,
       headerText,
       btnObjs,
+      inlineBtnStyle,
       closeModal,
     } = this.props;
 
@@ -139,7 +140,7 @@ class Modal extends Component {
             {children}
             {btnObjs &&
             btnObjs.length !== 0 && (
-              <ButtonGroup btnObjs={btnObjs} fullWidthBtn={fullWidthBtn} bottom />
+              <ButtonGroup btnObjs={btnObjs} fullWidthBtn={fullWidthBtn} bottom inlineBtnStyle={inlineBtnStyle}/>
             )}
           </InnerBox>
         </InnerBoxPositioning>

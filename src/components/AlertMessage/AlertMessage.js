@@ -80,7 +80,7 @@ const renderAlert = props => {
   const FlexColumn__AlertMessage = styled.div`
     height: 32px;
     display: flex;
-    font-size: 16px;
+    font-size: 14px;
     position: absolute;
     box-sizing: border-box;
     align-items: center;

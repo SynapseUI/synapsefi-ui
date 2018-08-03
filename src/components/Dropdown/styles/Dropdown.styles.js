@@ -32,7 +32,7 @@ export const MenuList = styled.div`
 export const MenuItem = styled.div`
   box-sizing: border-box;
   height: 40px;
-  font-size: 16px;
+  font-size: 14px;
   padding: 8px;
   cursor: pointer;
 
@@ -91,7 +91,7 @@ export const DownArrow = styled.div`
 
 export const PlaceHolder = styled.span`
   color: ${props => props.empty && css`${Colors.WARM_LIGHT}`};
-  font-size: 16px;
+  font-size: 14px;
   // width: ${props => props.searchable && css`85%` || css`100%`};
   width: 100%;
   overflow: hidden;
@@ -114,7 +114,7 @@ export const SearchInput = styled.input`
   border-width: 0px;
   height: 100%;
   margin-bottom: 0px;
-  font-size: 16px;
+  font-size: 14px;
 
   outline: none;
 
@@ -127,7 +127,7 @@ export const FlexStartAlign = styled.div`
   justify-content: space-between;
   align-items: center;
   
-  font-size: 16px;
+  font-size: 14px;
   
   color: ${props => props.empty && Colors.WARM_LIGHT};
   // width: ${props => props.searchable && css`90%` || css`100%`};

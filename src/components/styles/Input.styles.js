@@ -7,7 +7,7 @@ export const baseInputStyling = `
   resize: none;
 
   font-family: inherit;
-  font-size: 16px;
+  font-size: 14px;
 
   margin: 0;
   padding: 8px;
@@ -20,7 +20,7 @@ export const baseInputStyling = `
 
   &::placeholder, &::-webkit-datetime-edit {
     color: ${Colors.WARM_LIGHT};
-    font-size: 16px;
+    font-size: 14px;
   }
 
   &:focus {

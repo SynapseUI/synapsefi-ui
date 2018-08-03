@@ -48,7 +48,7 @@ const CheckBoxGroup__Label = styled.label`
   justify-content: center;
   align-items: center;
   height: 40px;
-  font-size: 16px;
+  font-size: 14px;
 
   cursor: pointer;
 

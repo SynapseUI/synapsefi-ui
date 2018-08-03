@@ -5,7 +5,7 @@ import colors from '../colors';
 const TableStyle = styled.table`
   border-collapse: collapse;
   color: ${colors.BODY};
-  font-size: 16px;
+  font-size: 14px;
 
   tr {
     border-top: 1px solid ${colors.WARM_LIGHT};

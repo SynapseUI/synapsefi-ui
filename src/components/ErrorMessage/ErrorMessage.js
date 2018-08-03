@@ -20,7 +20,7 @@ const FlexColumn__ErrorMessage = styled.span`
   display: flex;
   
   padding: 8px;
-  font-size: 16px;
+  font-size: 14px;
 
   margin-top: 36px;
   position: absolute;

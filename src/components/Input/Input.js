@@ -53,7 +53,7 @@ const FlexRowRev__Input = styled.input`
 
   margin: 0px;
   height: 40px;
-  font-size: 16px;
+
   border-width: 0px;
   color: ${Colors.DARK_NIGHT};
 

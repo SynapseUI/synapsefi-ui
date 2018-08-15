@@ -78,8 +78,10 @@ class App extends React.Component {
   render() {
     return (
       <Main>
-        <SvgIcons.error color="red" />
+        <SvgIcons.error color="green" />
+        <SvgIcons.error />
         <SvgIcons.queued color="blue" />
+        <SvgIcons.queued />
         {/* <Dropdown
           styles={{ width: '100%' }}
           // width="100%"

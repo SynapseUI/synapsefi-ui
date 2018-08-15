@@ -1,7 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Dropdown, Accordion, SvgIcons, DropdownHead, DropdownContent, Button, NumberInput } from 'package';
+import {
+  Dropdown,
+  Accordion,
+  SvgIcons,
+  DropdownHead,
+  DropdownContent,
+  Button,
+  NumberInput,
+} from 'package';
 
 import DisplayItem from './components/DisplayItem';
 import RadioGroup from '../../src/components/RadioGroup/RadioGroup';
@@ -38,7 +46,7 @@ class App extends React.Component {
       hide: true,
       from_node: '',
 
-      number: ''
+      number: '',
     };
 
     this.updateField = this.updateField.bind(this);
@@ -63,16 +71,18 @@ class App extends React.Component {
     );
   }
 
-  someLabel(){
-    return (
-      <p>Some Label</p>
-    )
+  someLabel() {
+    return <p>Some Label</p>;
   }
 
   render() {
     return (
       <Main>
-        <Dropdown
+        <SvgIcons.error color="green" />
+        <SvgIcons.error />
+        <SvgIcons.queued color="blue" />
+        <SvgIcons.queued />
+        {/* <Dropdown
           styles={{ width: '100%' }}
           // width="100%"
           key="test-dropdown"
@@ -105,7 +115,7 @@ class App extends React.Component {
           onChange={this.updateField}
           propName="number"
           // format='####'
-        />
+        /> */}
       </Main>
     );
   }

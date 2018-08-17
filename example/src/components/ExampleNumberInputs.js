@@ -36,7 +36,7 @@ class ExampleNumberInputs extends React.Component {
     this.updateField = this.updateField.bind(this);
   }
 
-  updateField(e, value, field) {    
+  updateField(e, value, field) {
     if ((value || value === '') && field) {
       this.setState({ [field]: value });
     }

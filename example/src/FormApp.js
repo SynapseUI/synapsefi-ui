@@ -101,8 +101,6 @@ class FormApp extends React.Component {
   }
 
   updateField(e, value, field) {
-    console.log('value: ', value);
-    
     if ((value || value === '') && field){
       this.setState({ [field]: value})
     }

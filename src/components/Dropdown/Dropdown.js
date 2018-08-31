@@ -50,19 +50,14 @@ class Dropdown extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if (this.props.value !== nextProps.value ||
-      (this.props.propValues && 
-        this.props.propValues.value !== nextProps.propValues.value)
-    ){
-      const omitedValues = (nextProps.propValues 
-          && nextProps.propValues.multiselect)
-          || nextProps.multiselect ?
-          ['showMenu', 'inputValue'] : [];
+    const omitedValues = (nextProps.propValues 
+        && nextProps.propValues.multiselect)
+        || nextProps.multiselect ?
+        ['showMenu', 'inputValue'] : [];
 
-      this.setState({
-        ..._.omit(Util.getStateFromProps(nextProps), omitedValues),
-      });
-    }
+    this.setState({
+      ..._.omit(Util.getStateFromProps(nextProps), omitedValues),
+    });
   }
 
   // -------------------------------------------------------------------------------------
@@ -91,17 +86,13 @@ class Dropdown extends Component {
     const {
       multiselect,
       onChange,
-      options,
-      placeholder
     } = this.props.propValues || this.props;
 
-    let singleSelection;
     let newSelection = item;
-    let firstLine = item.text;
 
     if (multiselect){
       newSelection = DataUtil.addOrRemove(item.key, this.state.selection);
-    } else {
+    } else if( this.state.inputValue === ''){
       newSelection = this.state.selection.key !== item.key ? item : '';
     }
 
@@ -114,7 +105,6 @@ class Dropdown extends Component {
       onChange,
       options,
       propName,
-      placeholder
     } = this.props.propValues || this.props;
 
     let newSelection = [];
@@ -160,6 +150,7 @@ class Dropdown extends Component {
               <Styles.StyledSearchIcon />
 
               <Styles.SearchInput
+                autocomplete="off"
                 value={this.state.inputValue}
                 placeholder={this.state.firstLine}
                 innerRef={input => input && input.focus()}
